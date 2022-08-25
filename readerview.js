@@ -1,3 +1,6 @@
+import {Page, getPageObj} from './modules/pageinfo.js';
+import {buildCite} from './modules/cite.js';
+
 (function () {
   
   if (window !== window.top || window.location.href.includes('readerView') || window.location.href.includes('readerView')) {
@@ -14,8 +17,10 @@
 
   window.addEventListener('load', function() {
     // add logic for both readerView and Default
+    getPageObj();
     getBookInfo();
     btnEvents();
+    
   });
 
   
@@ -35,7 +40,7 @@
     pageLinks.forEach(function(sel){
       let el = document.querySelectorAll(sel)
       el.forEach(function(target){
-        if (target.href.includes('libretexts.org')){
+        if (target.href.includes('libretexts.org') && !(target.href.includes('?readerView'))){
           target.href += '?readerView';
         }
       });
@@ -44,12 +49,10 @@
 
   function getBookInfo() {
     // get the base info for a book and sections
-    let bookTitle = document.querySelector('#parentParentTitleHolder').innerHTML;
-    let chapterTitle = document.querySelector('#parentTitleHolder').innerHTML;
 
-    document.querySelector('.header-title').innerHTML = '<span class="booktitle">' + bookTitle + '</span>';
-    if (chapterTitle){
-      document.querySelector('.header-title').innerHTML += ' <span class="material-symbols-outlined">keyboard_double_arrow_right</span> ' +  chapterTitle;
+    document.querySelector('.header-title').innerHTML = '<span class="booktitle">' + Page.parentParentTitle + '</span>';
+    if (Page.parentTitle){
+      document.querySelector('.header-title').innerHTML += ' <span class="material-symbols-outlined">keyboard_double_arrow_right</span> ' +  Page.parentTitle;
       document.querySelector('span.booktitle').style.color = 'darkslategray';
     }
   }
@@ -63,11 +66,22 @@
       let target = btn.getAttribute('data-target');
       let title = btn.getAttribute('data-modal-title');
       let target_element = document.getElementById(target);
+      let modalBodyMethod = btn.getAttribute('data-modal-src');
       
       btn.addEventListener('click', function(e){
         document.getElementById(target).classList.toggle('open');
         console.log(target_element);
         target_element.querySelector('.modal-title').innerHTML = title;
+
+        switch (modalBodyMethod) {
+          case 'cite':
+            target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
+            break;
+        
+          default:
+            console.log("error");
+            break;
+        }
       });
     });
 
@@ -100,6 +114,7 @@
     // Modal Close
     document.querySelector('.modal-close').addEventListener('click', function(){
       document.querySelector('.modal').classList.toggle('open');
+      document.querySelector('.modal-body').innerHTML = '';
     });
   
     // All Close
@@ -111,6 +126,7 @@
         openElements.forEach(function(el){
           if (excludeClose.indexOf(el.id) == -1){
             el.classList.toggle('open');
+            document.querySelector('.modal-body').innerHTML = '';
           } 
         });
       }

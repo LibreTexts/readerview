@@ -1,7 +1,17 @@
+/**
+ * Builds a draggable, resizable, expanding element
+ * that renders an external page in an iframe.
+ * 
+ * @param {string} url - URL to load in the iframe
+ * @param {string} title - used to add a <h2> in the popup element.
+ * @param {string} style - sets the color/styling for the popup; options: ['default','warning']
+ * @param {string} size - initial size of the popup; options: ['default','small','large']
+ */
+
 function createPop(url, title, style, size){
   //let popWrapper = document.createElement('div');
   const markup = 
-  `<div id="pop" class="">
+  `<div id="pop" class="pop-${style} pop-${size}">
   	<div class="pop-header">
     	<h2 class="pop-tite">${title}</h2>
       <div class="pop-controls">

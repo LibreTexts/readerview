@@ -324,7 +324,10 @@ button.toolbar-inner {
   margin: 0;
 }
 .modal-body {
-  padding: 1em;
+  padding: 1em 1em 2em;
+}
+.modal-body h3 {
+  margin: 0 !important;
 }
 
 /**
@@ -452,4 +455,21 @@ body.readerView {
 .readerView .btn:visited {
   color: white;
   text-decoration: none;
+}
+
+/** 
+ * Reference and Cite
+**/
+.copy-holder {
+  padding: 0.5em;
+  border: 1px solid lightgray;
+  margin: 0.5em 0;
+}
+.btn.copy-button {
+  font-size: 0.8em;
+  background: lightgray;
+  color: black;
+}
+#attribution {
+  margin-top: 2em;
 }
