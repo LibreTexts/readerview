@@ -1,5 +1,6 @@
 import {Page, getPageObj} from './modules/pageinfo.js';
 import {buildCite} from './modules/cite.js';
+import { initDownloadButtons } from './modules/downloads.js';
 
 (function () {
   
@@ -20,7 +21,7 @@ import {buildCite} from './modules/cite.js';
     getPageObj();
     getBookInfo();
     btnEvents();
-    
+    initDownloadButtons();
   });
 
   
