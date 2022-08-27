@@ -219,45 +219,6 @@ button.toolbar-inner {
 }
 
 /**
-* Homework
-**/
-#homework {
-  display: none;
-  background: white;
-  border-bottom: 1px solid lightgray;
-  border-left: 1px solid lightgray;
-  font-size: 0.9em;
-  position: fixed;
-  right: 0;
-  padding: 1em 2em 1em 1em;
-  max-width: 18rem;
-  height: 100%;
-}
-#homework.open {
-  display: block;
-}
-#grades {
-  margin-top: 2em;
-  padding-top: 2em;
-  border-top: 1px solid lightgray;
-}
-#grades label {
-    margin: 1em 0 0 0;
-}
-#grades progress {
-  width: 100%;
-  display: block;
-  height: 30px;
-}
-@media (max-width: 1024px ) {
-  #homework {
-    max-width: unset;
-    width: 12rem;
-    padding: 0.5em;
-  }
-}
-
-/**
 * Offcanvas Menu
 */
 #offcanvas-menu {
