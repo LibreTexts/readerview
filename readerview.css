@@ -132,6 +132,15 @@ button.disabled-btn {
   background-color: #DCDCDC;
   color: rgba(0, 0, 0, 0.4);
 }
+button.disabled-header-btn {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.4);
+}
+button.disabled-header-btn:hover {
+  background: white !important;
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.4);
+}
 
 @media (max-width: 1024px ) {
   #readerview .header-left-control {

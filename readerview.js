@@ -1,6 +1,7 @@
 import {Page, getPageObj} from './modules/pageinfo.js';
 import {buildCite} from './modules/cite.js';
 import { initDownloadButtons } from './modules/downloads.js';
+import { initHomeworkButton } from './modules/homework.js';
 
 (function () {
   
@@ -14,6 +15,7 @@ import { initDownloadButtons } from './modules/downloads.js';
       appendPageLinks();
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
+    window.addEventListener('libre-commonsinfoavailable', initHomeworkButton);
   }
   
   window.addEventListener('load', function() {
