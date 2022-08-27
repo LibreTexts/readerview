@@ -127,6 +127,11 @@ button.header-btn > span.material-symbols-outlined {
   margin-right: 0.35em;
   font-size: 1.3em;
 }
+button.disabled-btn {
+  cursor: not-allowed;
+  background-color: #DCDCDC;
+  color: rgba(0, 0, 0, 0.4);
+}
 
 @media (max-width: 1024px ) {
   #readerview .header-left-control {

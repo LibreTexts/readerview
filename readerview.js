@@ -13,15 +13,14 @@ import { initDownloadButtons } from './modules/downloads.js';
       // add logic meant for readerView Only
       appendPageLinks();
     });
+    window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
   }
   
-
   window.addEventListener('load', function() {
     // add logic for both readerView and Default
     getPageObj();
     getBookInfo();
     btnEvents();
-    initDownloadButtons();
   });
 
   
