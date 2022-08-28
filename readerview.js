@@ -2,6 +2,7 @@ import {Page, getPageObj} from './modules/pageinfo.js';
 import {buildCite} from './modules/cite.js';
 import { initDownloadButtons } from './modules/downloads.js';
 import { initHomeworkButton } from './modules/homework.js';
+import { initFeedbackButton } from './modules/feedback.js';
 
 (function () {
   
@@ -15,7 +16,10 @@ import { initHomeworkButton } from './modules/homework.js';
       appendPageLinks();
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
-    window.addEventListener('libre-commonsinfoavailable', initHomeworkButton);
+    window.addEventListener('libre-commonsinfoavailable', () => {
+      initHomeworkButton();
+      initFeedbackButton();
+    });
   }
   
   window.addEventListener('load', function() {

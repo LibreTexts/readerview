@@ -199,6 +199,15 @@ button.toolbar-btn > span.material-symbols-outlined {
   font-size: 1.3em;
   margin-left: 0.5em
 }
+button.toolbar-btn.disabled-toolbar-btn {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.4);
+}
+button.toolbar-btn.disabled-toolbar-btn:hover {
+  background: white !important;
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.4);
+}
 #toolbar > ul > li > ul {
   display: none;
   position: absolute;
