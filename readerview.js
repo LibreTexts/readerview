@@ -3,6 +3,7 @@ import {buildCite} from './modules/cite.js';
 import { initDownloadButtons } from './modules/downloads.js';
 import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
+import { renderTableOfContents } from './modules/contents.js';
 
 (function () {
   
@@ -14,6 +15,7 @@ import { initFeedbackButton } from './modules/feedback.js';
     window.addEventListener('load', function() {
       // add logic meant for readerView Only
       appendPageLinks();
+      renderTableOfContents();
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
     window.addEventListener('libre-commonsinfoavailable', () => {
