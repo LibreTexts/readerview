@@ -78,8 +78,8 @@ import { renderTableOfContents } from './modules/contents.js';
       
       btn.addEventListener('click', function(e){
         document.getElementById(target).classList.toggle('open');
-        console.log(target_element);
         target_element.querySelector('.modal-title').innerHTML = title;
+        target_element.querySelector('h2:first-of-type').focus();
 
         switch (modalBodyMethod) {
           case 'cite':
@@ -101,7 +101,7 @@ import { renderTableOfContents } from './modules/contents.js';
       btn.addEventListener('click', function(e){
         this.classList.toggle('active');
         target_element.classList.toggle('open');
-        target_element.querySelector('a:first-of-type').focus();
+        target_element.querySelector('a:first-of-type, button:first-of-type').focus();
       });
     });
 
