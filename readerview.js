@@ -97,9 +97,11 @@ import { renderTableOfContents } from './modules/contents.js';
     let collapseButtons = document.querySelectorAll('[data-type="collapse"]');
     collapseButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
+      let target_element = document.getElementById(target);
       btn.addEventListener('click', function(e){
         this.classList.toggle('active');
-        document.getElementById(target).classList.toggle('open');
+        target_element.classList.toggle('open');
+        target_element.querySelector('a:first-of-type').focus();
       });
     });
 
