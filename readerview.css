@@ -241,7 +241,7 @@ button.toolbar-inner {
 */
 #offcanvas-menu {
   width: 20rem;
-  height: 100%;
+  height: calc(100% - 54px - 1em);
   background: white;
   display: none;
   position: fixed;
@@ -251,9 +251,45 @@ button.toolbar-inner {
 }
 #offcanvas-menu.open {
   display: block;
+  overflow-y: scroll;
+  padding-bottom: 1em;
 }
 #offcanvas-menu .toc {
   padding: 1em;
+}
+
+/** TOC **/
+#offcanvas-menu ul,
+#offcanvas-menu li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#offcanvas-menu ul a:focus {
+  outline: 2px inset rgba(0,0,0,0.6);
+}
+#offcanvas-menu > ul > li {
+  padding: 0.3em 0.3em 0;
+}
+#offcanvas-menu > ul > li > span > a {
+  padding: 0.5em;
+  display: block;
+  font-weight: 700;
+  color: black;
+  background-color: #f0f0f3;
+}
+#offcanvas-menu > ul > li > ul > li > span > a {
+  padding: 0.5em 0.5em 0.5em 1.7em;
+  display: block;
+  background-color: #fff6f6;
+  color: #235A8B;
+  margin: 0.3em 0;
+  font-size: 0.9em;
+}
+
+#offcanvas-menu li.active > span > a {
+  background-color: #235A8B;
+  color: white;
 }
 
 @media (max-width: 1024px ) {
