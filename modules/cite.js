@@ -10,14 +10,14 @@ function buildCite(data){
     <div class="copy-holder">
       ${citeAuthors(data.authorDisplayName)} (${citeDate(data.modified.modifiedDate)}). ${data.title}. ${citePublisher()}. ${url}.
     </div>
-    <button class="btn copy-button" onclick="${copyToClipboard()}">Copy to clipboard</button>
+    <button class="btn copy-button">Copy to clipboard</button>
   </div>
   <div id="attribution">
     <h3>License &amp; Attribution</h3>
     <div class="copy-holder">
       ${data.title} by ${data.authorDisplayName} is licensed under [license info here], except where otherwise noted. ${url}.
     </div>
-    <button class="btn copy-button" onclick="${copyToClipboard()}">Copy to clipboard</button>
+    <button class="btn copy-button">Copy to clipboard</button>
   </div>
   `;
 
@@ -56,5 +56,6 @@ function citePublisher(){
 function copyToClipboard(){
   console.log(this);
 }
+
 
 export { buildCite };
