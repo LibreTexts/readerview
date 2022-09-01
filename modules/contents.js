@@ -1,5 +1,3 @@
-// import { Page } from "./pageinfo";
-
 /**
  * Renders the Table of Contents into the off-canvas menu.
  *
@@ -8,7 +6,7 @@
 async function renderTableOfContents() {
   const { structured } = await LibreTexts.getTOC();
   const container = document.getElementById('offcanvas-menu');
-  const [subdomain] = LibreTexts.parseURL();
+  //const [subdomain] = LibreTexts.parseURL();
   /**
    * ToDo:
    * - set current page id in LibreTexts object

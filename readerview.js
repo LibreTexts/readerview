@@ -1,5 +1,5 @@
-import {Page, getPageObj} from './modules/pageinfo.js';
-import {buildCite} from './modules/cite.js';
+import { Page, getPageObj } from './modules/pageinfo.js';
+import { buildCite } from './modules/cite.js';
 import { initDownloadButtons } from './modules/downloads.js';
 import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
