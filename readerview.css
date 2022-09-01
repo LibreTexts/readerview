@@ -484,6 +484,11 @@ body.readerView {
   padding: 0.5em;
   border: 1px solid lightgray;
   margin: 0.5em 0;
+  font-family: monospace;
+}
+.copy-holder p {
+  margin: 0;
+  padding: 0;
 }
 .btn.copy-button {
   font-size: 0.8em;

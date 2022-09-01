@@ -4,7 +4,7 @@
 
 function buildCite(data){
   let url = `https://${window.location.host}/@go/page/${data.pageId}`;
-  let markup = `
+  return `
   <div id="cite">
     <h3>Cite (APA)</h3>
     <div class="copy-holder">
@@ -15,7 +15,7 @@ function buildCite(data){
   <div id="attribution">
     <h3>License &amp; Attribution</h3>
     <div class="copy-holder">
-      ${data.title} by ${data.authorDisplayName} is licensed under [license info here], except where otherwise noted. ${url}.
+      ${buildLicenseAttribution(data)}
     </div>
     <button class="btn copy-button">Copy to clipboard</button>
   </div>
@@ -50,6 +50,19 @@ function citePublisher(){
     return publisher + '. LibreTexts';
   } else {
     return 'Libretexts';
+  }
+}
+
+function buildLicenseAttribution(data) {
+  const { license } = LibreTexts.current;
+  if (license.title === 'notset') {
+    return `
+    <p><span class="license-title">${data.title}</span> by <span class="license-author">${data.authorDisplayName}</span> is shared without a specified license.</p>
+    `;
+  } else {
+    return `
+    <p><span class="license-title">${data.title}</span> by <span class="license-author">${data.authorDisplayName}</span> is under a <span class="license-type"><a href="${license.link}" target="_blank" rel="nofollow">${license.title}</a></span>, except where otherwise noted.</p>
+    `;
   }
 }
 
