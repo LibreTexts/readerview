@@ -1,3 +1,4 @@
+import ClipboardJS from 'clipboard';
 import { Page, getPageObj } from './modules/pageinfo.js';
 import { buildCite } from './modules/cite.js';
 import { initDownloadButtons } from './modules/downloads.js';
@@ -5,6 +6,7 @@ import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
 import { renderTableOfContents } from './modules/contents.js';
 import { renderHeaderTitle } from './modules/headertitle.js';
+
 
 (function () {
   
@@ -37,6 +39,20 @@ import { renderHeaderTitle } from './modules/headertitle.js';
       renderHeaderTitle();
     }, 2000);
     btnEvents();
+
+    // make all .copy-button copy to clipboard from 
+    // data-clipboard-target
+    const clip = new ClipboardJS('.copy-button');
+    /*
+    clip.on('success', (e) => {
+      console.log('copy success');
+      console.log(e);
+    });
+    clip.on('error', (e) => {
+      console.error('copy error');
+      console.error(e);
+    });
+    */
   });
 
   
