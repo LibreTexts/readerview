@@ -10,19 +10,26 @@ function renderHeaderTitle() {
   }
 
   const buildBookTitle = (book) => {
-    return `<a id="bookTitle" href="${book.url}">${book.title}</a>`;
+    return `<a id="bookTitle" href="${book.url}?readerView">${book.title}</a>`;
   }
 
   const buildChapterTitle = (toc) => {
     const page = toc.filter(item => item.id == currentPageId);
     const chapter = toc.filter(item => item.id == page[0].parentID);
-
-    if (chapter) {
-      return `
-        <span class="material-symbols-outlined">keyboard_double_arrow_right</span> <a id="chapterTitle" href="${window.location.host}/${chapter[0].path}">${chapter[0].title}</a>
-      `;
+    /**
+     * ToDo:
+     * - show only Book title on book root
+     * - handle 3+ levels of heirarchy
+     * - show other chapters in dropdown menu when chapter title clicked
+     */
+    if (chapter[0].id == coverpage.id) {
+      // do not show chapter title link if 1st level chapter
+      return '';
     } else {
-      return;
+      return `
+        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+        <a id="chapterTitle" href="https://${window.location.host}/${chapter[0].path}?readerView">${chapter[0].title}</a>
+      `;
     }
   }
 
