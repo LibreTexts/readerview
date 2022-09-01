@@ -88,6 +88,14 @@
   display: inline-flex;
   align-items: center;
 }
+#readerview .header-title a {
+  color: darkslategray;
+}
+#readerview .header-title a:hover,
+#readerview .header-title a:focus {
+  color: #235A8B;
+  text-decoration: underline;
+}
 #readerview .header-title > span.material-symbols-outlined {
   color: darkslategray;
   font-size: 1em;

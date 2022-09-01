@@ -4,6 +4,7 @@ import { initDownloadButtons } from './modules/downloads.js';
 import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
 import { renderTableOfContents } from './modules/contents.js';
+import { renderHeaderTitle } from './modules/headertitle.js';
 
 (function () {
   
@@ -27,7 +28,14 @@ import { renderTableOfContents } from './modules/contents.js';
   window.addEventListener('load', function() {
     // add logic for both readerView and Default
     getPageObj();
-    getBookInfo();
+    
+    /**
+     * ToDo:
+     * - find out why current.coverpage is not available on window.load
+     */
+    setTimeout(function() {
+      renderHeaderTitle();
+    }, 2000);
     btnEvents();
   });
 
@@ -53,16 +61,6 @@ import { renderTableOfContents } from './modules/contents.js';
         }
       });
     });
-  }
-
-  function getBookInfo() {
-    // get the base info for a book and sections
-
-    document.querySelector('.header-title').innerHTML = '<span class="booktitle">' + Page.parentParentTitle + '</span>';
-    if (Page.parentTitle){
-      document.querySelector('.header-title').innerHTML += ' <span class="material-symbols-outlined">keyboard_double_arrow_right</span> ' +  Page.parentTitle;
-      document.querySelector('span.booktitle').style.color = 'darkslategray';
-    }
   }
 
   function btnEvents() {
