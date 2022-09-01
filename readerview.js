@@ -43,16 +43,12 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     // make all .copy-button copy to clipboard from 
     // data-clipboard-target
     const clip = new ClipboardJS('.copy-button');
-    /*
     clip.on('success', (e) => {
-      console.log('copy success');
-      console.log(e);
+      e.trigger.innerHTML = 'Copied!';
+      setTimeout(function() {
+        e.trigger.innerHTML = 'Copy to clipboard';
+      }, 4000);
     });
-    clip.on('error', (e) => {
-      console.error('copy error');
-      console.error(e);
-    });
-    */
   });
 
   
