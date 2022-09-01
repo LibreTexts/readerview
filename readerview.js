@@ -5,6 +5,10 @@ import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
 import { renderTableOfContents } from './modules/contents.js';
 
+// clipboard - breaks things:
+//import  * as ClipboardJS from './node_modules/clipboard/dist/clipboard.js';
+//import  { ClipboardJS } from './node_modules/clipboard/dist/clipboard.js';
+
 (function () {
   
   if (window !== window.top || window.location.href.includes('readerView') || window.location.href.includes('readerView')) {
@@ -29,6 +33,10 @@ import { renderTableOfContents } from './modules/contents.js';
     getPageObj();
     getBookInfo();
     btnEvents();
+
+    // make all .copy-button copy to clipboard from 
+    // data-clipboard-target
+    // new ClipboardJS('.copy-button'); 
   });
 
   

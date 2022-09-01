@@ -10,18 +10,17 @@ function buildCite(data){
     <div class="copy-holder">
       ${citeAuthors(data.authorDisplayName)} (${citeDate(data.modified.modifiedDate)}). ${data.title}. ${citePublisher()}. ${url}.
     </div>
-    <button class="btn copy-button">Copy to clipboard</button>
+    <button class="btn copy-button" data-clipboard-target="#cite .copy-holder">Copy to clipboard</button>
   </div>
   <div id="attribution">
     <h3>License &amp; Attribution</h3>
     <div class="copy-holder">
       ${buildLicenseAttribution(data)}
     </div>
-    <button class="btn copy-button">Copy to clipboard</button>
+    <button class="btn copy-button" data-clipboard-target="#attribution .copy-holder">Copy to clipboard</button>
   </div>
   `;
-
-  return markup;
+  
 }
 
 function citeDate(date){

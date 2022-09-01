@@ -1,0 +1,22 @@
+{
+  "name": "readerview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "readerview.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreTexts/readerview.git"
+  },
+  "author": "LibreTexts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LibreTexts/readerview/issues"
+  },
+  "homepage": "https://github.com/LibreTexts/readerview#readme",
+  "dependencies": {
+    "clipboard": "^2.0.11"
+  }
+}
