@@ -1,3 +1,4 @@
+import ClipboardJS from 'clipboard';
 import { Page, getPageObj } from './modules/pageinfo.js';
 import { buildCite } from './modules/cite.js';
 import { initDownloadButtons } from './modules/downloads.js';
@@ -5,9 +6,6 @@ import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
 import { renderTableOfContents } from './modules/contents.js';
 
-// clipboard - breaks things:
-//import  * as ClipboardJS from './node_modules/clipboard/dist/clipboard.js';
-//import  { ClipboardJS } from './node_modules/clipboard/dist/clipboard.js';
 
 (function () {
   
@@ -36,7 +34,17 @@ import { renderTableOfContents } from './modules/contents.js';
 
     // make all .copy-button copy to clipboard from 
     // data-clipboard-target
-    // new ClipboardJS('.copy-button'); 
+    const clip = new ClipboardJS('.copy-button');
+    /*
+    clip.on('success', (e) => {
+      console.log('copy success');
+      console.log(e);
+    });
+    clip.on('error', (e) => {
+      console.error('copy error');
+      console.error(e);
+    });
+    */
   });
 
   

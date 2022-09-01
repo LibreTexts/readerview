@@ -45,7 +45,7 @@ function citeAuthors(author){
 function citePublisher(){
   let bylineElement = document.querySelector('.mt-author-companyname');
   if (bylineElement){
-    let publisher = bylineElement.firstChild.text();
+    let publisher = bylineElement.firstChild.text;
     return publisher + '. LibreTexts';
   } else {
     return 'Libretexts';
