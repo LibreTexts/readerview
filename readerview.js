@@ -1,6 +1,7 @@
 import ClipboardJS from 'clipboard';
 import { Page, getPageObj } from './modules/pageinfo.js';
 import { buildCite } from './modules/cite.js';
+import { renderHelp } from './modules/help.js';
 import { initDownloadButtons } from './modules/downloads.js';
 import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
@@ -95,6 +96,10 @@ import { renderHeaderTitle } from './modules/headertitle.js';
           case 'cite':
             target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
             break;
+          
+          case 'help':
+              target_element.querySelector('.modal-body').innerHTML = renderHelp();
+              break;
         
           default:
             console.log("error");

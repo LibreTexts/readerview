@@ -5,7 +5,8 @@
 .readerView .elm-meta-icons,
 .readerView div.annotator-frame,
 .readerView #custom_open,
-.readerView .sbHeader {
+.readerView .sbHeader,
+.readerView #attachments {
   display: none;
 }
 .readerView header.elm-header {
@@ -358,6 +359,8 @@ button.toolbar-inner {
   margin: 0 !important;
 }
 
+
+
 /**
 * Layout
 */
@@ -387,6 +390,15 @@ body.readerView {
 /**
 * Typography
 */
+.readerView a {
+  color: #235A8B;
+  text-decoration: none;
+}
+.readerView a:hover,
+.readerView a:focus {
+  color: #154772;
+  text-decoration: underline;
+}
 .readerView h1#title {
   color: black;
   font-weight: 600;
@@ -505,4 +517,14 @@ body.readerView {
 }
 #attribution {
   margin-top: 2em;
+}
+
+/** 
+ * Help & Documentation
+**/
+
+#helpInfo {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid lightgray;
 }
