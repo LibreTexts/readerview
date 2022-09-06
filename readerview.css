@@ -528,3 +528,74 @@ body.readerView {
   padding-top: 1em;
   border-top: 1px solid lightgray;
 }
+
+/** 
+ * Pop Element
+**/
+#pop {
+  z-index: 1002;
+  position: fixed;
+  bottom: 0;
+  left: 1em;
+  max-width: 400px;
+  width: 30%;
+  height: 40%;
+  background: white;
+  border: 1px solid lightgray;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 3px 3px 5px 2px rgb(0 0 0 / 20%);
+}
+#pop.expanded {
+  width: 80%;
+  height: 80%;
+  max-width: 960px;
+  bottom: 0;
+}
+#pop.minimized {
+  max-width: 400px;
+  width: 30%;
+  height: auto;
+  bottom: 0;
+  left: 1em;
+  box-shadow: none;
+}
+#pop.minimized .pop-body {
+  display: none;
+}
+
+#pop .pop-header {
+  padding: 0.5em;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  cursor: move;
+}
+#pop .pop-header h2.pop-title {
+  padding: 0;
+}
+#pop .pop-header .pop-controls > span {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  color: #235A8B;
+}
+#pop .pop-header .pop-controls > span.hidden {
+  display: none;
+}
+#pop .pop-header .pop-controls > span:hover,
+#pop .pop-header .pop-controls > span:focus {
+  background: #154772;
+  color: white;
+}
+#pop .pop-header .pop-controls > span > span {
+  font-size: 1em;
+}
+
+#pop .pop-body iframe {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}

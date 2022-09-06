@@ -5,6 +5,7 @@ import { renderHelp } from './modules/help.js';
 import { initDownloadButtons } from './modules/downloads.js';
 import { initHomeworkButton } from './modules/homework.js';
 import { initFeedbackButton } from './modules/feedback.js';
+import { initPopButtons } from './modules/popelement.js';
 import { renderTableOfContents } from './modules/contents.js';
 import { renderHeaderTitle } from './modules/headertitle.js';
 
@@ -31,6 +32,8 @@ import { renderHeaderTitle } from './modules/headertitle.js';
   window.addEventListener('load', function() {
     // add logic for both readerView and Default
     getPageObj();
+    initPopButtons();
+    tippy('[data-tippy-content]');
     
     /**
      * ToDo:
