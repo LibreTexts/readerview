@@ -263,7 +263,7 @@ button.toolbar-inner {
 }
 #offcanvas-menu.open {
   display: block;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-bottom: 1em;
 }
 #offcanvas-menu .toc {
@@ -299,9 +299,39 @@ button.toolbar-inner {
   font-size: 0.9em;
 }
 
-#offcanvas-menu li.active > span > a {
+#offcanvas-menu ul li li.active > span > a {
   background-color: #235A8B;
   color: white;
+}
+#offcanvas-menu li.expandable:not(.expanded) > ul {
+  display: none;
+}
+#offcanvas-menu li.expandable > span {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f0f3;
+}
+#offcanvas-menu span.toc-expander {
+  padding: 0.5em;
+  display: block;
+  font-weight: 700;
+  color: black;
+  background-color: #f0f0f3;
+  border-left: 1px solid lightgray;
+}
+#offcanvas-menu span.toc-expander:hover,
+#offcanvas-menu span.toc-expander:focus {
+  cursor: pointer;
+  background-color: lightgray;
+}
+#offcanvas-menu span.toc-expander > span {
+  font-size: 1em;
+  display: inline-block;
+  line-height: inherit;
+  font-weight: 900;
+}
+#offcanvas-menu li.expanded span.toc-expander > span {
+  transform: rotate(180deg);
 }
 
 @media (max-width: 1024px ) {

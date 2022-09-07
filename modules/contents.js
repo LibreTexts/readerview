@@ -4,7 +4,7 @@
  * @returns {Promise<void>}
  */
 async function renderTableOfContents() {
-  const { structured } = await LibreTexts.getTOC();
+  const { flat, structured } = await LibreTexts.getTOC();
   const container = document.getElementById('offcanvas-menu');
   //const [subdomain] = LibreTexts.parseURL();
   /**
@@ -20,20 +20,29 @@ async function renderTableOfContents() {
   const buildListView = (page) => {
     if (Array.isArray(page.subpages)) {
       const children = page.subpages.map((item) => {
+        let itemClasslist = [`m-${item.id}`];
+        if (item.subpages){
+          itemClasslist.push('expandable');
+        }
+        if (currentPageId == item.id){
+          itemClasslist.push('active');
+        }
+        let expander = `
+          <span class="toc-expander" tabindex="0">
+            <span class="material-symbols-outlined">expand_more</span>
+          </span>
+        `;
         const grandchildren = buildListView(item);
         return `
-          <li class="${((currentPageId == item.id) ? `m-${item.id} active` : `m-${item.id}`)}">
+          <li class="${itemClasslist.join(' ')}">
             <span>
               <a href="/${item.path}?readerView">${item.title}</a>
+              ${item.subpages ? expander : ''}
             </span>
             ${grandchildren}
           </li>
         `;
       }).filter((item) => item !== null);
-      /** 
-       * ToDo:
-       * - set current page's parent ul as active if current page is subpage
-       */
       if (children.length > 0) {
         return `
           <ul>
@@ -45,9 +54,34 @@ async function renderTableOfContents() {
     return '';
   };
 
+  const setActiveChapter = (toc) => {
+
+    const page = toc.filter(item => item.id == currentPageId);
+    const chapter = toc.filter(item => item.id == page[0].parentID);
+    document.querySelector(`.m-${chapter[0].id}`).classList.add('active', 'expanded');
+  }
+
   const toc = buildListView(structured);
   container.innerHTML = toc;
+  const chapter = setActiveChapter(flat);
+  chapter;
+  initMenuExpanderButtons();
 }
+
+function initMenuExpanderButtons(){
+  let buttons = document.querySelectorAll('.toc-expander');
+  buttons.forEach(function(btn){
+    ["click", "keypress"].forEach(ev=>{
+      btn.addEventListener(ev, function(e){
+        e.preventDefault();
+        let parent = btn.closest('li.expandable');
+        let targetUL = parent.querySelector('ul');
+        parent.classList.toggle('expanded');
+        targetUL.classList.toggle('open');
+      });
+    });
+  });
+} 
 
 export {
   renderTableOfContents,
