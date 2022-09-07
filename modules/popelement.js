@@ -12,14 +12,15 @@ function buildPopElement(url, title, style = 'default', size = 'default'){
   const markup = 
   `<div id="pop" class="pop-style-${style} pop-size-${size}">
   	<div class="pop-header">
-    	<h2 class="pop-title">${title}</h2>
+    	<h2 class="pop-title" tabindex="0">${title}</h2>
       <div class="pop-controls">
-      	<span class="pop-minimize" data-tippy-content="Minimize Panel"><span class="material-symbols-outlined">expand_more</span></span>
-        <span class="pop-expand" data-tippy-content="Expand Panel"><span class="material-symbols-outlined">open_in_full</span></span>
-      	<span class="pop-close" data-tippy-content="Close Panel"><span class="material-symbols-outlined">close</span></span>
+      	<span tabindex="0" class="pop-minimize" data-tippy-content="Minimize Panel"><span class="material-symbols-outlined">expand_more</span></span>
+        <span tabindex="0" class="pop-open hidden" data-tippy-content="Open Panel"><span class="material-symbols-outlined">expand_less</span></span>
+        <span tabindex="0" class="pop-expand" data-tippy-content="Expand Panel"><span class="material-symbols-outlined">open_in_full</span></span>
+      	<span tabindex="0" class="pop-close" data-tippy-content="Close Panel"><span class="material-symbols-outlined">close</span></span>
       </div>
     </div>
-    <div class="pop-body">
+    <div class="pop-body" data-iframe-height="iFrameResizer">
     	<iframe id="pop-iframe" src="${url}" title="${title}" allowfullscreen frameborder="0"  height="100%" width="100%"></iframe>
     </div>
   </div>`;
@@ -32,9 +33,13 @@ function initPopButtons() {
   popButtons.forEach(function(btn){
     const src = btn.getAttribute('data-src');
     const title = btn.getAttribute('data-title');
-
-    btn.addEventListener('click', function(){
-      renderPopElement(src, title)
+    
+    ["click", "keypress"].forEach(ev=>{
+      btn.addEventListener(ev, function(e){
+        e.preventDefault();
+        closePop();
+        renderPopElement(src, title);
+      });
     });
   });
 }
@@ -42,11 +47,21 @@ function initPopButtons() {
 function renderPopElement(src, title) {
   const popElement = buildPopElement(src, title);
   document.body.insertAdjacentHTML('beforeend', popElement);
-  iFrameResize({ log: false }, '#pop-iframe')
+  //iFrameResize({ scrolling: 'true', log: false, heightCalculationMethod: 'taggedElement' }, '#pop-iframe');
+  iframeHeight();
   dragElement(document.getElementById("pop"));
-  document.querySelector('.pop-expand').addEventListener('click', expandPop);
-  document.querySelector('.pop-close').addEventListener('click', closePop);
-  document.querySelector('.pop-minimize').addEventListener('click', minimizePop);
+  tippy('[data-tippy-content]');
+  document.querySelector('h2.pop-title').focus();
+
+
+  ["click", "keypress"].forEach(ev=>{
+    document.querySelector('.pop-expand').addEventListener(ev, expandPop);
+    document.querySelector('.pop-close').addEventListener(ev, closePop);
+    document.querySelector('.pop-minimize').addEventListener(ev, minimizePop);
+    document.querySelector('.pop-open').addEventListener(ev, minimizePop);
+  });
+
+  
 
 }
 
@@ -86,17 +101,20 @@ function dragElement(elmnt) {
 }
 
 // Using iframeresizer.js instead
-// function iframeHeight() {
-//   const h = document.querySelector('#pop').scrollHeight;
-//   console.log(h);
-//   document.querySelector('.pop-body iframe').style.height = h + 'px';
-// }
+function iframeHeight() {
+  const p = document.querySelector('#pop').scrollHeight;
+  const b = document.querySelector('.pop-header').scrollHeight;
+  document.querySelector('.pop-body iframe').style.height = (p-b) + 'px';
+}
 
-function minimizePop(){
+function minimizePop(e){
+  e.preventDefault();
   document.querySelector('#pop').style.top = null;
   document.querySelector('#pop').style.left = null;
   document.querySelector('#pop').classList.toggle('minimized');
   document.querySelector('.pop-expand').classList.toggle('hidden');
+  document.querySelector('.pop-minimize').classList.toggle('hidden');
+  document.querySelector('.pop-open').classList.toggle('hidden');
   if (!document.querySelector('#pop').classList.contains('minimized')) {
     dragElement(document.getElementById("pop"));
   } else {
@@ -105,12 +123,24 @@ function minimizePop(){
   
 }
 
-function expandPop(){
+function expandPop(e){
+  e.preventDefault();
   document.querySelector('#pop').classList.toggle('expanded');
+  iframeHeight();
 }
 
-function closePop(){
-  document.querySelector('#pop').remove();
+function closePop(e){
+  const pop = document.querySelector('#pop');
+  if (pop) {
+    pop.remove();
+    let r = document.querySelector('button#resources');
+    if (r) {
+      r.focus();
+    } else {
+      document.querySelector('button#toggle_tools');
+    }
+  }
+  
 }
 
 export { initPopButtons };

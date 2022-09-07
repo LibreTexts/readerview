@@ -204,6 +204,9 @@ button.toolbar-btn:active {
   outline: inherit;
   border-right: 1px solid lightgray;
 }
+button.toolbar-btn:focus-visible {
+  outline: 1px inset;
+}
 button.toolbar-btn > span.material-symbols-outlined {
   font-size: 1.3em;
   margin-left: 0.5em
@@ -592,10 +595,8 @@ body.readerView {
 #pop .pop-header .pop-controls > span > span {
   font-size: 1em;
 }
-
 #pop .pop-body iframe {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   overflow-y: auto;
 }
