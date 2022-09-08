@@ -39,9 +39,10 @@ import { renderHeaderTitle } from './modules/headertitle.js';
      * ToDo:
      * - find out why current.coverpage is not available on window.load
      */
-    setTimeout(function() {
-      renderHeaderTitle();
-    }, 2000);
+    renderHeaderTitle();
+    // setTimeout(function() {
+    //   renderHeaderTitle();
+    // }, 2000);
     btnEvents();
 
     // make all .copy-button copy to clipboard from 

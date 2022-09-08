@@ -82,6 +82,9 @@
   max-width: 175px;
   padding: 0.5em 2em 0.5em 0;
 }
+#readerview .header-branding img {
+  max-height: 34px;
+}
 #readerview .header-title {
   align-self: center;
   font-weight: 700;
@@ -282,6 +285,9 @@ button.toolbar-inner {
 }
 #offcanvas-menu > ul > li {
   padding: 0.3em 0.3em 0;
+}
+#offcanvas-menu > ul > li.active > span > a {
+  color: #235A8B;
 }
 #offcanvas-menu > ul > li > span > a {
   padding: 0.5em;
