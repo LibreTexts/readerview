@@ -40,9 +40,6 @@ import { renderHeaderTitle } from './modules/headertitle.js';
      * - find out why current.coverpage is not available on window.load
      */
     renderHeaderTitle();
-    // setTimeout(function() {
-    //   renderHeaderTitle();
-    // }, 2000);
     btnEvents();
 
     // make all .copy-button copy to clipboard from 
@@ -90,26 +87,36 @@ import { renderHeaderTitle } from './modules/headertitle.js';
       let title = btn.getAttribute('data-modal-title');
       let target_element = document.getElementById(target);
       let modalBodyMethod = btn.getAttribute('data-modal-src');
-      
-      btn.addEventListener('click', function(e){
-        document.getElementById(target).classList.toggle('open');
-        target_element.querySelector('.modal-title').innerHTML = title;
-        target_element.querySelector('h2:first-of-type').focus();
 
-        switch (modalBodyMethod) {
-          case 'cite':
-            target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
-            break;
-          
-          case 'help':
-              target_element.querySelector('.modal-body').innerHTML = renderHelp();
+      ["click", "keypress"].forEach(ev=>{
+        btn.addEventListener(ev, function(e){
+          e.preventDefault();
+          if (e.keyCode === 13) {
+            document.getElementById(target).classList.toggle('open');
+            target_element.querySelector('.modal-title').innerHTML = title;
+            target_element.querySelector('h2:first-of-type').focus();
+          }
+          if (ev == 'click') {
+            document.getElementById(target).classList.toggle('open');
+            target_element.querySelector('.modal-title').innerHTML = title;
+          }
+          switch (modalBodyMethod) {
+            case 'cite':
+              target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
               break;
-        
-          default:
-            console.log("error");
-            break;
-        }
+            
+            case 'help':
+                target_element.querySelector('.modal-body').innerHTML = renderHelp();
+                break;
+          
+            default:
+              console.log("error");
+              break;
+          }
+
+        });
       });
+      modalClose();
     });
 
     // Div Collapse
@@ -117,10 +124,25 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     collapseButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
       let target_element = document.getElementById(target);
-      btn.addEventListener('click', function(e){
-        this.classList.toggle('active');
-        target_element.classList.toggle('open');
-        target_element.querySelector('a:first-of-type, button:first-of-type').focus();
+
+      ["click", "keypress"].forEach(ev=>{
+        btn.addEventListener(ev, function(e){
+          e.preventDefault();
+          if (e.keyCode === 13) {
+            this.classList.toggle('active');
+            target_element.classList.toggle('open');
+            target_element.querySelector('a:first-of-type, button:first-of-type').focus();
+          }
+          if (e.keyCode === 27) {
+            this.classList.remove('active');
+            target_element.classList.remove('open');
+            this.focus();
+          }
+          if (ev == 'click'){
+            this.classList.toggle('active');
+            target_element.classList.toggle('open');
+          }
+        });
       });
     });
 
@@ -128,23 +150,55 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     let dropdownButtons = document.querySelectorAll('[data-type="dropdown"]');
     dropdownButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
-      btn.addEventListener('click', function(e){
-        this.classList.toggle('active');
-        let anyOpen = document.querySelectorAll('#toolbar ul.open');
-        if (anyOpen){
-          anyOpen.forEach(function(el){
-            el.classList.remove('open');
-          })
-        }
-        document.getElementById(target).classList.toggle('open');
+
+      ["click", "keypress"].forEach(ev=>{
+        btn.addEventListener(ev, function(e){
+          e.preventDefault();
+          if (e.keyCode === 13) {
+            this.classList.toggle('active');
+            let anyOpen = document.querySelectorAll('#toolbar ul.open');
+            if (anyOpen){
+              anyOpen.forEach(function(el){
+                el.classList.remove('open');
+              });
+            }
+            document.getElementById(target).classList.toggle('open');
+          }
+          if (ev == 'click'){
+            this.classList.toggle('active');
+            let anyOpen = document.querySelectorAll('#toolbar ul.open');
+            if (anyOpen){
+              anyOpen.forEach(function(el){
+                el.classList.remove('open');
+              });
+            }
+            document.getElementById(target).classList.toggle('open');
+          }
+        });
       });
     });
   
     // Modal Close
-    document.querySelector('.modal-close').addEventListener('click', function(){
-      document.querySelector('.modal').classList.toggle('open');
-      document.querySelector('.modal-body').innerHTML = '';
-    });
+    function modalClose(){
+      let modalCloseButton = document.querySelectorAll('.modal-close');
+      modalCloseButton.forEach(function(btn){
+        ["click", "keypress"].forEach(ev=>{
+          btn.addEventListener(ev, function(e){
+            e.preventDefault();
+            if (e.keyCode === 13) {
+              document.querySelector('.modal').classList.toggle('open');
+              document.querySelector('.modal-body').innerHTML = '';
+              document.querySelector('#toolbar a:first-of-type, #toolbar button:first-of-type').focus();
+            }
+            if (ev == 'click'){
+              document.querySelector('.modal').classList.toggle('open');
+              document.querySelector('.modal-body').innerHTML = '';
+            }
+          });
+        });
+      });
+    }
+
   
     // All Close
     document.addEventListener('click', function(e){

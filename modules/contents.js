@@ -58,7 +58,6 @@ async function renderTableOfContents() {
     const page = toc.filter(item => item.id == currentPageId);
     const chapter = toc.filter(item => item.id == page[0].parentID);
     let chapterParentElement = document.querySelector(`.m-${chapter[0].id}`);
-    console.log(chapter);
     if (chapterParentElement) {
       chapterParentElement.classList.add('active', 'expanded');
     }    
@@ -73,17 +72,22 @@ async function renderTableOfContents() {
 
 function initMenuExpanderButtons(){
   let buttons = document.querySelectorAll('.toc-expander');
-  console.log(buttons);
   buttons.forEach(function(btn){
     ["click", "keypress"].forEach(ev=>{
       btn.addEventListener(ev, function(e){
         e.preventDefault();
-        let parent = btn.closest('li.expandable');
-        let targetUL = parent.querySelector('ul');
-        parent.classList.toggle('expanded');
-        targetUL.classList.toggle('open');
-        console.log(parent);
-        console.log(targetUL);
+        if (e.keyCode === 13) {
+          let parent = btn.closest('li.expandable');
+          let targetUL = parent.querySelector('ul');
+          parent.classList.toggle('expanded');
+          targetUL.classList.toggle('open');
+        }
+        if (ev == 'click'){
+          let parent = btn.closest('li.expandable');
+          let targetUL = parent.querySelector('ul');
+          parent.classList.toggle('expanded');
+          targetUL.classList.toggle('open');
+        }
       });
     });
   });

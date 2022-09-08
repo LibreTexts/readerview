@@ -37,8 +37,14 @@ function initPopButtons() {
     ["click", "keypress"].forEach(ev=>{
       btn.addEventListener(ev, function(e){
         e.preventDefault();
-        closePop();
-        renderPopElement(src, title);
+        if (e.keyCode === 13) {
+          closePop();
+          renderPopElement(src, title);
+        }
+        if (ev == 'click'){
+          closePop();
+          renderPopElement(src, title);
+        }
       });
     });
   });
