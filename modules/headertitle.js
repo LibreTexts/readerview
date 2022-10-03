@@ -23,15 +23,18 @@ async function renderHeaderTitle() {
      * - handle 3+ levels of heirarchy
      * - show other chapters in dropdown menu when chapter title clicked
      */
-    if (chapter[0].id == coverpage.id) {
-      // do not show chapter title link if 1st level chapter
-      return '';
-    } else {
-      return `
-        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-        <a id="chapterTitle" href="https://${window.location.host}/${chapter[0].path}?readerView">${chapter[0].title}</a>
-      `;
+    if (chapter.length) {
+      if (chapter[0].id == coverpage.id) {
+        // do not show chapter title link if 1st level chapter
+        return '';
+      } else {
+        return `
+          <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+          <a id="chapterTitle" href="https://${window.location.host}/${chapter[0].path}?readerView">${chapter[0].title}</a>
+        `;
+      }
     }
+    return '';
   }
 
   const bookTitle = buildBookTitle(coverpage);

@@ -1,4 +1,5 @@
 import ClipboardJS from 'clipboard';
+import MicroModal from 'micromodal';
 import { Page, getPageObj } from './modules/pageinfo.js';
 import { buildCite } from './modules/cite.js';
 import { renderHelp } from './modules/help.js';
@@ -12,7 +13,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 
 (function () {
   
-  if (window !== window.top || window.location.href.includes('readerView') || window.location.href.includes('readerView')) {
+  if (window.location.href.includes('readerView') || window.location.href.includes('readerView')) {
 
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
@@ -34,6 +35,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     getPageObj();
     initPopButtons();
     tippy('[data-tippy-content]');
+    MicroModal.init();
     
     /**
      * ToDo:
@@ -41,6 +43,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
      */
     renderHeaderTitle();
     btnEvents();
+    modalClose();
 
     // make all .copy-button copy to clipboard from 
     // data-clipboard-target
@@ -83,30 +86,33 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     // Modals
     let modalButtons = document.querySelectorAll('[data-type="modal"]');
     modalButtons.forEach(function(btn){
-      let target = btn.getAttribute('data-target');
+      //let target = btn.getAttribute('data-target');
       let title = btn.getAttribute('data-modal-title');
-      let target_element = document.getElementById(target);
+      //let target_element = document.getElementById('modal-main');
       let modalBodyMethod = btn.getAttribute('data-modal-src');
 
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
           if (e.keyCode === 13) {
-            document.getElementById(target).classList.toggle('open');
-            target_element.querySelector('.modal-title').innerHTML = title;
-            target_element.querySelector('h2:first-of-type').focus();
+            //document.getElementById(target).classList.toggle('open');
+            MicroModal.show('modal-main');
+            document.getElementById('modal-main-title').innerHTML = title;
+            //target_element.querySelector('h2:first-of-type').focus();
           }
           if (ev == 'click') {
-            document.getElementById(target).classList.toggle('open');
-            target_element.querySelector('.modal-title').innerHTML = title;
+            //document.getElementById(target).classList.toggle('open');
+            MicroModal.show('modal-main');
+            document.getElementById('modal-main-title').innerHTML = title;
           }
           switch (modalBodyMethod) {
             case 'cite':
-              target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
+              //target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
+              document.getElementById('modal-main-body').innerHTML = buildCite(Page);
               break;
             
             case 'help':
-                target_element.querySelector('.modal-body').innerHTML = renderHelp();
+              document.getElementById('modal-main-body').innerHTML = renderHelp();
                 break;
           
             default:
@@ -116,7 +122,6 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 
         });
       });
-      modalClose();
     });
 
     // Div Collapse
@@ -178,26 +183,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
       });
     });
   
-    // Modal Close
-    function modalClose(){
-      let modalCloseButton = document.querySelectorAll('.modal-close');
-      modalCloseButton.forEach(function(btn){
-        ["click", "keypress"].forEach(ev=>{
-          btn.addEventListener(ev, function(e){
-            e.preventDefault();
-            if (e.keyCode === 13) {
-              document.querySelector('.modal').classList.toggle('open');
-              document.querySelector('.modal-body').innerHTML = '';
-              document.querySelector('#toolbar a:first-of-type, #toolbar button:first-of-type').focus();
-            }
-            if (ev == 'click'){
-              document.querySelector('.modal').classList.toggle('open');
-              document.querySelector('.modal-body').innerHTML = '';
-            }
-          });
-        });
-      });
-    }
+
 
   
     // All Close
@@ -217,5 +203,24 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 
   } // btnEvents()
 
-  
+  // Modal Close
+  // function modalClose(){
+  //   let modalCloseButton = document.querySelectorAll('.modal-close');
+  //   modalCloseButton.forEach(function(btn){
+  //     ["click", "keypress"].forEach(ev=>{
+  //       btn.addEventListener(ev, function(e){
+  //         //e.preventDefault();
+  //         if (e.keyCode === 13) {
+  //           document.getElementById('modal_readerview').classList.toggle('open');
+  //           document.querySelector('.modal-body').innerHTML = '';
+  //           document.querySelector('#toolbar a:first-of-type, #toolbar button:first-of-type').focus();
+  //         }
+  //         if (ev == 'click'){
+  //           document.getElementById('modal_readerview').classList.toggle('open');
+  //           document.querySelector('.modal-body').innerHTML = '';
+  //         }
+  //       });
+  //     });
+  //   });
+  // }
 })();

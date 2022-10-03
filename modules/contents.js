@@ -57,8 +57,9 @@ async function renderTableOfContents() {
   const setActiveChapter = (toc) => {
     const page = toc.filter(item => item.id == currentPageId);
     const chapter = toc.filter(item => item.id == page[0].parentID);
-    let chapterParentElement = document.querySelector(`.m-${chapter[0].id}`);
-    if (chapterParentElement) {
+   
+    if (chapter.length) {
+      let chapterParentElement = document.querySelector(`.m-${chapter[0].id}`);
       chapterParentElement.classList.add('active', 'expanded');
     }    
   }
