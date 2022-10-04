@@ -14,10 +14,22 @@ function buildPopElement(url, title, style = 'default', size = 'default'){
   	<div class="pop-header">
     	<h2 class="pop-title" tabindex="0">${title}</h2>
       <div class="pop-controls">
-      	<span tabindex="0" class="pop-minimize" data-tippy-content="Minimize Panel"><span class="material-symbols-outlined">expand_more</span></span>
-        <span tabindex="0" class="pop-open hidden" data-tippy-content="Open Panel"><span class="material-symbols-outlined">expand_less</span></span>
-        <span tabindex="0" class="pop-expand" data-tippy-content="Expand Panel"><span class="material-symbols-outlined">open_in_full</span></span>
-      	<span tabindex="0" class="pop-close" data-tippy-content="Close Panel"><span class="material-symbols-outlined">close</span></span>
+      	<span tabindex="0" class="pop-minimize" data-tippy-content="Minimize Panel" aria-labelledby="panel-min-label">
+          <span hidden="hidden" id="panel-min-label">Minimize this panel</span> 
+          <span aria-hidden="true" class="material-symbols-outlined" focusable="false">expand_more</span>
+        </span>
+        <span tabindex="0" class="pop-open hidden" data-tippy-content="Open Panel" aria-labelledby="panel-open-label">
+          <span hidden="hidden" id="panel-open-label">Open this panel</span> 
+          <span aria-hidden="true" class="material-symbols-outlined" focusable="false">expand_less</span>
+        </span>
+        <span tabindex="0" class="pop-expand" data-tippy-content="Grow or Shrink Panel" aria-labelledby="panel-resize-label">
+          <span hidden="hidden" id="panel-resize-label">Grow or shrink panel</span>   
+          <span class="material-symbols-outlined">open_in_full</span>
+        </span>
+      	<span tabindex="0" class="pop-close" data-tippy-content="Close Panel" aria-labelledby="panel-close-label">
+          <span hidden="hidden" id="panel-close-label">Close panel</span>
+          <span class="material-symbols-outlined">close</span>
+        </span>
       </div>
     </div>
     <div class="pop-body" data-iframe-height="iFrameResizer">
@@ -37,6 +49,12 @@ function initPopButtons() {
     ["click", "keypress"].forEach(ev=>{
       btn.addEventListener(ev, function(e){
         e.preventDefault();
+        let expanded = this.getAttribute('aria-expanded');
+        if (expanded === 'false') {
+          this.setAttribute('aria-expanded', 'true')
+        } else {
+          this.setAttribute('aria-expanded', 'false')
+        }
         if (e.keyCode === 13) {
           closePop();
           renderPopElement(src, title);
@@ -53,7 +71,6 @@ function initPopButtons() {
 function renderPopElement(src, title) {
   const popElement = buildPopElement(src, title);
   document.body.insertAdjacentHTML('beforeend', popElement);
-  //iFrameResize({ scrolling: 'true', log: false, heightCalculationMethod: 'taggedElement' }, '#pop-iframe');
   iframeHeight();
   dragElement(document.getElementById("pop"));
   tippy('[data-tippy-content]');
@@ -61,10 +78,38 @@ function renderPopElement(src, title) {
 
 
   ["click", "keypress"].forEach(ev=>{
-    document.querySelector('.pop-expand').addEventListener(ev, expandPop);
-    document.querySelector('.pop-close').addEventListener(ev, closePop);
-    document.querySelector('.pop-minimize').addEventListener(ev, minimizePop);
-    document.querySelector('.pop-open').addEventListener(ev, minimizePop);
+    document.querySelector('.pop-expand').addEventListener(ev, function(e){
+      if (e.keyCode === 13) {
+        expandPop(e);
+      }
+      if (ev == 'click'){
+        expandPop(e);
+      }
+    });
+    document.querySelector('.pop-close').addEventListener(ev, function(e){
+      if (e.keyCode === 13) {
+        closePop();
+      }
+      if (ev == 'click'){
+        closePop();
+      }
+    });
+    document.querySelector('.pop-minimize').addEventListener(ev, function(e){
+      if (e.keyCode === 13) {
+        minimizePop(e);
+      }
+      if (ev == 'click'){
+        minimizePop(e);
+      }
+    });
+    document.querySelector('.pop-open').addEventListener(ev, function(e){
+      if (e.keyCode === 13) {
+        minimizePop(e);
+      }
+      if (ev == 'click'){
+        minimizePop(e);
+      }
+    });
   });
 
   

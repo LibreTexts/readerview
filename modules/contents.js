@@ -28,8 +28,9 @@ async function renderTableOfContents() {
           itemClasslist.push('active', 'expanded');
         }
         let expander = `
-          <span class="toc-expander" tabindex="0">
-            <span class="material-symbols-outlined">expand_more</span>
+          <span class="toc-expander" tabindex="0" aria-expanded="false" aria-labelledby="toc-chapter${item.id}-label">
+            <span hidden id="toc-chapter${item.id}-label">Show submenu for ${item.title}</span> 
+            <span aria-hidden="true" class="icon material-symbols-outlined" focusable="false">expand_more</span>
           </span>
         `;
         const grandchildren = buildListView(item);
@@ -56,12 +57,17 @@ async function renderTableOfContents() {
 
   const setActiveChapter = (toc) => {
     const page = toc.filter(item => item.id == currentPageId);
-    const chapter = toc.filter(item => item.id == page[0].parentID);
+    const chapterTop = toc.filter(item => item.id == page[0].parentID);
    
-    if (chapter.length) {
-      let chapterParentElement = document.querySelector(`.m-${chapter[0].id}`);
-      chapterParentElement.classList.add('active', 'expanded');
-    }    
+    if (chapterTop.length) {
+      let chapterParentElement = document.querySelector(`.m-${chapterTop[0].id}`);
+      if (chapterParentElement) {
+        chapterParentElement.classList.add('active', 'expanded');
+        chapterParentElement.querySelector('.toc-expander').setAttribute('aria-expanded', 'true');
+      } else {
+        return;
+      } 
+    }
   }
 
   const toc = buildListView(structured);
@@ -76,6 +82,12 @@ function initMenuExpanderButtons(){
   buttons.forEach(function(btn){
     ["click", "keypress"].forEach(ev=>{
       btn.addEventListener(ev, function(e){
+        let expanded = this.getAttribute('aria-expanded');
+        if (expanded === 'false') {
+          this.setAttribute('aria-expanded', 'true')
+        } else {
+          this.setAttribute('aria-expanded', 'false')
+        }
         e.preventDefault();
         if (e.keyCode === 13) {
           let parent = btn.closest('li.expandable');
@@ -92,7 +104,7 @@ function initMenuExpanderButtons(){
       });
     });
   });
-} 
+}
 
 export {
   renderTableOfContents,

@@ -6,8 +6,8 @@ function initHomeworkButton() {
   const homeworkButton = document.getElementById('open_homework');
   if (LibreTexts.current?.commons?.hasAdaptCourse && homeworkButton) {
     const courseID = LibreTexts.current.commons.adaptCourseID;
-    homeworkButton.classList.remove('disabled-header-btn');
-    homeworkButton.disabled = false;
+    homeworkButton.classList.remove('hidden');
+    homeworkButton.removeAttribute('disabled','');
     homeworkButton.addEventListener('click', () => {
       window.open(
         `https://adapt.libretexts.org/courses/${courseID}/anonymous`,

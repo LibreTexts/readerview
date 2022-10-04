@@ -28,14 +28,11 @@ import { renderHeaderTitle } from './modules/headertitle.js';
       initHomeworkButton();
       initFeedbackButton();
     });
-  }
-  
-  window.addEventListener('load', function() {
-    // add logic for both readerView and Default
+
     getPageObj();
     initPopButtons();
-    tippy('[data-tippy-content]');
     MicroModal.init();
+    closeWithEsc();
     
     /**
      * ToDo:
@@ -43,7 +40,6 @@ import { renderHeaderTitle } from './modules/headertitle.js';
      */
     renderHeaderTitle();
     btnEvents();
-    modalClose();
 
     // make all .copy-button copy to clipboard from 
     // data-clipboard-target
@@ -54,6 +50,12 @@ import { renderHeaderTitle } from './modules/headertitle.js';
         e.trigger.innerHTML = 'Copy to clipboard';
       }, 4000);
     });
+  }
+  
+  window.addEventListener('load', function() {
+    // add logic for both readerView and Default
+    tippy('[data-tippy-content]');
+ 
   });
 
   
@@ -80,40 +82,64 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     });
   }
 
+
+  function closeWithEsc() {
+    // To Do: wire this up with data-controlled-by or something to ensure the aria-* settings, etc are managed properly with Esc closing.
+    let exitablePanels = ['#offcanvas-menu', '.toolbar-btn'];
+    exitablePanels.forEach(function(panel){
+      document.querySelector(panel).addEventListener('keydown', function(e){
+        if(e.key === "Escape") {
+          console.log(e);
+          e.preventDefault();
+          this.classList.remove('open');
+        }
+      });
+    });
+  }
+
+
   function btnEvents() {
     // Handles events for all layout buttons
+
+    let exitBtn = document.getElementById('exit_reader');
+    ["click", "keypress"].forEach(ev=>{
+      exitBtn.addEventListener(ev, function(e){
+        e.preventDefault();
+        if (e.keyCode === 13 || ev == 'click') {
+          window.open(window.location.origin + window.location.pathname, '_self');
+        }
+      })
+    });
 
     // Modals
     let modalButtons = document.querySelectorAll('[data-type="modal"]');
     modalButtons.forEach(function(btn){
-      //let target = btn.getAttribute('data-target');
       let title = btn.getAttribute('data-modal-title');
-      //let target_element = document.getElementById('modal-main');
       let modalBodyMethod = btn.getAttribute('data-modal-src');
 
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
           if (e.keyCode === 13) {
-            //document.getElementById(target).classList.toggle('open');
             MicroModal.show('modal-main');
             document.getElementById('modal-main-title').innerHTML = title;
-            //target_element.querySelector('h2:first-of-type').focus();
           }
           if (ev == 'click') {
-            //document.getElementById(target).classList.toggle('open');
             MicroModal.show('modal-main');
             document.getElementById('modal-main-title').innerHTML = title;
           }
           switch (modalBodyMethod) {
             case 'cite':
-              //target_element.querySelector('.modal-body').innerHTML = buildCite(Page);
               document.getElementById('modal-main-body').innerHTML = buildCite(Page);
               break;
             
             case 'help':
               document.getElementById('modal-main-body').innerHTML = renderHelp();
                 break;
+            
+            case 'na':
+              let modalBody = btn.getAttribute('data-modal-body');
+              document.getElementById('modal-main-body').innerHTML = `<p>${modalBody}</p>`;
           
             default:
               console.log("error");
@@ -129,10 +155,17 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     collapseButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
       let target_element = document.getElementById(target);
+      
 
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
+          let expanded = this.getAttribute('aria-expanded');
+          if (expanded === 'false') {
+            this.setAttribute('aria-expanded', 'true')
+          } else {
+            this.setAttribute('aria-expanded', 'false')
+          }
           if (e.keyCode === 13) {
             this.classList.toggle('active');
             target_element.classList.toggle('open');
@@ -155,29 +188,33 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     let dropdownButtons = document.querySelectorAll('[data-type="dropdown"]');
     dropdownButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
+      let target_element = document.getElementById(target);
 
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
           if (e.keyCode === 13) {
             this.classList.toggle('active');
+            let alreadyOpen = target_element.classList.contains('open');
             let anyOpen = document.querySelectorAll('#toolbar ul.open');
             if (anyOpen){
               anyOpen.forEach(function(el){
                 el.classList.remove('open');
               });
             }
-            document.getElementById(target).classList.toggle('open');
+            target_element.classList.toggle('open', alreadyOpen === false);
           }
           if (ev == 'click'){
             this.classList.toggle('active');
+            let alreadyOpen = target_element.classList.contains('open');
+            console.log(alreadyOpen);
             let anyOpen = document.querySelectorAll('#toolbar ul.open');
             if (anyOpen){
               anyOpen.forEach(function(el){
                 el.classList.remove('open');
               });
             }
-            document.getElementById(target).classList.toggle('open');
+            target_element.classList.toggle('open', alreadyOpen === false); 
           }
         });
       });
@@ -188,7 +225,8 @@ import { renderHeaderTitle } from './modules/headertitle.js';
   
     // All Close
     document.addEventListener('click', function(e){
-      let exclude = ['button', 'a', 'button > span', '.modal-content *'];
+      //let exclude = ['button.has-submenu', 'a', 'button.has-submenu > span', '.modal-content *'];
+      let exclude = ['button.has-submenu', 'button.has-submenu>*', '.modal-content *'];
       let excludeClose = ['toolbar','offcanvas-menu','homework'];
       if (!e.target.matches(exclude)) {
         let openElements = document.querySelectorAll('.open');

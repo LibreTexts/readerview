@@ -6,7 +6,8 @@
 .readerView div.annotator-frame,
 .readerView #custom_open,
 .readerView .sbHeader,
-.readerView #attachments {
+.readerView #attachments,
+.readerView .LTBranding {
   display: none;
 }
 .readerView header.elm-header {
@@ -42,11 +43,23 @@
   display: none;
 }
 
+.readerView button:disabled,
+.readerView a:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.readerView .hidden {
+  display: none;
+}
 
 /**
 * Reader View Header
 **/
 #readerview {
+  display: none;
+}
+.readerView #readerview  {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 10px;
@@ -77,6 +90,7 @@
 #readerview .header-menu > button:focus {
   background-color: rgb(241, 241, 241);
   box-shadow: unset;
+  outline: 1px solid black;
 }
 #readerview .header-branding {
   max-width: 175px;
@@ -330,7 +344,7 @@ button.toolbar-inner {
   cursor: pointer;
   background-color: lightgray;
 }
-#offcanvas-menu span.toc-expander > span {
+#offcanvas-menu span.toc-expander > span.icon {
   font-size: 1em;
   display: inline-block;
   line-height: inherit;
@@ -437,6 +451,11 @@ body.readerView {
 .readerView a:focus {
   color: #154772;
   text-decoration: underline;
+  outline: 1px solid black;
+}
+.readerView button:hover,
+.readerView button:focus {
+  outline: 1px solid black;
 }
 .readerView h1#title {
   color: black;
@@ -644,7 +663,7 @@ body.readerView {
 \**************************/
 
 .modal {
-
+  z-index: 1003;
 }
 
 .modal__overlay {
@@ -657,12 +676,14 @@ body.readerView {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1003;
 }
 
 .modal__container {
   background-color: #fff;
   padding: 0 1em 1em 1em;
-  max-width: 700px;
+  max-width: 900px;
+  min-width: 30%;
   max-height: 100vh;
   border-radius: 4px;
   overflow-y: auto;

@@ -4,19 +4,19 @@
  */
 function initDownloadButtons() {
   if (LibreTexts.current?.downloads) {
-    const pdfLinks = LibreTexts.current.downloads.pdf;
     const fullDownloadBtn = document.getElementById('download_pdf_full');
     const pageDownloadBtn = document.getElementById('download_pdf_page');
+    const pdfLinks = LibreTexts.current.downloads.pdf;
     if (pdfLinks.full && fullDownloadBtn) {
-      fullDownloadBtn.classList.remove('disabled-btn');
       fullDownloadBtn.disabled = false;
+      fullDownloadBtn.removeAttribute('data-micromodal-trigger');
       fullDownloadBtn.addEventListener('click', () => {
         window.open(pdfLinks.full, '_blank', 'noreferrer');
       });
     }
     if (pdfLinks.page && pageDownloadBtn)  {
-      pageDownloadBtn.classList.remove('disabled-btn');
       pageDownloadBtn.disabled = false;
+      pageDownloadBtn.removeAttribute('data-micromodal-trigger');
       pageDownloadBtn.addEventListener('click', () => {
         window.open(pdfLinks.page, '_blank', 'noreferrer');
       });      
