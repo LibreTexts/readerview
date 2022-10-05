@@ -7,8 +7,8 @@ function getPageObj(){
   Page.modified.dateTime = document.getElementById('modifiedHolder').innerText;
   Page.pageId = document.getElementById('IDHolder').innerText;
   if (document.querySelector('.mt-author-information')) {
-    Page.authorDisplayName = document.querySelector('.mt-author-information a').innerText ;
-    Page.authorLink = document.querySelector('.mt-author-information a').getAttribute('href');
+    Page.authorDisplayName = document.querySelector('.mt-author-information a') ? document.querySelector('.mt-author-information a').innerText : 'Anonymous';
+    Page.authorLink = document.querySelector('.mt-author-information a') ? document.querySelector('.mt-author-information a').getAttribute('href') : 'https://libretexts.org';
   }
   Page.parentTitle = document.getElementById('parentTitleHolder').innerText;
   Page.parentParentTitle = document.getElementById('parentParentTitleHolder').innerText;
