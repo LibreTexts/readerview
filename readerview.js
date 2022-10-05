@@ -31,7 +31,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 
     getPageObj();
     initPopButtons();
-    MicroModal.init();
+    //MicroModal.init();
     closeWithEsc();
     
     /**
@@ -89,7 +89,6 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     exitablePanels.forEach(function(panel){
       document.querySelector(panel).addEventListener('keydown', function(e){
         if(e.key === "Escape") {
-          console.log(e);
           e.preventDefault();
           this.classList.remove('open');
         }
@@ -207,7 +206,6 @@ import { renderHeaderTitle } from './modules/headertitle.js';
           if (ev == 'click'){
             this.classList.toggle('active');
             let alreadyOpen = target_element.classList.contains('open');
-            console.log(alreadyOpen);
             let anyOpen = document.querySelectorAll('#toolbar ul.open');
             if (anyOpen){
               anyOpen.forEach(function(el){

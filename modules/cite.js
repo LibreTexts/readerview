@@ -65,9 +65,5 @@ function buildLicenseAttribution(data) {
   }
 }
 
-function copyToClipboard(){
-  console.log(this);
-}
-
 
 export { buildCite };

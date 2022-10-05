@@ -6,7 +6,8 @@ function getPageObj(){
   Page.modified = [];
   Page.modified.dateTime = document.getElementById('modifiedHolder').innerText;
   Page.pageId = document.getElementById('IDHolder').innerText;
-  Page.authorDisplayName = document.getElementById('displaynameHolder').innerText;
+  Page.authorDisplayName = document.querySelector('.mt-author-information a').innerText;
+  Page.authorLink = document.querySelector('.mt-author-information a').getAttribute('href');
   Page.parentTitle = document.getElementById('parentTitleHolder').innerText;
   Page.parentParentTitle = document.getElementById('parentParentTitleHolder').innerText;
 
