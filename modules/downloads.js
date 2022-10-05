@@ -10,6 +10,7 @@ function initDownloadButtons() {
     if (pdfLinks.full && fullDownloadBtn) {
       fullDownloadBtn.disabled = false;
       fullDownloadBtn.removeAttribute('data-micromodal-trigger');
+      pageDownloadBtn.removeAttribute('data-type');
       fullDownloadBtn.addEventListener('click', () => {
         window.open(pdfLinks.full, '_blank', 'noreferrer');
       });
@@ -17,6 +18,7 @@ function initDownloadButtons() {
     if (pdfLinks.page && pageDownloadBtn)  {
       pageDownloadBtn.disabled = false;
       pageDownloadBtn.removeAttribute('data-micromodal-trigger');
+      pageDownloadBtn.removeAttribute('data-type');
       pageDownloadBtn.addEventListener('click', () => {
         window.open(pdfLinks.page, '_blank', 'noreferrer');
       });      

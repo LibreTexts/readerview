@@ -9,7 +9,7 @@ function initFeedbackButton() {
     && (commonsData.hasPeerReviews || commonsData.allowAnonPR)
     && feedbackBtn
   ) {
-    feedbackBtn.classList.remove('disabled-toolbar-btn');
+    feedbackBtn.classList.remove('hidden');
     feedbackBtn.disabled = false;
     feedbackBtn.addEventListener('click', () => {
       const commonsURL = `https://commons.libretexts.org/book/${commonsData.bookID}`;
