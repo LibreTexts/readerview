@@ -10,7 +10,7 @@ function initDownloadButtons() {
     if (pdfLinks.full && fullDownloadBtn) {
       fullDownloadBtn.disabled = false;
       fullDownloadBtn.removeAttribute('data-micromodal-trigger');
-      pageDownloadBtn.removeAttribute('data-type');
+      fullDownloadBtn.removeAttribute('data-type');
       fullDownloadBtn.addEventListener('click', () => {
         window.open(pdfLinks.full, '_blank', 'noreferrer');
       });
