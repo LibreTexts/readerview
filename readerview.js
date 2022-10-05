@@ -1,5 +1,6 @@
 import ClipboardJS from 'clipboard';
 import MicroModal from 'micromodal';
+import ls from 'localstorage-slim';
 import { Page, getPageObj } from './modules/pageinfo.js';
 import { buildCite } from './modules/cite.js';
 import { renderHelp } from './modules/help.js';
@@ -20,6 +21,15 @@ import { renderHeaderTitle } from './modules/headertitle.js';
   
     window.addEventListener('load', function() {
       // add logic meant for readerView Only
+
+      async function getLibreTexts() {
+        const toc = await LibreTexts.getTOC();
+        const current = await LibreTexts.current;
+        ls.set('toc', toc, { ttl: 60 });
+        ls.set('current', current, { ttl: 60 });
+      }
+      getLibreTexts();   
+
       appendPageLinks();
       renderTableOfContents();
     });

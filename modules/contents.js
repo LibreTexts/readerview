@@ -3,8 +3,14 @@
  *
  * @returns {Promise<void>}
  */
+
+import ls from 'localstorage-slim';
+
 async function renderTableOfContents() {
-  const { flat, structured } = await LibreTexts.getTOC();
+  //const { flat, structured } = await LibreTexts.getTOC();
+
+  const { flat, structured } = ls.get('toc');
+
   const container = document.getElementById('offcanvas-menu');
   //const [subdomain] = LibreTexts.parseURL();
   /**
