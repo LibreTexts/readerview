@@ -19,18 +19,20 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
   
-    window.addEventListener('load', function() {
+    window.addEventListener('load', async function () {
       // add logic meant for readerView Only
+
+      appendPageLinks();
 
       async function getLibreTexts() {
         const toc = await LibreTexts.getTOC();
-        const current = await LibreTexts.current;
+        const current = LibreTexts.current;
         ls.set('toc', toc, { ttl: 60 });
         ls.set('current', current, { ttl: 60 });
       }
-      getLibreTexts();   
+      await getLibreTexts(); // wait for TOC and coverpage to be available
 
-      appendPageLinks();
+      renderHeaderTitle();
       renderTableOfContents();
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
@@ -43,12 +45,6 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     initPopButtons();
     //MicroModal.init();
     closeWithEsc();
-    
-    /**
-     * ToDo:
-     * - find out why current.coverpage is not available on window.load
-     */
-    renderHeaderTitle();
     btnEvents();
 
     // make all .copy-button copy to clipboard from 

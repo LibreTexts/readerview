@@ -9,10 +9,10 @@ import ls from 'localstorage-slim';
 async function renderTableOfContents() {
   //const { flat, structured } = await LibreTexts.getTOC();
 
-  const { flat, structured } = ls.get('toc');
+  let { flat, structured } = ls.get('toc') || {};
 
   if (!flat && !structured) {
-    const { flat, structured } = await LibreTexts.getTOC();
+    ({ flat, structured } = await LibreTexts.getTOC());
   }
 
   const container = document.getElementById('offcanvas-menu');

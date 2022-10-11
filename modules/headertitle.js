@@ -4,9 +4,8 @@ async function renderHeaderTitle() {
   //const { flat, structured } = await LibreTexts.getTOC();
   //const { coverpage } = LibreTexts.current;
 
-  const { flat, structured } = ls.get('toc');
-  let { coverpage } = ls.get('current');
-
+  const { flat, structured } = ls.get('toc') || {};
+  const { coverpage } = ls.get('current') || {};
   
   const container = document.querySelector('.header-title');
   const currentPageId = document.getElementById('IDHolder').innerText;
