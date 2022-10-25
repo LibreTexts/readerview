@@ -176,6 +176,15 @@ button.disabled-header-btn:hover {
     display: none;
   }
 }
+@media (max-width: 450px ) {
+  button.header-btn > span.material-symbols-outlined {
+    font-size: 1.8em;
+    margin-right: 0;
+  }
+  button.header-btn > span:nth-of-type(2) {
+    display: none;
+  }
+}
 
 /**
 * Toolbar
@@ -360,6 +369,12 @@ button.toolbar-inner {
     top: 42px;
   }
 }
+@media (max-width: 450px ) {
+  #offcanvas-menu {
+    top: 52px;
+    width: 80%;
+  }
+}
 
 /**
 * Modal
@@ -438,6 +453,13 @@ body.readerView {
     max-width: unset;
     margin: 0 13rem;
   }
+}
+
+@media (max-width: 450px ) {
+  .readerView article.elm-content-container {
+    max-width: unset;
+    margin: 0 1rem;
+  } 
 }
 
 /**
