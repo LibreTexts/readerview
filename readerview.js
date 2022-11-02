@@ -165,6 +165,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
+          let icon = btn.querySelector('.material-symbols-outlined');
           let expanded = this.getAttribute('aria-expanded');
           if (expanded === 'false') {
             this.setAttribute('aria-expanded', 'true')
@@ -184,6 +185,11 @@ import { renderHeaderTitle } from './modules/headertitle.js';
           if (ev == 'click'){
             this.classList.toggle('active');
             target_element.classList.toggle('open');
+          }
+          if (btn.id === 'toggle_ocm' && btn.classList.contains('active')){
+            icon.innerHTML = 'close';
+          } else  {
+            icon.innerHTML = 'menu';
           }
         });
       });

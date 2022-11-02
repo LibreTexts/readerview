@@ -75,7 +75,6 @@ async function renderTableOfContents() {
         chapterParentElement.classList.add('active', 'expanded');
         chapterParentElement.querySelector('.toc-expander').setAttribute('aria-expanded', 'true');
         let subChapterParent = chapterParentElement.parentElement.parentElement;
-        console.log(subChapterParent);
         if (subChapterParent.nodeName == 'LI') {
           subChapterParent.classList.add('active', 'expanded');
           subChapterParent.querySelector('.toc-expander').setAttribute('aria-expanded', 'true');

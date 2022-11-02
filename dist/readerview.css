@@ -497,8 +497,6 @@ button.toolbar-inner {
   color: white;
 }
 
-
-
 /** Menu Expander **/
 #offcanvas-menu > ul > li.expandable > span {
   display: flex;
