@@ -425,6 +425,8 @@ button.toolbar-inner {
 #offcanvas-menu ul a:focus {
   outline: 2px inset rgba(0,0,0,0.6);
 }
+
+/** Level 1: Chapter **/
 #offcanvas-menu > ul > li {
   padding: 0.3em 0.3em 0;
 }
@@ -438,6 +440,8 @@ button.toolbar-inner {
   color: black;
   background-color: #f0f0f3;
 }
+
+/** Level 2: Page in Chapter **/
 #offcanvas-menu > ul > li > ul > li > span > a {
   padding: 0.5em 0.5em 0.5em 1.7em;
   display: block;
@@ -446,15 +450,57 @@ button.toolbar-inner {
   margin: 0.3em 0;
   font-size: 0.9em;
 }
-
-#offcanvas-menu ul li li.active > span > a {
+#offcanvas-menu > ul > li > ul > li.active > span > a {
   background-color: #235A8B;
   color: white;
 }
-#offcanvas-menu li.expandable:not(.expanded) > ul {
+#offcanvas-menu > ul > li.expandable:not(.expanded) > ul {
   display: none;
 }
-#offcanvas-menu li.expandable > span {
+
+/** Level 2.1: Sub Chapter **/
+#offcanvas-menu > ul > li > ul > li.expandable:not(.expanded) > ul {
+  display: none;
+}
+#offcanvas-menu > ul > li > ul > li.expandable > span {
+  display: flex;
+  justify-content: space-between;
+}
+#offcanvas-menu > ul > li > ul > li.expandable > span > a {
+  flex: 1;
+}
+#offcanvas-menu > ul > li > ul > li.expandable > span > span.toc-expander {
+  margin: 0.3em 0;
+  padding: 0.3em;
+}
+#offcanvas-menu > ul > li > ul > li.expandable.expanded span.toc-expander > span {
+  transform: rotate(180deg);
+}
+#offcanvas-menu > ul > li > ul > li.expandable.expanded > span > a {
+  background-color: #fff6f6;
+  color: #235A8B;
+  font-weight: bold;
+}
+/** Level 3: Page in SubChapter **/
+#offcanvas-menu > ul > li > ul > li > ul {
+  margin-bottom: 0.5em;
+}
+#offcanvas-menu > ul > li > ul > li > ul > li > span > a {
+  padding: 0.5em 0.5em 0.5em 3em;
+  display: block;
+  color: black;
+  margin: 0;
+  font-size: 0.8em;
+}
+#offcanvas-menu > ul > li > ul > li > ul > li.active > span > a {
+  background-color: #235A8B;
+  color: white;
+}
+
+
+
+/** Menu Expander **/
+#offcanvas-menu > ul > li.expandable > span {
   display: flex;
   justify-content: space-between;
   background-color: #f0f0f3;
@@ -478,7 +524,7 @@ button.toolbar-inner {
   line-height: inherit;
   font-weight: 900;
 }
-#offcanvas-menu li.expanded span.toc-expander > span {
+#offcanvas-menu > ul > li.expanded > span> span.toc-expander > span {
   transform: rotate(180deg);
 }
 
