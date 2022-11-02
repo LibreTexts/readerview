@@ -476,7 +476,7 @@ button.toolbar-inner {
 #offcanvas-menu > ul > li > ul > li.expandable.expanded span.toc-expander > span {
   transform: rotate(180deg);
 }
-#offcanvas-menu > ul > li > ul > li.expandable.expanded > span > a {
+#offcanvas-menu > ul > li > ul > li.expanded.active > span > a {
   background-color: #fff6f6;
   color: #235A8B;
   font-weight: bold;

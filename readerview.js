@@ -186,9 +186,9 @@ import { renderHeaderTitle } from './modules/headertitle.js';
             this.classList.toggle('active');
             target_element.classList.toggle('open');
           }
-          if (btn.id === 'toggle_ocm' && btn.classList.contains('active')){
+          if (btn.id === 'toggle_ocm' && btn.classList.contains('active')) {
             icon.innerHTML = 'close';
-          } else  {
+          } else if ( btn.id === 'toggle_ocm' && !(btn.classList.contains('active')) ) {
             icon.innerHTML = 'menu';
           }
         });
