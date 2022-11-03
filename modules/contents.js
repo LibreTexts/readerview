@@ -15,7 +15,14 @@ async function renderTableOfContents() {
     ({ flat, structured } = await LibreTexts.getTOC());
   }
 
-  const container = document.getElementById('offcanvas-menu');
+  const container = document.getElementById('toc');
+  container.innerHTML = `<p>Loading table of contents...</p>`;
+
+  if (!structured || !flat) {
+    container.innerHTML = '';
+    container.classList.add('hidden');
+  }
+
   //const [subdomain] = LibreTexts.parseURL();
   /**
    * ToDo:
@@ -23,8 +30,9 @@ async function renderTableOfContents() {
    */
   const currentPageId = document.getElementById('IDHolder').innerText;
 
-  if (!structured || !container) {
+  if (!structured || !flat || !container) {
     console.error('[ReaderView]: Error building Table of Contents.');
+
     return;
   }
   const buildListView = (page) => {
@@ -87,6 +95,7 @@ async function renderTableOfContents() {
 
   const toc = buildListView(structured);
   container.innerHTML = toc;
+  container.classList.remove('hidden');
   const chapter = setActiveChapter(flat);
   chapter;
   initMenuExpanderButtons();
