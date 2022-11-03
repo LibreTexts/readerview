@@ -10,6 +10,7 @@ import { initFeedbackButton } from './modules/feedback.js';
 import { initPopButtons } from './modules/popelement.js';
 import { renderTableOfContents } from './modules/contents.js';
 import { renderHeaderTitle } from './modules/headertitle.js';
+import { performSearch } from './modules/search.js';
 
 
 (function () {
@@ -46,6 +47,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     //MicroModal.init();
     closeWithEsc();
     btnEvents();
+    performSearch();
 
     // make all .copy-button copy to clipboard from 
     // data-clipboard-target
@@ -237,7 +239,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
     document.addEventListener('click', function(e){
       //let exclude = ['button.has-submenu', 'a', 'button.has-submenu > span', '.modal-content *'];
       let exclude = ['button.has-submenu', 'button.has-submenu>*', '.modal-content *'];
-      let excludeClose = ['toolbar','offcanvas-menu','homework'];
+      let excludeClose = ['toolbar','offcanvas-menu','homework','search'];
       if (!e.target.matches(exclude)) {
         let openElements = document.querySelectorAll('.open');
         openElements.forEach(function(el){

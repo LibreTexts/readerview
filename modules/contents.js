@@ -16,13 +16,7 @@ async function renderTableOfContents() {
   }
 
   const container = document.getElementById('toc');
-  container.innerHTML = `<p>Loading table of contents...</p>`;
-
-  if (!structured || !flat) {
-    container.innerHTML = '';
-    container.classList.add('hidden');
-  }
-
+  
   //const [subdomain] = LibreTexts.parseURL();
   /**
    * ToDo:
