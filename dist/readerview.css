@@ -677,12 +677,16 @@ button.toolbar-inner {
 body.readerView {
   background-color: #f0f0f3;
 }
+.readerView article.elm-content-container, section.mt-content-container {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
 .readerView article.elm-content-container {
   background: white;
   max-width: 1000px;
-  margin: auto;
+  margin: auto !important;
   min-width: unset !important;
-  padding: 1em 2em;
+  padding: 1em 3.5em;
   border-radius: 10px;
   border: 1px solid lightgray;
 }
@@ -765,18 +769,18 @@ body.readerView {
 }
 
 .readerView section.mt-content-container p {
-  font-size: 18px;
-  margin-bottom: 1.4em;
+  font-size: 18px !important;
+  margin-bottom: 1em;
   line-height: 1.5em;
 }
 
 .readerView section.mt-content-container li {
-  margin-bottom: 1.4em;
+  margin-bottom: 0;
 }
 
 .readerView figure {
   margin: 0 !important;
-  padding: 2em 0;
+  padding: 1.5em 0;
 }
 
 .readerView figcaption {
@@ -789,7 +793,7 @@ body.readerView {
 }
 
 .readerView table.mt-responsive-table {
-  margin: 2em 0;
+  margin: 1.5em 0;
 }
 
 .readerView .btn {
