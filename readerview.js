@@ -35,6 +35,7 @@ import { performSearch } from './modules/search.js';
 
       renderHeaderTitle();
       renderTableOfContents();
+      performSearch();
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
     window.addEventListener('libre-commonsinfoavailable', () => {
@@ -47,7 +48,7 @@ import { performSearch } from './modules/search.js';
     //MicroModal.init();
     closeWithEsc();
     btnEvents();
-    performSearch();
+    
 
     // make all .copy-button copy to clipboard from 
     // data-clipboard-target
