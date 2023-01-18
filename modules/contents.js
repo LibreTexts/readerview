@@ -6,14 +6,19 @@
 
 import ls from 'localstorage-slim';
 
-async function renderTableOfContents() {
+async function renderTableOfContents(id) {
   //const { flat, structured } = await LibreTexts.getTOC();
 
-  let { flat, structured } = ls.get('toc') || {};
+  const { coverpage, toc } = ls.get(id) || {};
+  const { flat, structured } = toc || {};
 
-  if (!flat && !structured) {
-    ({ flat, structured } = await LibreTexts.getTOC());
-  }
+  console.log(toc);
+
+  // let { flat, structured } = ls.get('toc') || {};
+
+  // if (!flat && !structured) {
+  //   ({ flat, structured } = await LibreTexts.getTOC());
+  // }
 
   const container = document.getElementById('toc');
   
@@ -87,8 +92,8 @@ async function renderTableOfContents() {
     }
   }
 
-  const toc = buildListView(structured);
-  container.innerHTML = toc;
+  const menu = buildListView(structured);
+  container.innerHTML = menu;
   container.classList.remove('hidden');
   const chapter = setActiveChapter(flat);
   chapter;

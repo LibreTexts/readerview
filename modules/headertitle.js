@@ -1,11 +1,16 @@
 import ls from 'localstorage-slim';
-async function renderHeaderTitle() {
+async function renderHeaderTitle(id) {
 
   //const { flat, structured } = await LibreTexts.getTOC();
   //const { coverpage } = LibreTexts.current;
 
-  const { flat, structured } = ls.get('toc') || {};
-  const { coverpage } = ls.get('current') || {};
+  const { coverpage, toc } = ls.get(id) || {};
+  const { flat, structured } = toc || {};
+
+  //console.log(toc);
+
+  // const { flat, structured } = ls.get('toc') || {};
+  //const { coverpage } = ls.get('current') || {};
   
   const container = document.querySelector('.header-title');
   const currentPageId = document.getElementById('IDHolder').innerText;

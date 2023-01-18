@@ -1,6 +1,6 @@
 import ls from 'localstorage-slim';
 
-function performSearch() {
+function performSearch(id) {
 
 
   const searchPanel = document.getElementById('search');
@@ -10,7 +10,10 @@ function performSearch() {
   let searchScope = '';
   let searchLocation = 'https://' + window.location.host + '/Special:Search?readerView&qid=&fpid=&fpth=&type=wiki&query=';
 
-  let { flat, structured } = ls.get('toc') || {};
+  const { toc } = ls.get(id) || {};
+  const { flat, structured } = toc || {};
+
+  //let { flat, structured } = ls.get('toc') || {};
 
 
   if (!flat && !structured) {

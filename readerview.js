@@ -25,17 +25,31 @@ import { performSearch } from './modules/search.js';
 
       appendPageLinks();
 
-      async function getLibreTexts() {
-        const toc = await LibreTexts.getTOC();
-        const current = LibreTexts.current;
-        ls.set('toc', toc, { ttl: 60 });
-        ls.set('current', current, { ttl: 60 });
+      async function getLTObject() {
+        return LibreTexts.getTOC();
       }
-      await getLibreTexts(); // wait for TOC and coverpage to be available
 
-      renderHeaderTitle();
-      renderTableOfContents();
-      performSearch();
+      getLTObject().then(function(result){
+        const bookID = LibreTexts.current.coverpage.id;
+        let bookPath = LibreTexts.current.coverpage.path;
+        ls.set(bookID, LibreTexts.current, { ttl: 3600 });
+
+        renderHeaderTitle(bookID);
+        renderTableOfContents(bookID);
+        performSearch(bookID);
+      });
+
+      // async function getLibreTexts() {
+      //   const toc = await LibreTexts.getTOC();
+      //   const current = LibreTexts.current;
+      //   // ls.set('toc', toc, { ttl: 60 });
+      //   // ls.set('current', current, { ttl: 60 });
+      // }
+      // await getLibreTexts(); // wait for TOC and coverpage to be available
+
+      
+      
+      
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
     window.addEventListener('libre-commonsinfoavailable', () => {
