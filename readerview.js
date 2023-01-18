@@ -31,9 +31,8 @@ import { performSearch } from './modules/search.js';
 
       getLTObject().then(function(result){
         let bookID = LibreTexts.current.coverpage.id;
-        let current = ls.get(bookID) || {};
         
-        if (!current) {
+        if (!(ls.get(bookID))) {
           ls.set(bookID, LibreTexts.current, { ttl: 3600 });
         }
 

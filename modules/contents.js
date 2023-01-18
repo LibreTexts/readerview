@@ -9,10 +9,8 @@ import ls from 'localstorage-slim';
 async function renderTableOfContents(id) {
   //const { flat, structured } = await LibreTexts.getTOC();
 
-  const { coverpage, toc } = ls.get(id) || {};
+  const { toc } = ls.get(id) || {};
   const { flat, structured } = toc || {};
-
-  console.log(toc);
 
   // let { flat, structured } = ls.get('toc') || {};
 
