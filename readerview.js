@@ -11,6 +11,7 @@ import { initPopButtons } from './modules/popelement.js';
 import { renderTableOfContents } from './modules/contents.js';
 import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch } from './modules/search.js';
+import { initResourceLinks } from './modules/resources.js';
 
 
 (function () {
@@ -39,6 +40,8 @@ import { performSearch } from './modules/search.js';
         renderHeaderTitle(bookID);
         renderTableOfContents(bookID);
         performSearch(bookID);
+        initResourceLinks(bookID);
+        initPopButtons();
  
       });
       
@@ -51,7 +54,7 @@ import { performSearch } from './modules/search.js';
     });
 
     getPageObj();
-    initPopButtons();
+    
     //MicroModal.init();
     closeWithEsc();
     btnEvents();
