@@ -62,4 +62,34 @@ function getKeywords() {
   return keywords;
 }
 
-export { performSearch };
+async function setSearchLinkParent() {
+  console.log('search link mods');
+  const searchresults = document.querySelector('ul#search-results');
+
+  if (searchresults) {
+
+    
+
+    let resultItem = await searchresults.querySelectorAll('li');
+    let resultLink = await document.querySelectorAll('a.go');
+
+    // console.log(searchresults);
+    // console.log(resultItem);
+    // console.log(resultLink);
+
+
+
+
+    // resultItem.forEach(item => {
+    //   item.dataset.path += '?readerView';
+    // })
+    // resultLink.forEach(item => {
+    //   item.setAttribute('href', item.href + '?readerView')
+    // })
+  } else {
+    return
+  }
+
+}
+
+export { performSearch, setSearchLinkParent };

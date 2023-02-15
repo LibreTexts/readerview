@@ -312,7 +312,7 @@ form#book_search .header-btn {
 }
 #search_results > iframe {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 300px);
   border: 0;
 }
 body.columbia-special-search.readerView article.elm-content-container {

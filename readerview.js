@@ -10,7 +10,7 @@ import { initFeedbackButton } from './modules/feedback.js';
 import { initPopButtons } from './modules/popelement.js';
 import { renderTableOfContents } from './modules/contents.js';
 import { renderHeaderTitle } from './modules/headertitle.js';
-import { performSearch } from './modules/search.js';
+import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
 
@@ -21,9 +21,9 @@ import { initToolsLinks } from './modules/tools.js';
 
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
-  
+
     window.addEventListener('load', async function () {
-      // add logic meant for readerView Only
+      // add logic meant for readerView Only    
 
       appendPageLinks();
 
@@ -42,11 +42,11 @@ import { initToolsLinks } from './modules/tools.js';
         renderTableOfContents(bookID);
         performSearch(bookID);
         initResourceLinks(bookID);
-        initToolsLinks();
+        initToolsLinks(bookID);
         initPopButtons();
  
       });
-      
+  
       
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
