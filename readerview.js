@@ -79,7 +79,7 @@ import { initToolsLinks } from './modules/tools.js';
  
   });
 
-  
+
   function appendPageLinks() {
     // add the readerView parameter to specific URLs on page
     // to ensure user does not accidently nav away from readerView
@@ -190,7 +190,7 @@ import { initToolsLinks } from './modules/tools.js';
           if (e.keyCode === 13) {
             this.classList.toggle('active');
             target_element.classList.toggle('open');
-            target_element.querySelector('a:first-of-type, button:first-of-type').focus();
+            target_element.querySelector('a:first-of-type, button:first-of-type, input:first-of-type').focus();
           }
           if (e.keyCode === 27) {
             this.classList.remove('active');

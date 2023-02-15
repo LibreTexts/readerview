@@ -7,6 +7,7 @@ function performSearch(id) {
   const searchLabel = searchPanel.querySelector('label');
   const searchForm = document.querySelector('#book_search');
   const searchBtn = document.querySelector('#searchButton');
+  const searchResult = document.querySelector('#search_results');
   let searchScope = '';
   let searchLocation = 'https://' + window.location.host + '/Special:Search?readerView&qid=&fpid=&fpth=&type=wiki&query=';
 
@@ -27,13 +28,25 @@ function performSearch(id) {
       e.preventDefault();
 
       if (e.keyCode === 13) {
-        getKeywords();
+        const searchQuery = `${searchLocation}${getKeywords()}${searchScope}`;
+        searchResult.innerHTML += `
+        <iframe src="${searchQuery}" border="0" width="100%" height="100%"></iframe>
+        `;
       }
 
       if (ev == 'click'){
         
         console.log(searchScope);
-        window.open(`${searchLocation}${getKeywords()}${searchScope}`, '_blank', 'noreferrer');
+        //window.open(`${searchLocation}${getKeywords()}${searchScope}`, '_blank', 'noreferrer');
+
+        const searchQuery = `${searchLocation}${getKeywords()}${searchScope}`;
+
+        searchResult.innerHTML += `
+        <iframe src="${searchQuery}" border="0" width="100%" height="100%"></iframe>
+        `;
+
+
+
       }
     });
 

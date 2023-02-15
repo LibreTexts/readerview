@@ -279,18 +279,27 @@ button.disabled-header-btn:hover {
 **/
 #search {
   display: none;
+  width: 27rem;
+  height: calc(100% - 54px - 1em);
+  background: white;
+  position: fixed;
+  top: 55px;
+  right: 0;
+  border-left: 1px solid lightgray;
+  padding: 1em;
 }
 #search.open {
   display: block;
-  background-color: white;
-  padding: 1em 3em 1em 1em;
+}
+#search h2 {
+  padding: 0 0 1em;
 }
 form#book_search {
   display: flex;
-  align-items: center;
+  align-items: end;
+  margin-bottom: 1em;
 }
 form#book_search label {
-  width: 10rem;
   margin: 0;
   padding: 0;
 }
@@ -300,6 +309,49 @@ form#book_search .header-btn {
   font-weight: bold;
   padding: 0 1em;
   line-height: 37px;
+}
+#search_results > iframe {
+  width: 100%;
+  height: calc(100vh - 200px);
+  border: 0;
+}
+body.columbia-special-search.readerView article.elm-content-container {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  max-width: unset;
+}
+body.columbia-special-search.readerView footer.elm-footer,
+body.columbia-special-search.readerView #mt-search-spblls-filters,
+body.columbia-special-search.readerView #mt-search-component-form,
+body.columbia-special-search.readerView .mt-help-breadcrumb > li:not(:last-of-type),
+body.columbia-special-search.readerView #search-results > li .url,
+body.columbia-special-search.readerView #user-history-top-control.mt-show {
+  display: none;
+}
+body.columbia-special-search.readerView div.center {
+  width: unset;
+}
+body.columbia-special-search.readerView .mt-help-breadcrumb-container,
+body.columbia-special-search.readerView .mt-search-results-count-text,
+body.columbia-special-search.readerView .mt-help-breadcrumb li {
+  color: #000;
+  opacity: 1;
+}
+body.columbia-special-search.readerView #search-results {
+  font-size: 14px;
+}
+
+body.columbia-special-search.readerView #mt-search-results li:nth-child(odd),
+body.columbia-special-search.readerView .mt-tree-search-results li:nth-child(odd) {
+  background: #fff;
+}
+
+body.columbia-special-search.readerView #mt-search-results li,
+body.columbia-special-search.readerView .mt-tree-search-results li {
+  padding: 1em 0;
+  border-bottom: 1px solid lightgrey;
 }
 
 /**
