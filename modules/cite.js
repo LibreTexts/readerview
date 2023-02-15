@@ -1,14 +1,25 @@
 /**
  * 
  */
+//import ls from 'localstorage-slim';
 
 function buildCite(data){
+
+  const mtAuthorName = 
+    document.querySelector('.mt-author-information > a') ? 
+    document.querySelector('.mt-author-information > a').innerText : null;
+
+  const mtCompanyName = 
+    document.querySelector('.mt-author-companyname > a')?
+    document.querySelector('.mt-author-companyname > a').innerText : null;
+
+
   let url = `https://${window.location.host}/@go/page/${data.pageId}`;
   return `
   <div id="cite">
-    <h3>Cite (APA)</h3>
+    <h3>Cite</h3>
     <div class="copy-holder">
-      ${citeAuthors(data.authorDisplayName)} (${citeDate(data.modified.modifiedDate)}). ${data.title}. ${citePublisher()}. ${url}.
+      ${citeAuthors(mtAuthorName)} (${citeDate(data.modified.modifiedDate)}). ${data.title}. ${citePublisher(mtCompanyName)}. ${url}.
     </div>
     <button class="btn copy-button" data-clipboard-target="#cite .copy-holder">Copy to clipboard</button>
   </div>
@@ -20,8 +31,12 @@ function buildCite(data){
     <button class="btn copy-button" data-clipboard-target="#attribution .copy-holder">Copy to clipboard</button>
   </div>
   `;
-  
+
+
 }
+
+
+
 
 function citeDate(date){
   let datestring = new Date(date);
@@ -33,20 +48,24 @@ function citeDate(date){
 }
 
 function citeAuthors(author){
-  let name = author.split(' ');
-  let initials = name[name.length - 1] + ', ';
-  initials += name[0].substring(0, 1).toUpperCase() + '.';
-  if (name.length > 2) {
-    initials += ' ' + name[1].substring(0, 1).toUpperCase() + '.';
+  console.log(`author obj: ${author}`);
+  if (author) {
+    let name = author.split(' ');
+    let initials = name[name.length - 1] + ', ';
+    initials += name[0].substring(0, 1).toUpperCase() + '.';
+    if (name.length > 2) {
+      initials += ' ' + name[1].substring(0, 1).toUpperCase() + '.';
+    }
+    return initials;
+  } else {
+    return '';
   }
-  return initials;
+
 }
 
-function citePublisher(){
-  let bylineElement = document.querySelector('.mt-author-companyname');
-  if (bylineElement){
-    let publisher = bylineElement.firstChild.text;
-    return publisher + '. LibreTexts';
+function citePublisher(company){
+  if (company){
+    return company + '. LibreTexts';
   } else {
     return 'Libretexts';
   }
@@ -56,11 +75,11 @@ function buildLicenseAttribution(data) {
   const { license } = LibreTexts.current;
   if (license.title === 'notset') {
     return `
-    <p><span class="license-title">${data.title}</span> by <span class="license-author">${data.authorDisplayName}</span> is shared without a specified license.</p>
+    <p><span class="license-title">${data.title}</span> by <span class="license-author">${data.authorDisplayName ? data.authorDisplayName : 'LibreTexts'}</span> is shared without a specified license.</p>
     `;
   } else {
     return `
-    <p><span class="license-title">${data.title}</span> by <span class="license-author">${data.authorDisplayName}</span> is under a <span class="license-type"><a href="${license.link}" target="_blank" rel="nofollow">${license.title}</a></span>, except where otherwise noted.</p>
+    <p><span class="license-title">${data.title}</span> by <span class="license-author">${data.authorDisplayName ? data.authorDisplayName : 'LibreTexts'}</span> is licensed <span class="license-type"><a href="${license.link}" target="_blank" rel="nofollow">${license.title}</a></span>, except where otherwise noted.</p>
     `;
   }
 }
