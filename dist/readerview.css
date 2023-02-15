@@ -326,7 +326,8 @@ form#book_search .header-btn {
   margin: 0;
   position: relative;
 }
-button.toolbar-btn {
+button.toolbar-btn,
+a.toolbar-btn {
   border-radius: 0;
   border: 0;
   border-right: 1px solid lightgray;
@@ -336,28 +337,38 @@ button.toolbar-btn {
   font-family: inherit;
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
+  color: #000 !important;
 }
 button.toolbar-btn:hover,
 button.toolbar-btn:focus,
-button.toolbar-btn:active {
+button.toolbar-btn:active,
+a.toolbar-btn:hover,
+a.toolbar-btn:focus,
+a.toolbar-btn:active {
   background: #f5efef;
   border: unset;
   box-shadow: unset;
   outline: inherit;
   border-right: 1px solid lightgray;
+  text-decoration: none !important;
 }
-button.toolbar-btn:focus-visible {
+button.toolbar-btn:focus-visible,
+a.toolbar-btn:focus-visible {
   outline: 1px inset;
 }
-button.toolbar-btn > span.material-symbols-outlined {
+button.toolbar-btn > span.material-symbols-outlined,
+a.toolbar-btn > span.material-symbols-outlined {
   font-size: 1.3em;
   margin-left: 0.5em
 }
-button.toolbar-btn.disabled-toolbar-btn {
+button.toolbar-btn.disabled-toolbar-btn,
+a.toolbar-btn.disabled-toolbar-btn {
   cursor: not-allowed;
   color: rgba(0, 0, 0, 0.4);
 }
-button.toolbar-btn.disabled-toolbar-btn:hover {
+button.toolbar-btn.disabled-toolbar-btn:hover,
+a.toolbar-btn.disabled-toolbar-btn:hover {
   background: white !important;
   cursor: not-allowed;
   color: rgba(0, 0, 0, 0.4);
@@ -382,7 +393,8 @@ button.toolbar-btn.disabled-toolbar-btn:hover {
 #toolbar > ul > li > ul > li {
   margin: 0;
 }
-button.toolbar-inner {
+button.toolbar-inner,
+a.toolbar-inner {
   display: block !important;
   width: 100%;
   align-items: unset;
@@ -412,6 +424,7 @@ button.toolbar-inner {
   #toolbar > ul {
     flex-direction: column;
   }
+  #toolbar a.toolbar-btn,
   #toolbar button.toolbar-btn {
     width: 100%;
     text-align: left;

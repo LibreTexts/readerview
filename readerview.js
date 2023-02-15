@@ -12,6 +12,7 @@ import { renderTableOfContents } from './modules/contents.js';
 import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
+import { initToolsLinks } from './modules/tools.js';
 
 
 (function () {
@@ -41,6 +42,7 @@ import { initResourceLinks } from './modules/resources.js';
         renderTableOfContents(bookID);
         performSearch(bookID);
         initResourceLinks(bookID);
+        initToolsLinks();
         initPopButtons();
  
       });
