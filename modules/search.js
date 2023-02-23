@@ -28,23 +28,26 @@ function performSearch(id) {
       e.preventDefault();
 
       if (e.keyCode === 13) {
-        const searchQuery = `${searchLocation}${getKeywords()}${searchScope}`;
-        searchResult.innerHTML += `
-        <iframe src="${searchQuery}" border="0" width="100%" height="100%"></iframe>
-        `;
+        window.open(`${searchLocation}${getKeywords()}${searchScope}`, '_blank', 'noreferrer');
+
+        // const searchQuery = `${searchLocation}${getKeywords()}${searchScope}`;
+        // searchResult.innerHTML = `
+        // <iframe src="${searchQuery}" border="0" width="100%" height="100%"></iframe>
+        // `;
       }
 
       if (ev == 'click'){
         
-        console.log(searchScope);
-        //window.open(`${searchLocation}${getKeywords()}${searchScope}`, '_blank', 'noreferrer');
+        //console.log(searchScope);
+        window.open(`${searchLocation}${getKeywords()}${searchScope}`, '_blank', 'noreferrer');
 
-        const searchQuery = `${searchLocation}${getKeywords()}${searchScope}`;
+        // const searchQuery = `${searchLocation}${getKeywords()}${searchScope}`;
 
-        searchResult.innerHTML += `
-        <iframe src="${searchQuery}" border="0" width="100%" height="100%"></iframe>
-        `;
+        // searchResult.innerHTML = `
+        // <iframe src="${searchQuery}" border="0" width="100%" height="100%"></iframe>
+        // `;
 
+        
 
 
       }
