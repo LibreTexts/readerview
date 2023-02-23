@@ -10,23 +10,23 @@
 
 function buildPopElement(url, title, style = 'default', size = 'default'){
   const markup = 
-  `<div id="pop" class="pop-style-${style} pop-size-${size}">
+  `<div tabindex="0" id="pop" class="pop-style-${style} pop-size-${size}">
   	<div class="pop-header">
-    	<h2 class="pop-title" tabindex="0">${title}</h2>
+    	<h2 class="pop-title">${title}</h2>
       <div class="pop-controls">
-      	<span tabindex="0" class="pop-minimize" data-tippy-content="Minimize Panel" aria-labelledby="panel-min-label">
+      	<span tabindex="0" class="pop-minimize" aria-labelledby="panel-min-label">
           <span hidden="hidden" id="panel-min-label">Minimize this panel</span> 
           <span aria-hidden="true" class="material-symbols-outlined" focusable="false">expand_more</span>
         </span>
-        <span tabindex="0" class="pop-open hidden" data-tippy-content="Open Panel" aria-labelledby="panel-open-label">
+        <span tabindex="0" class="pop-open hidden" aria-labelledby="panel-open-label">
           <span hidden="hidden" id="panel-open-label">Open this panel</span> 
           <span aria-hidden="true" class="material-symbols-outlined" focusable="false">expand_less</span>
         </span>
-        <span tabindex="0" class="pop-expand" data-tippy-content="Grow or Shrink Panel" aria-labelledby="panel-resize-label">
+        <span tabindex="0" class="pop-expand" aria-labelledby="panel-resize-label">
           <span hidden="hidden" id="panel-resize-label">Grow or shrink panel</span>   
           <span class="material-symbols-outlined">open_in_full</span>
         </span>
-      	<span tabindex="0" class="pop-close" data-tippy-content="Close Panel" aria-labelledby="panel-close-label">
+      	<span tabindex="0" class="pop-close" aria-labelledby="panel-close-label">
           <span hidden="hidden" id="panel-close-label">Close panel</span>
           <span class="material-symbols-outlined">close</span>
         </span>
@@ -73,8 +73,7 @@ function renderPopElement(src, title) {
   document.body.insertAdjacentHTML('beforeend', popElement);
   iframeHeight();
   dragElement(document.getElementById("pop"));
-  tippy('[data-tippy-content]');
-  document.querySelector('h2.pop-title').focus();
+  document.getElementById("pop").focus();
 
 
   ["click", "keypress"].forEach(ev=>{
