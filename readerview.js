@@ -15,6 +15,7 @@ import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
 
 
+
 (function () {
   
   if (window.location.href.includes('readerView') || window.location.href.includes('readerView')) {
@@ -46,8 +47,7 @@ import { initToolsLinks } from './modules/tools.js';
         initPopButtons();
  
       });
-  
-      
+
     });
     window.addEventListener('libre-downloadsinfoavailable', initDownloadButtons);
     window.addEventListener('libre-commonsinfoavailable', () => {
@@ -210,40 +210,42 @@ import { initToolsLinks } from './modules/tools.js';
       });
     });
 
-    // Dropdown Menus
-    let dropdownButtons = document.querySelectorAll('[data-type="dropdown"]');
-    dropdownButtons.forEach(function(btn){
-      let target = btn.getAttribute('data-target');
-      let target_element = document.getElementById(target);
 
-      ["click", "keypress"].forEach(ev=>{
-        btn.addEventListener(ev, function(e){
-          e.preventDefault();
-          if (e.keyCode === 13) {
-            this.classList.toggle('active');
-            let alreadyOpen = target_element.classList.contains('open');
-            let anyOpen = document.querySelectorAll('#toolbar ul.open');
-            if (anyOpen){
-              anyOpen.forEach(function(el){
-                el.classList.remove('open');
-              });
-            }
-            target_element.classList.toggle('open', alreadyOpen === false);
-          }
-          if (ev == 'click'){
-            this.classList.toggle('active');
-            let alreadyOpen = target_element.classList.contains('open');
-            let anyOpen = document.querySelectorAll('#toolbar ul.open');
-            if (anyOpen){
-              anyOpen.forEach(function(el){
-                el.classList.remove('open');
-              });
-            }
-            target_element.classList.toggle('open', alreadyOpen === false); 
-          }
-        });
-      });
-    });
+
+    // Dropdown Menus
+    // let dropdownButtons = document.querySelectorAll('[data-type="dropdown"]');
+    // dropdownButtons.forEach(function(btn){
+    //   let target = btn.getAttribute('data-target');
+    //   let target_element = document.getElementById(target);
+
+    //   ["click", "keypress"].forEach(ev=>{
+    //     btn.addEventListener(ev, function(e){
+    //       e.preventDefault();
+    //       if (e.keyCode === 13) {
+    //         this.classList.toggle('active');
+    //         let alreadyOpen = target_element.classList.contains('open');
+    //         let anyOpen = document.querySelectorAll('#toolbar ul.open');
+    //         if (anyOpen){
+    //           anyOpen.forEach(function(el){
+    //             el.classList.remove('open');
+    //           });
+    //         }
+    //         target_element.classList.toggle('open', alreadyOpen === false);
+    //       }
+    //       if (ev == 'click'){
+    //         this.classList.toggle('active');
+    //         let alreadyOpen = target_element.classList.contains('open');
+    //         let anyOpen = document.querySelectorAll('#toolbar ul.open');
+    //         if (anyOpen){
+    //           anyOpen.forEach(function(el){
+    //             el.classList.remove('open');
+    //           });
+    //         }
+    //         target_element.classList.toggle('open', alreadyOpen === false); 
+    //       }
+    //     });
+    //   });
+    // });
   
 
 

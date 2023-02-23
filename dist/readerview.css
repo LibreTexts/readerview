@@ -434,7 +434,30 @@ a.toolbar-btn.disabled-toolbar-btn:hover {
   cursor: not-allowed;
   color: rgba(0, 0, 0, 0.4);
 }
-#toolbar > ul > li > ul {
+#toolbar .sub-nav {
+  position: absolute;
+  border: 1px solid lightgray;
+  background-color: white;
+  top: auto;
+  width: 232px;
+  display: none;
+}
+#toolbar .sub-nav ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+#toolbar .sub-nav.open {
+  display: block;
+}
+#toolbar .sub-nav li {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* #toolbar > ul > li > ul {
   display: none;
   position: absolute;
   z-index: 100;
@@ -447,16 +470,16 @@ a.toolbar-btn.disabled-toolbar-btn:hover {
   border-top: 0;
   list-style-type: none;
   padding: 0;
-}
-#toolbar > ul > li > ul.open {
+} */
+/* #toolbar > ul > li > ul.open {
   display: block;
 }
 #toolbar > ul > li > ul > li {
   margin: 0;
-}
+} */
 button.toolbar-inner,
 a.toolbar-inner {
-  display: block !important;
+  display: block;
   width: 100%;
   align-items: unset;
   text-align: left;

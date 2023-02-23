@@ -58,7 +58,7 @@ function initToolsLinks(id) {
       return `<li><a href="${link}" class="toolbar-btn toolbar-inner" target="_blank"><span>${title}</span></a></li>`
     }
     const buildScriptLink = (script, title) => {
-      return `<li><button type="button" class="toolbar-btn toolbar-inner" onclick="event.preventDefault(); ${script}"><span>${title}</span></a></li>`
+      return `<li><a href="?toolbarlink" class="toolbar-btn toolbar-inner" onclick="event.preventDefault(); ${script}"><span>${title}</span></a></li>`
     }
     siteTools.forEach(item => {
       if (item.type === 'script') {

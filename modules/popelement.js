@@ -183,7 +183,7 @@ function closePop(e){
   const pop = document.querySelector('#pop');
   if (pop) {
     pop.remove();
-    let r = document.querySelector('button#resources');
+    let r = document.querySelector('a#resources');
     if (r) {
       r.focus();
     } else {

@@ -11,7 +11,8 @@ function initFeedbackButton() {
   ) {
     feedbackBtn.classList.remove('hidden');
     feedbackBtn.disabled = false;
-    feedbackBtn.addEventListener('click', () => {
+    feedbackBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       const commonsURL = `https://commons.libretexts.org/book/${commonsData.bookID}`;
       window.open(`${commonsURL}?peerreview=show`, '_blank', 'noreferrer');
     }); 
