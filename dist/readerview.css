@@ -53,13 +53,32 @@
   display: none;
 }
 
+.readerView #nextButton,
+.readerView #backButton {
+  position: fixed;
+  top: unset;
+  bottom: 10px;
+  border-radius: 0;
+  display: block !important;
+}
+.readerView .libreNavTitle {
+  position: fixed;
+  top: unset;
+  bottom: 10px;
+  border-radius: 0;
+}
+.readerView #nextTitle {
+  right: calc(3em + 40px);
+}
+.readerView #prevTitle {
+  left: calc(3em + 40px);
+}
+
 .readerView #nextButton {
   right: 3em;
-  display: block !important;
 }
 .readerView #backButton {
   left: 3em;
-  display: block !important;
 }
 
 
@@ -88,7 +107,7 @@
 }
 .readerView #readerview  {
   display: grid;
-  grid-template-columns: 1fr 6fr 3fr;
+  grid-template-columns: 1fr 6fr 4fr;
   gap: 10px;
   border-bottom: 1px solid lightgray;
   background-color: white;
@@ -289,6 +308,7 @@ button.disabled-header-btn:hover {
   right: 0;
   border-left: 1px solid lightgray;
   padding: 1em;
+  max-width: 80%;
 }
 #search.open {
   display: block;
@@ -364,6 +384,17 @@ body.columbia-special-search.readerView .mt-tree-search-results li {
   padding: 1em 0;
   border-bottom: 1px solid lightgrey;
 }
+
+.mt-tree-search-results li.mt-selected, .mt-tree-search-results li.mt-selected:nth-child(2n), .mt-tree-search-results li.mt-selected:nth-child(odd) {
+  background: unset;
+}
+
+@media (max-width: 767px ) {
+  #search {
+    position: absolute;
+  }
+}
+
 
 /**
 * Toolbar
@@ -500,11 +531,11 @@ a.toolbar-inner {
   }
 }
 
-@media (max-width: 450px ) {
+@media (max-width: 767px ) {
   #toolbar {
     padding-left: 0;
     width: calc(100% - 13rem);
-    position: fixed;
+    position: absolute;
     right: 0;
   }
   #toolbar > ul {
@@ -515,7 +546,8 @@ a.toolbar-inner {
     width: 100%;
     text-align: left;
   }
-  #toolbar > ul > li > ul {
+  #toolbar > ul > li > ul,
+  #toolbar .sub-nav {
     position: relative;
     padding-left: 1.5em;
   }
