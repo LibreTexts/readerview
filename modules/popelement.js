@@ -14,22 +14,22 @@ function buildPopElement(url, title, style = 'default', size = 'default'){
   	<div class="pop-header">
     	<h2 class="pop-title">${title}</h2>
       <div class="pop-controls">
-      	<span tabindex="0" class="pop-minimize" aria-labelledby="panel-min-label">
+      	<button tabindex="0" class="pop-minimize" aria-labelledby="panel-min-label">
           <span hidden="hidden" id="panel-min-label">Minimize this panel</span> 
           <span aria-hidden="true" class="material-symbols-outlined" focusable="false">expand_more</span>
-        </span>
-        <span tabindex="0" class="pop-open hidden" aria-labelledby="panel-open-label">
+        </button>
+        <button tabindex="0" class="pop-open hidden" aria-labelledby="panel-open-label">
           <span hidden="hidden" id="panel-open-label">Open this panel</span> 
           <span aria-hidden="true" class="material-symbols-outlined" focusable="false">expand_less</span>
-        </span>
-        <span tabindex="0" class="pop-expand" aria-labelledby="panel-resize-label">
+        </button>
+        <button tabindex="0" class="pop-expand" aria-labelledby="panel-resize-label">
           <span hidden="hidden" id="panel-resize-label">Grow or shrink panel</span>   
           <span class="material-symbols-outlined">open_in_full</span>
-        </span>
-      	<span tabindex="0" class="pop-close" aria-labelledby="panel-close-label">
+        </button>
+      	<button tabindex="0" class="pop-close" aria-labelledby="panel-close-label">
           <span hidden="hidden" id="panel-close-label">Close panel</span>
           <span class="material-symbols-outlined">close</span>
-        </span>
+        </button>
       </div>
     </div>
     <div class="pop-body" data-iframe-height="iFrameResizer">

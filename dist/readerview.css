@@ -72,9 +72,11 @@
   }
 }
 @media (max-width: 768px ) {
- 
+  .readerView header.elm-header {
+    position: static;
+  }
 }
-@media (max-width: 450px ) {
+@media (max-width: 600px ) {
 
 }
 
@@ -786,6 +788,7 @@ body.readerView {
   padding: 1em 3.5em;
   border-radius: 10px;
   border: 1px solid lightgray;
+  width: 100% !important;
 }
 .readerView footer.elm-footer {
   z-index: 1002;
@@ -1013,22 +1016,22 @@ body.readerView {
 #pop .pop-header h2.pop-title {
   padding: 0;
 }
-#pop .pop-header .pop-controls > span {
+#pop .pop-header .pop-controls > button {
   display: inline-block;
-  padding: 0.25em 0.5em;
+  padding: 0em 0.5em;
   cursor: pointer;
   border: 1px solid lightgray;
   color: #235A8B;
 }
-#pop .pop-header .pop-controls > span.hidden {
+#pop .pop-header .pop-controls > button.hidden {
   display: none;
 }
-#pop .pop-header .pop-controls > span:hover,
-#pop .pop-header .pop-controls > span:focus {
+#pop .pop-header .pop-controls > button:hover,
+#pop .pop-header .pop-controls > button:focus {
   background: #154772;
   color: white;
 }
-#pop .pop-header .pop-controls > span > span {
+#pop .pop-header .pop-controls > button > span {
   font-size: 1em;
 }
 #pop .pop-body iframe {
@@ -1068,7 +1071,7 @@ body.readerView {
 \**************************/
 
 .modal {
-  z-index: 1003;
+  z-index: 2147483647;
 }
 
 .modal__overlay {
@@ -1081,18 +1084,24 @@ body.readerView {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1003;
+  z-index: 2147483647;
 }
 
 .modal__container {
   background-color: #fff;
   padding: 0 1em 1em 1em;
-  max-width: 900px;
+  max-width: 90%;
   min-width: 30%;
   max-height: 100vh;
   border-radius: 4px;
   overflow-y: auto;
   box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .modal__container {
+    max-width: 900px;
+  }
 }
 
 .modal__header > .mt-section {
