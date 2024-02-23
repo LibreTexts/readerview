@@ -2,6 +2,6 @@
 
 Enables an accessible and more modern-look for the LibreTexts Libraries.
 
-changes to citation branch.
+changes to citation
 
 Test Deploy 
