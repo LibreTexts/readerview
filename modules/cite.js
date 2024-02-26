@@ -4,7 +4,7 @@
 //import ls from 'localstorage-slim';
 
 function buildCite(data){
-
+  console.log(data);
   const mtAuthorName = 
     document.querySelector('.mt-author-information > a') ? 
     document.querySelector('.mt-author-information > a').innerText : null;
@@ -17,10 +17,29 @@ function buildCite(data){
   let url = `https://${window.location.host}/@go/page/${data.pageId}`;
   return `
   <div id="cite">
-    <h3>Cite</h3>
+    <h3>Cite</h3> 
+    <div>
+                <select id="citeSe">
+                    <option value="" selected="true" disabled="true">Template Selection</option>
+                    <option value="citation-apa">APA</option>
+                    <option value="harvard1">Harvard</option>
+                    <option value="chicago">Chicago</option>
+                    <option value="vancouver">Vancouver</option>
+                    <option value="mla">MLA</option>
+                    <option value="acs">ACS</option>
+                </select>
+            </div>
+            
     <div class="copy-holder">
       ${citeAuthors(mtAuthorName)} (${citeDate(data.modified.modifiedDate)}). ${data.title}. ${citePublisher(mtCompanyName)}. ${url}.
     </div>
+
+    <div id="citeCont">
+                 <a id="citeCopy">Copy Text</a>
+                 <a id="citeCopyHTML">Copy HTML</a>
+                 <a id="citeBIBTEX">Download BibTeX </a>
+                 <a id="citeRIS">Download RIS </a>
+            </div>
     <button class="btn copy-button" data-clipboard-target="#cite .copy-holder">Copy to clipboard</button>
   </div>
   <div id="attribution">

@@ -974,6 +974,40 @@ body.readerView {
 /** 
  * Reference and Cite
 **/
+
+#citeCont {
+  border-top: 1px solid lightgrey;
+  padding-top: 0em;
+  margin-top: 0.1em;
+  margin-bottom: 0.2em;
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+}
+
+#citeCont > a {
+  padding: 0.5em 0.75em;
+  border-radius: 4px;
+  background-color: #DCDCDC;
+  color: black;
+  font-size: 1em;
+}
+
+#citeCont > a:hover,
+#citeCont > a:focus {
+  background: #154772;
+  color: white;
+    cursor: pointer;
+}
+
+
+#citeSe {
+  max-width: 30%;
+  margin-top: 0.35em;
+  margin-bottom: 0.35em;
+  font-family: monospace;
+}
+
 .copy-holder {
   padding: 0.5em;
   border: 1px solid lightgray;
