@@ -20,9 +20,7 @@ function buildCite(data){
                     <option value="acs">ACS</option>
                 </select>
             </div>
-    <div type="text" id="cite_holder" class="copy-holder">
-    ${pageParam['title']}.${pageParam['URL']}
-    </div>
+    <textarea readonly type="text" id="cite_holder" class="copy-holder">${pageParam['title']}.${pageParam['URL']}</textarea>
     <div id="citeCont">
                  <a id="citeCpy">Copy Text</a>
                  <a id="citeCpyHTML">Copy HTML</a>
@@ -33,7 +31,7 @@ function buildCite(data){
   <div id="attribution ">
     <h3>License &amp; Attribution</h3>
     <div type="text" id="cite_holder" class="copy-holder">
-      ${buildLicenseAttribution(data)}
+     ${buildLicenseAttribution(data)}
     </div>
     <div id="citeCont">
     <a id="citeCpy">Copy Text</a>

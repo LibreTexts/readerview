@@ -1000,6 +1000,10 @@ body.readerView {
     cursor: pointer;
 }
 
+.mt-textarea select, textarea {
+  width: 800px;
+  min-height: 3rem;
+}
 
 #citeSe {
   max-width: 30%;
@@ -1017,8 +1021,7 @@ body.readerView {
 .copy-holder p {
   margin: 0;
   padding: 0;
-  height:20px;
-  width: 800px;
+  
 }
 .btn.copy-button {
   font-size: 0.8em;
