@@ -976,7 +976,7 @@ body.readerView {
 **/
 
 #citeCont {
-  border-top: 1px solid lightgrey;
+  /* border-top: 1px solid lightgrey; */
   padding-top: 0em;
   margin-top: 0.1em;
   margin-bottom: 0.2em;
@@ -1017,6 +1017,8 @@ body.readerView {
 .copy-holder p {
   margin: 0;
   padding: 0;
+  height:20px;
+  width: 800px;
 }
 .btn.copy-button {
   font-size: 0.8em;

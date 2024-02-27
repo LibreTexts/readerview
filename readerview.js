@@ -68,7 +68,7 @@ import { initToolsLinks } from './modules/tools.js';
     clip.on('success', (e) => {
       e.trigger.innerHTML = 'Copied!';
       setTimeout(function() {
-        e.trigger.innerHTML = 'Copy to clipboard';
+        e.trigger.innerHTML = 'Copy Text';
       }, 4000);
     });
   }
