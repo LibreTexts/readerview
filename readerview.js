@@ -133,10 +133,13 @@ import { initToolsLinks } from './modules/tools.js';
 
     // Modals
     let modalButtons = document.querySelectorAll('[data-type="modal"]');
+    
     modalButtons.forEach(function(btn){
       let title = btn.getAttribute('data-modal-title');
       let modalBodyMethod = btn.getAttribute('data-modal-src');
-
+      console.log("I am printing modal buttons");
+      console.log(title)
+    console.log(modalBodyMethod);  
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
@@ -170,12 +173,53 @@ import { initToolsLinks } from './modules/tools.js';
       });
     });
 
-    // Div Collapse
+    var toolbarMenu = document.getElementById('toolbar_menu');
+    var ReadabilityToolbarItem = document.createElement('li');
+
+      // Step 3: Set attributes or content for the new li element
+      ReadabilityToolbarItem.className = 'toolbar-item';  // Add any necessary classes
+      ReadabilityToolbarItem.id = 'Readability-menu-item';       // Set the ID if needed
+      // ReadabilityToolbarItem.textContent = 'New Menu Item';  // Set the text content
+
+      // Step 4: Append the new li element to the parent ul element
+      toolbarMenu.appendChild(ReadabilityToolbarItem);
+      
+      var sub_readability = document.createElement('button');
+
+      sub_readability.className="toolbar-btn toolbar-top";
+      // var isExpanded = sub_readability.getAttribute('aria-expanded') === 'true';
+      sub_readability.setAttribute('aria-expanded', "false");
+      sub_readability.id="toolsmenu"
+      sub_readability.href="https://dev.libretexts.org/?tools?readerView"
+      sub_readability.rel="internal"
+      
+      ReadabilityToolbarItem.appendChild(sub_readability);
+       
+      var content = document.createElement('span');
+      content.textContent= "Readability";
+
+      sub_readability.appendChild(content);
+
+      sub_readability.onclick = toggleReadability;
+
+    function toggleReadability(){
+      var searchElement = document.getElementById('search');
+
+      // Toggle aria-expanded
+      var isExpanded = sub_readability.getAttribute('aria-expanded') === 'false';
+      sub_readability.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+
+      // Toggle class 'open' on the 'search' element
+      searchElement.classList.toggle('open', isExpanded);
+
+    }
+     // Div Collapse
     let collapseButtons = document.querySelectorAll('[data-type="collapse"]');
     collapseButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
       let target_element = document.getElementById(target);
-      
+       console.log("Heyyy");
+       console.log(target_element);
 
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
