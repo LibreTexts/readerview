@@ -230,6 +230,7 @@ import { readability_panel } from './modules/readability.js';
         console.log(ReadabilityElement);
         ReadabilityElement.setAttribute("class","op");
         readability_panel();
+
     } 
     else {
       console.log(ReadabilityElement);
@@ -237,7 +238,7 @@ import { readability_panel } from './modules/readability.js';
     }
     
     }
-
+     
      // Div Collapse
     let collapseButtons = document.querySelectorAll('[data-type="collapse"]');
     collapseButtons.forEach(function(btn){

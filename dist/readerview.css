@@ -295,7 +295,11 @@ button.disabled-header-btn:hover {
   }
 }
 
-
+p {
+  font-size: 100%;
+  line-height: 1.4;
+  color: black;
+} 
 /* Readability */
 #readability {
   display: none;
@@ -303,7 +307,7 @@ button.disabled-header-btn:hover {
   height: calc(100% - 54px - 1em);
   background: white;
   position: fixed;
-  top: 95px;
+  top: 94px;
   left: 0;
   border: 1px solid lightgray;
   padding: 1em;
@@ -312,6 +316,17 @@ button.disabled-header-btn:hover {
 #readability.op {
     display: block;
   z-index: 10;
+}
+
+
+#doBeelines .bee_readability #SB_brights {
+  background-image: linear-gradient(90deg, #0000F4, #000000, #E93323);
+  color: #ffffff;
+}
+
+#SB_Blues {
+  background-image: linear-gradient(90deg, #0000f1, #000000, #891bd5);
+  color: #ffffff;
 }
 
 /**
