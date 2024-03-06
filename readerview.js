@@ -13,7 +13,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
-
+import { readability_panel } from './modules/readability.js';
 
 
 (function () {
@@ -22,6 +22,18 @@ import { initToolsLinks } from './modules/tools.js';
 
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
+    
+    var parent= document.getElementById('readerview_container')
+    var readabilityDiv = document.createElement("div");
+    readabilityDiv.id = "readability";
+    readabilityDiv.className="";
+    parent.appendChild(readabilityDiv);
+    
+    // var readSubDiv = document.createElement("div");
+    // readSubDiv.setAttribute("mt-section-origin", "Template:Custom/Views/Header/Header_Panel");
+    // readSubDiv.className = "mt-section";
+    // readabilityDiv.appendChild(readSubDiv);
+
 
     window.addEventListener('load', async function () {
       // add logic meant for readerView Only    
@@ -172,26 +184,28 @@ import { initToolsLinks } from './modules/tools.js';
         });
       });
     });
-
+     
+    // READABILITY OPTION 
     var toolbarMenu = document.getElementById('toolbar_menu');
     var ReadabilityToolbarItem = document.createElement('li');
 
-      // Step 3: Set attributes or content for the new li element
-      ReadabilityToolbarItem.className = 'toolbar-item';  // Add any necessary classes
-      ReadabilityToolbarItem.id = 'Readability-menu-item';       // Set the ID if needed
-      // ReadabilityToolbarItem.textContent = 'New Menu Item';  // Set the text content
+      ReadabilityToolbarItem.className = 'toolbar-item';  
+      ReadabilityToolbarItem.id = 'Readability-menu-item'; 
 
-      // Step 4: Append the new li element to the parent ul element
       toolbarMenu.appendChild(ReadabilityToolbarItem);
       
       var sub_readability = document.createElement('button');
 
-      sub_readability.className="toolbar-btn toolbar-top";
       // var isExpanded = sub_readability.getAttribute('aria-expanded') === 'true';
-      sub_readability.setAttribute('aria-expanded', "false");
-      sub_readability.id="toolsmenu"
-      sub_readability.href="https://dev.libretexts.org/?tools?readerView"
-      sub_readability.rel="internal"
+      sub_readability.setAttribute('aria-expanded', "false");      
+      sub_readability.className="toolbar-btn";
+      
+
+      sub_readability.id="readability_btn";
+      // sub_readability.href="https://dev.libretexts.org/?tools?readerView";
+      sub_readability.rel="internal";
+      sub_readability.setAttribute("data-target","readability");
+      sub_readability.setAttribute("data_type","collapse");
       
       ReadabilityToolbarItem.appendChild(sub_readability);
        
@@ -200,26 +214,35 @@ import { initToolsLinks } from './modules/tools.js';
 
       sub_readability.appendChild(content);
 
-      sub_readability.onclick = toggleReadability;
+      ReadabilityToolbarItem.onclick = toggleReadability;
+    
+      // sub_readability.addEventListener('click', readability_panel);
 
-    function toggleReadability(){
-      var searchElement = document.getElementById('search');
 
-      // Toggle aria-expanded
-      var isExpanded = sub_readability.getAttribute('aria-expanded') === 'false';
-      sub_readability.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-
-      // Toggle class 'open' on the 'search' element
-      searchElement.classList.toggle('open', isExpanded);
-
+    function toggleReadability(){ 
+      var ReadabilityElement = document.getElementById('readability');
+      console.log(ReadabilityElement.getAttribute("class"));
+ 
+      var isExpanded = sub_readability.getAttribute('aria-expanded') === 'true';
+      sub_readability.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+      console.log(isExpanded);
+      if (!isExpanded) {
+        console.log(ReadabilityElement);
+        ReadabilityElement.setAttribute("class","op");
+        readability_panel();
+    } 
+    else {
+      console.log(ReadabilityElement);
+        ReadabilityElement.setAttribute("class","");
     }
+    
+    }
+
      // Div Collapse
     let collapseButtons = document.querySelectorAll('[data-type="collapse"]');
     collapseButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
       let target_element = document.getElementById(target);
-       console.log("Heyyy");
-       console.log(target_element);
 
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
