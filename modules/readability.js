@@ -2,6 +2,12 @@
 function readability_panel() {
    console.log("Hello there");
    document.getElementById('readability').innerHTML = `
+   <head>
+    <!-- Add icon library -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   </head>
+   <i class="fa fa-chevron-right" id="chevron-icon"></i>
    <img title="Beeline Logo" src="https://test.libretexts.org/hagnew/development/public/Binh%20Nguyen/ReactSidebar/src/assets/beeline_logo_combo_master-cropped.svg" style="margin: 0px 5vw;">
    <p id="beelineExamples"> BeeLine Reader uses subtle color gradients to help you read more quickly and efficiently. Choose a color scheme below, or <a href="http://www.beelinereader.com/education/?utm_source=libretexts" style="color: rgb(48, 179, 246); display: unset; margin: 0px;">click here to learn more. </a></p>
    
@@ -15,10 +21,60 @@ function readability_panel() {
    <button class="bee_readability" id="sb_inverted" style="margin: 6px; border: 2px solid white; background-image: linear-gradient(90deg, #56aaff, #ffffff, #9e8dfc);
    color: #383838;">Inverted + Dark Mode</button>
    <button class="bee_readability" id="sb_off" style="margin: 6px; border: 2px solid white;">OFF</button>
+    </div>
+   <div>
+   <label class="fontSize_label">Text Size</label>
+   <input 
+      class="fontSize_in"
+      type="range"
+      min="10"
+      max="28"
+      id="slider"
+      click="changeSizeBySlider()"
+      value="13"
+    />
    </div>
+   
+   
    `;
 }
 
+document.addEventListener("click", function(e){
+   if (e.target && e.target.id === "slider") {
+      changeSizeBySlider();
+    }
+     
+})
+function changeSizeBySlider(){
+   
+   var main_cont=document.querySelectorAll("#elm-main-content");
+   var eg_cont= document.getElementById("beelineExamples");
+
+   var sld = document.getElementById("slider");
+   console.log(main_cont);
+
+   main_cont.forEach(function(element) {
+      element.style.fontSize = sld.value + "px";
+   });
+   // main_cont.style.fontSize=sld.value + "px";
+   eg_cont.style.fontSize=sld.value + "px";
+}
+
+//CLOSE BUTTON
+document.addEventListener("click", function(e){
+   if (e.target && e.target.id === "chevron-icon") {
+      close_panel();
+    }
+     
+});
+
+function close_panel(){
+   var ReadabilityElement = document.getElementById('readability');
+   var aria = document.getElementById('readability_btn');
+   console.log(aria);
+   aria.setAttribute('aria-expanded','false');
+   ReadabilityElement.setAttribute("class","");
+}
 
 document.addEventListener("click", function (e) {
    switch (e.target && e.target.id) {
@@ -38,22 +94,28 @@ document.addEventListener("click", function (e) {
          console.log("Inverted + Dark Mode");
          impl_Beeline('night_blues');
          break;
-      default: impl_Beeline_default();
+      case 'sb_off': impl_Beeline_default();
    }
 });
 
 function impl_Beeline(theme) {
-   var beelineElements = document.querySelectorAll("#beelineExamples");
+   var beelineElements = document.querySelectorAll("#elm-main-content");
+   var beeline_header = document.querySelectorAll("#readerview-container");
    console.log(beelineElements);
 
    for (var i = 0; i < beelineElements.length; i++) {
       var beeline = new BeeLineReader(beelineElements[i], { theme: theme });
       beeline.color();
    }
+   for (var i = 0; i < beeline_header.length; i++) {
+      var beeline = new BeeLineReader(beeline_header[i], { theme: theme });
+      beeline.color();
+   }
+
 }
 
 function impl_Beeline_default() {
-   var beelineElements = document.querySelectorAll("#beelineExamples");
+   var beelineElements = document.querySelectorAll("#elm-main-content");
    console.log(beelineElements)
    for (var i = 0; i < beelineElements.length; i++) {
       var beeline = new BeeLineReader(beelineElements[i], { theme: "off" });

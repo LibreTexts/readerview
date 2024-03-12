@@ -10,6 +10,22 @@
 .readerView .LTBranding {
   display: none;
 }
+
+/* #panel_btn{
+  background-color: white;
+  margin-top: -10px;
+  margin-bottom: -7px;
+  width:13px;
+  margin-left: -29px;
+} */
+#chevron-icon{
+  margin-left: 6px;
+}
+
+#chevron-icon:hover{
+  cursor:pointer;
+  color: rgb(29, 81, 140)
+}
 .readerView header.elm-header {
   margin-bottom: 1em;
   position: sticky;
@@ -38,6 +54,16 @@
   display: none;
 }
 
+.fontSize_label{
+  padding: 10px;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.fontSize_in{
+  margin-top: -15px;
+  
+}
 /* Hide footer feedback **/
 .readerView .elm-article-feedback {
   display: none;
@@ -308,7 +334,7 @@ p {
   background: white;
   position: fixed;
   top: 94px;
-  left: 0;
+  right: 0;
   border: 1px solid lightgray;
   padding: 1em;
   max-width: 80%;
@@ -678,6 +704,9 @@ a.toolbar-inner {
   background-color: #f0f0f3;
 }
 
+#elm-main-content{
+  font-size: 20px;
+}
 /** Level 2: Page in Chapter **/
 #toc > ul > li > ul > li > span > a {
   padding: 0.5em 0.5em 0.5em 1.7em;

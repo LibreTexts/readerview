@@ -238,6 +238,8 @@ import { readability_panel } from './modules/readability.js';
     }
     
     }
+
+
      
      // Div Collapse
     let collapseButtons = document.querySelectorAll('[data-type="collapse"]');
