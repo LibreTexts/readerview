@@ -13,7 +13,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
-import { readability_panel } from './modules/readability.js';
+import { readability_panel, close_panel } from './modules/readability.js';
 
 
 (function () {
@@ -230,6 +230,7 @@ import { readability_panel } from './modules/readability.js';
         console.log(ReadabilityElement);
         ReadabilityElement.setAttribute("class","op");
         readability_panel();
+        close_search_panel();
 
     } 
     else {
@@ -238,15 +239,40 @@ import { readability_panel } from './modules/readability.js';
     }
     
     }
+    
 
+    document.getElementById('toogle_search').addEventListener('click', function() {
+      setTimeout(() => {
+        const searchDiv = document.getElementById('search');
+        if (this.getAttribute('aria-expanded') === 'true' && searchDiv.classList.contains('open')) {
+          close_panel();
+        }
+      }, 0); 
+    });    
+    
+    // document.getElementById('readability_btn').addEventListener('click', function() {
+    //   setTimeout(() => {
+    //     const read_div = document.getElementById('readability');
+    //     if (this.getAttribute('aria-expanded') === 'true' && read_div.classList.contains('op')) {
+    //       close_search_panel();
+    //     }
+    //   }, 0); 
+    // });    
 
+    function close_search_panel(){
+     var search_elm= document.getElementById('toogle_search');
+      const searchDiv = document.getElementById('search');
+      search_elm.setAttribute('aria-expanded','false');
+      search_elm.classList.remove('active');
+      searchDiv.classList.remove('open');
+      search_elm.focus();
+    }
      
      // Div Collapse
     let collapseButtons = document.querySelectorAll('[data-type="collapse"]');
     collapseButtons.forEach(function(btn){
       let target = btn.getAttribute('data-target');
       let target_element = document.getElementById(target);
-
       ["click", "keypress"].forEach(ev=>{
         btn.addEventListener(ev, function(e){
           e.preventDefault();
