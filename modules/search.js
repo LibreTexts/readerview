@@ -2,7 +2,6 @@ import ls from 'localstorage-slim';
 
 function performSearch(id) {
 
-
   const searchPanel = document.getElementById('search');
   const searchLabel = searchPanel.querySelector('label');
   const searchForm = document.querySelector('#book_search');
@@ -54,6 +53,8 @@ function performSearch(id) {
     });
 
   });
+
+
 
 }
 

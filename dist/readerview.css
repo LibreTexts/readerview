@@ -10,7 +10,15 @@
 .readerView .LTBranding {
   display: none;
 }
+#pop .pop-header .pop-controls > button {
+  display: inline-block;
+  padding: 0em 0.5em;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  color: #235A8B;
+}
 
+@font-face { font-family: "OpenDyslexic"; src: url('https://dl.dropboxusercontent.com/s/qfpakpjedhsrdb9/OpenDyslexicAlta-Regular.ttf'); } 
 /* #panel_btn{
   background-color: white;
   margin-top: -10px;
@@ -18,6 +26,79 @@
   width:13px;
   margin-left: -29px;
 } */
+
+.dyslexic-toggle {
+  display: flex;
+  align-items: center;
+  gap:10px;
+  font-size: medium;
+  font-family: "OpenDyslexic";
+  margin-left: 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  /* background-color: #2196F3; */
+  background-color: rgb(17, 96, 175);
+  ;
+
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
 #chevron-icon{
   margin-left: 6px;
 }
@@ -926,7 +1007,7 @@ body.readerView {
   outline: 1px solid black;
 }
 .readerView h1#title {
-  color: black;
+  /* color: black; */
   font-weight: 600;
   margin: 0 !important;
   padding: 0.75em 0;
@@ -1043,6 +1124,93 @@ body.readerView {
     margin-bottom: 1.2em;
     line-height: 1.5em;
   }
+}
+
+
+
+/* FONT ADJUSTMENT 2.0 */
+
+.font-adjuster {
+  position: relative;
+  width: 90%;
+  max-width: 200px;
+  margin: auto;
+  padding-bottom: 15px;
+  
+}
+.btn_plus{
+  background-color: rgb(17, 96, 175);
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  /* align-items: center; */
+  z-index: 2;
+  right: -15px;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+}
+
+.btn_plus:hover{
+  background-color: rgb(20, 38, 56);
+  border: none;
+  transform: scale(1.1);
+}
+.btn_minus{
+  background-color: rgb(17, 96, 175);
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  /* align-items: center; */
+  z-index: 2;
+  left: -15px;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+
+}
+.btn_minus:hover{
+  background-color: rgb(20, 38, 56);
+  border: none;
+  transform: scale(1.1);
+}
+
+.range_base {
+  color: rgb(14, 14, 15);
+  position: relative;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 2.6;
+  direction: ltr;
+  background-color: #d9eef5;
+  text-align: center;
+  font-weight: bold;
+}
+
+#font-slider {
+  margin: 0 10px;
+  flex-grow: 1;
+}
+
+#decrease, #increase {
+  width: 30px;
+  height: 30px;
+}
+
+#text {
+  font-size: 10px; /* Initial font size */
 }
 
 /** 
