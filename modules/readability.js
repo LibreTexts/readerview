@@ -1,6 +1,6 @@
 
 function readability_panel() {
-   console.log("Hello there");
+  
    document.getElementById('readability').innerHTML = `
    <head>
     <!-- Add icon library -->
@@ -12,26 +12,51 @@ function readability_panel() {
    <p id="beelineExamples"> BeeLine Reader uses subtle color gradients to help you read more quickly and efficiently. Choose a color scheme below, or <a href="http://www.beelinereader.com/education/?utm_source=libretexts" style="color: rgb(48, 179, 246); display: unset; margin: 0px;">click here to learn more. </a></p>
    
    <div id="doBeelines">
+   <label class="fontSize_label">Text Color</label>
+
+   <div class="text_color">
+   <div class="button-container">
    <button class="bee_readability" id="sb_bright" style="margin: 6px; border: 2px solid white;background-image: linear-gradient(90deg, #0000F4, #000000, #E93323);
-   color: #ffffff">BRIGHT</button>
+   color: #ffffff ; width: 50px; height:50px;"></button>
+   <div class="label">Bright</div>
+   </div>
+
+   <div class="button-container">
    <button class="bee_readability" id="sb_blues" style="margin: 6px; border: 2px solid white;background-image: linear-gradient(90deg, #0000f1, #000000, #891bd5);
-   color: #ffffff;">BLUES</button>
+   color: #ffffff;width: 50px; height:50px;"></button>
+   <div class="label">Blues</div>
+   </div>
+
+   <div class="button-container">
    <button class="bee_readability" id="sb_gray" style="margin: 6px; border: 2px solid white; background-image: linear-gradient(90deg, #7d7d7d, #000000, #7d7d7d);
-   color: #ffffff;">GRAY</button>
+   color: #ffffff;width: 50px; height:50px;"></button>
+   <div class="label">Gray</div>
+   </div>
+
+   <div class="button-container">
    <button class="bee_readability" id="sb_inverted" style="margin: 6px; border: 2px solid white; background-image: linear-gradient(90deg, #56aaff, #ffffff, #9e8dfc);
-   color: #383838;">Inverted + Dark Mode</button>
-   <button class="bee_readability" id="sb_off" style="margin: 6px; border: 2px solid white;">OFF</button>
+   color: #383838;width: 50px; height:50px;"></button>
+   <div class="label">Inverted & dark</div>
+   </div>
+
+   <div class="button-container">
+   <button class="bee_readability" id="sb_off" style="margin: 6px; border: 2px solid white; width: 50px; height:50px;"></button>
+   <div class="label">Off</div>
+   </div>
+   
+    </div>
     </div>
    <div>
-   <label class="fontSize_label">Text Size Adjustment</label>
+   <label class="fontSize_label">Text Size</label>
 
     <div class="font-adjuster">
-    <button class="btn_plus" id="btn_inc" tabindex="0" aria-label="Increase"><i class="fa fa-plus" style="font-size:15px; margin-left: 28px; margin-top: -2px " ></i></button>
-    <button class=" btn_minus" id="btn_dsc" tabindex="0" aria-label="Increase"><i class="fa fa-minus" style="font-size:15px; margin-left: 28px; margin-top: -2px"></i></button>
+    <button class="btn_plus" id="btn_inc" tabindex="0" aria-label="Increase">+</button>
+    <button class=" btn_minus" id="btn_dsc" tabindex="0" aria-label="Increase">-</button>
     <div type ="input" class="range_base" id="range_bs" value="18">18%</div>
   </div>
 
    </div>
+   <label class="fontSize_label">Text type</label>
    <div class="dyslexic-toggle">
    Enable Dyslexic Font 
    <label class="switch">
@@ -43,28 +68,21 @@ function readability_panel() {
    
    `;
 }
+console.log("HEYYYY");
+var dyslexic_enabled=localStorage.getItem("DyslexicFont");
+console.log(dyslexic_enabled);
 
 
-
-//Dyslexic Font
+// Dyslexic Font
 document.addEventListener("click", function(e){
    if(e.target && e.target.id=="dyslexic-checkbox"){
       var checkbox= document.getElementById('dyslexic-checkbox');
-      // var eg_cont= document.getElementById("beelineExamples");
-      // var elm = document.querySelectorAll("#elm-main-content");
+      
       if (checkbox.checked){
-            // eg_cont.style.fontFamily="OpenDyslexic";
-            // for (var i = 0; i < elm.length; i++) {
-            //    elm[i].style.fontFamily="OpenDyslexic";
-            // }
          change_font("OpenDyslexic");
          localStorage.setItem("DyslexicFont", true);
         }
         else{
-         // eg_cont.style.fontFamily="inherit";
-         // for (var i = 0; i < elm.length; i++) {
-         //    elm[i].style.fontFamily="inherit";
-         // }
          change_font("inherit");
          localStorage.setItem("DyslexicFont", false);
        }
@@ -72,95 +90,19 @@ document.addEventListener("click", function(e){
       
    });
 
+
+
+
 function change_font(font){
    console.log("The font should be ", font);
-   var eg_cont= document.getElementById("beelineExamples");
+   // var eg_cont= document.getElementById("beelineExamples");
    var elm = document.querySelectorAll("#elm-main-content");
-      eg_cont.style.fontFamily=font;
+      // eg_cont.style.fontFamily=font;
             for (var i = 0; i < elm.length; i++) {
                elm[i].style.fontFamily=font;
             }
 }
 
-// // Dyslexic Font
-// document.addEventListener("DOMContentLoaded", function() {
-   
-//    var selectedFont= localStorage.getItem('DyslexicFont');
-//    if(selectedFont=="true"){
-//       change_font("OpenDyslexic");
-//    } 
-//    else{
-//       change_font("inherit");
-//    }
-
-  
-// });
-
-
-
-// THE ONE WHICH I have commented recently
-
-
-
-// document.addEventListener("DOMContentLoaded", function() {
-//    // Read the dyslexic font setting from localStorage
-//    var selectedFont = localStorage.getItem('DyslexicFont');
-   
-//    // Ensure the checkbox is correctly checked or unchecked based on localStorage
-//    var dyslexicCheckbox = document.getElementById('dyslexic-checkbox');
-//    if (selectedFont === "true") {
-//       dyslexicCheckbox.checked = true;
-//       applyDyslexicFont(true);
-//    } else {
-//       dyslexicCheckbox.checked = false;
-//       applyDyslexicFont(false);
-//    }
-// });
-
-// function applyDyslexicFont(enabled) {
-//    // Define the font to apply based on the 'enabled' parameter
-//    var font = enabled ? "OpenDyslexic" : "inherit";
-//    // Apply the font to elements
-//    var eg_cont = document.getElementById("beelineExamples");
-//    var elms = document.querySelectorAll("#elm-main-content");
-//    if (eg_cont) eg_cont.style.fontFamily = font;
-//    elms.forEach(elm => {
-//       elm.style.fontFamily = font;
-//    });
-// }
-
-// // Listen for changes to the dyslexic font checkbox
-// document.addEventListener("click", function(e) {
-//    if (e.target && e.target.id === "dyslexic-checkbox") {
-//       var isEnabled = e.target.checked;
-//       localStorage.setItem("DyslexicFont", isEnabled); // Store the setting as a string
-//       applyDyslexicFont(isEnabled);
-//    }
-// });
-
-
-
-//Text Size
-// document.addEventListener("click", function(e){
-//    if (e.target && e.target.id === "slider") {
-//       changeSizeBySlider();
-//     }
-     
-// })
-// function changeSizeBySlider(){
-   
-//    var main_cont=document.querySelectorAll("#elm-main-content");
-//    var eg_cont= document.getElementById("beelineExamples");
-
-//    var sld = document.getElementById("slider");
-//    console.log(main_cont);
-
-//    for (var i = 0; i < main_cont.length; i++) {
-//       main_cont[i].style.fontSize=sld.value + "px";
-//    }
-//    // main_cont.style.fontSize=sld.value + "px";
-//    eg_cont.style.fontSize=sld.value + "px";
-// }
 
 
 
@@ -197,8 +139,6 @@ document.addEventListener("click", function(e){
       val.textContent = value_dsc+"%";
    }
 });
-
-
 
 
 //CLOSE BUTTON
@@ -294,4 +234,4 @@ function impl_Beeline_default() {
 
 
 
-export { readability_panel, close_panel };
+export { readability_panel, close_panel,change_font };
