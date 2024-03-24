@@ -13,13 +13,13 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
-import { readability_panel, close_panel } from './modules/readability.js';
+import { readability_panel, close_panel,change_font } from './modules/readability.js';
 
 
 (function () {
   
   if (window.location.href.includes('readerView') || window.location.href.includes('readerView')) {
-
+    
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
     
@@ -230,16 +230,49 @@ import { readability_panel, close_panel } from './modules/readability.js';
         console.log(ReadabilityElement);
         ReadabilityElement.setAttribute("class","op");
         readability_panel();
+        restoreDyslexicFontState();
+        // setTimeout(restoreDyslexicFontState, 0);
         close_search_panel();
 
     } 
+
     else {
       console.log(ReadabilityElement);
         ReadabilityElement.setAttribute("class","");
+        setTimeout(restoreDyslexicFontState, 0);
+
     }
     
     }
     
+    document.addEventListener('DOMContentLoaded', function() {
+      readability_panel();
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+      var selected_font = localStorage.getItem('DyslexicFont');
+
+    if (selected_font == "true") {
+      restoreDyslexicFontState();
+      change_font("OpenDyslexic");
+    } else {
+      restoreDyslexicFontState();
+      change_font("inherit");
+    }
+  });
+
+  function restoreDyslexicFontState() {
+    var checkbox = document.getElementById('dyslexic-checkbox');
+    var selected_font = localStorage.getItem('DyslexicFont');
+
+    if (selected_font == "true") {
+      checkbox.checked = true;
+      change_font("OpenDyslexic");
+    } else {
+      checkbox.checked = false;
+      change_font("inherit");
+    }
+}
+
 
     document.getElementById('toogle_search').addEventListener('click', function() {
       setTimeout(() => {
