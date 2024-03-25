@@ -13,7 +13,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
-import { readability_panel, close_panel,change_font } from './modules/readability.js';
+import { readability_panel, close_panel,change_font, font_size } from './modules/readability.js';
 
 
 (function () {
@@ -22,7 +22,6 @@ import { readability_panel, close_panel,change_font } from './modules/readabilit
     
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
-    
     var parent= document.getElementById('readerview_container')
     var readabilityDiv = document.createElement("div");
     readabilityDiv.id = "readability";
@@ -189,6 +188,14 @@ import { readability_panel, close_panel,change_font } from './modules/readabilit
     var toolbarMenu = document.getElementById('toolbar_menu');
     var ReadabilityToolbarItem = document.createElement('li');
 
+    var get_font_size= localStorage.getItem("FontSize");
+    if (get_font_size==null){
+      localStorage.setItem("FontSize",18);
+    }
+    else{
+      localStorage.setItem("FontSize",get_font_size);
+    }
+
       ReadabilityToolbarItem.className = 'toolbar-item';  
       ReadabilityToolbarItem.id = 'Readability-menu-item'; 
 
@@ -230,6 +237,7 @@ import { readability_panel, close_panel,change_font } from './modules/readabilit
         console.log(ReadabilityElement);
         ReadabilityElement.setAttribute("class","op");
         readability_panel();
+        font_size(localStorage.getItem("FontSize"));
         restoreDyslexicFontState();
         // setTimeout(restoreDyslexicFontState, 0);
         close_search_panel();
@@ -246,7 +254,10 @@ import { readability_panel, close_panel,change_font } from './modules/readabilit
     }
     
     document.addEventListener('DOMContentLoaded', function() {
+      var get_font_size= localStorage.getItem("FontSize")
+      font_size(get_font_size);
       readability_panel();
+      
     });
     document.addEventListener("DOMContentLoaded", function() {
       var selected_font = localStorage.getItem('DyslexicFont');
