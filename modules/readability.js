@@ -52,7 +52,7 @@ function readability_panel() {
     <div class="font-adjuster">
     <button class="btn_plus" id="btn_inc" tabindex="0" aria-label="Increase">+</button>
     <button class=" btn_minus" id="btn_dsc" tabindex="0" aria-label="Increase">-</button>
-    <div type ="input" class="range_base" id="range_bs" value="18">18%</div>
+    <div type ="input" class="range_base" id="range_bs" value="18"></div>
   </div>
 
    </div>
@@ -68,9 +68,7 @@ function readability_panel() {
    
    `;
 }
-console.log("HEYYYY");
-var dyslexic_enabled=localStorage.getItem("DyslexicFont");
-console.log(dyslexic_enabled);
+
 
 
 // Dyslexic Font
@@ -90,9 +88,6 @@ document.addEventListener("click", function(e){
       
    });
 
-
-
-
 function change_font(font){
    console.log("The font should be ", font);
    // var eg_cont= document.getElementById("beelineExamples");
@@ -104,41 +99,91 @@ function change_font(font){
 }
 
 
+//FONT SIZE
 
+document.addEventListener("click", function(e) {
+   if (e.target && (e.target.id == "btn_inc" || e.target.id == "btn_dsc")) {
 
-document.addEventListener("click", function(e){
-     if(e.target && e.target.id == "btn_inc"){
-        var eg_cont= document.getElementById("beelineExamples");
-        var main_cont=document.querySelectorAll("#elm-main-content");
+      var val = document.getElementById("range_bs");
+       var currentFontSize = parseInt(val.getAttribute("value"), 10);
+       var newFontSize = e.target.id == "btn_inc" ? currentFontSize + 3 : currentFontSize - 3;
+       
+       localStorage.setItem("FontSize",newFontSize);
 
-        var val= document.getElementById("range_bs");
-        var value_inc= parseInt(val.getAttribute("value"),10)+3;
-        val.setAttribute("value",value_inc);
-
-        for (var i = 0; i < main_cont.length; i++) {
-         main_cont[i].style.fontSize=value_inc + "px";
-      }
-      //   eg_cont.style.fontSize=value_inc + "px";
-        val.textContent = value_inc+"%";
-     }
-});
-
-document.addEventListener("click", function(e){
-   if(e.target && e.target.id == "btn_dsc"){
-      var eg_cont= document.getElementById("beelineExamples");
-      var main_cont=document.querySelectorAll("#elm-main-content");
-
-      var val= document.getElementById("range_bs");
-      var value_dsc= parseInt(val.getAttribute("value"),10)-3;
-      val.setAttribute("value",value_dsc);
-
-      for (var i = 0; i < main_cont.length; i++) {
-         main_cont[i].style.fontSize=value_dsc + "px";
-      }
-      // eg_cont.style.fontSize=value_dsc + "px";
-      val.textContent = value_dsc+"%";
+      //  val.setAttribute("value", newFontSize);
+      //  val.textContent = newFontSize + "%";
+       font_size(newFontSize);
+       
    }
 });
+
+function font_size(newFontSize){
+   var val = document.getElementById("range_bs");
+   var main_cont = document.querySelectorAll("#elm-main-content");
+   var main_cont2 = document.querySelectorAll('.readerView section.mt-content-container p');
+   var title= document.querySelectorAll('.readerView h1#title');
+   var h2=document.querySelectorAll('.readerView h2');
+
+   for (var i = 0; i < main_cont.length; i++) {
+       main_cont[i].style.fontSize = newFontSize + "px";
+   }
+
+   for (var i = 0; i < main_cont2.length; i++) {
+       main_cont2[i].style.fontSize = newFontSize + "px";
+   }
+   for(var i=0; i<title.length; i++){
+      title[i].style.fontSize= parseInt(newFontSize,10)*2 - 3 + "px";
+   }
+
+   for(var i=0; i<h2.length; i++){
+      h2[i].style.fontSize= parseInt(newFontSize,10) + 4 + "px" + " !important";
+   }
+   val.setAttribute("value", newFontSize);
+   val.textContent = newFontSize + "%";
+}
+
+
+// document.addEventListener("click", function(e){
+//      if(e.target && e.target.id == "btn_inc"){
+//         var eg_cont= document.getElementById("beelineExamples");
+//         var main_cont=document.querySelectorAll("#elm-main-content");
+//         var main_cont2= document.querySelectorAll('.readerView section.mt-content-container p');
+//         console.log(main_cont2);
+//         var val= document.getElementById("range_bs");
+//         var value_inc= parseInt(val.getAttribute("value"),10)+3;
+//         val.setAttribute("value",value_inc);
+
+//         for (var i = 0; i < main_cont.length; i++) {
+//          main_cont[i].style.fontSize=value_inc + "px";
+//       }
+//       for (var i = 0; i < main_cont2.length; i++) {
+//          main_cont2[i].style.fontSize = value_inc + "px";
+//      }
+//       //   eg_cont.style.fontSize=value_inc + "px";
+//         val.textContent = value_inc+"%";
+//      }
+// });
+
+// document.addEventListener("click", function(e){
+//    if(e.target && e.target.id == "btn_dsc"){
+//       var eg_cont= document.getElementById("beelineExamples");
+//       var main_cont=document.querySelectorAll("#elm-main-content");
+//       var main_cont2= document.querySelectorAll('.readerView section.mt-content-container p');
+
+//       var val= document.getElementById("range_bs");
+//       var value_dsc= parseInt(val.getAttribute("value"),10)-3;
+//       val.setAttribute("value",value_dsc);
+
+//       for (var i = 0; i < main_cont.length; i++) {
+//          main_cont[i].style.fontSize=value_dsc + "px";
+//       }
+//       for (var i = 0; i < main_cont2.length; i++) {
+//          main_cont2[i].style.fontSize = value_dsc + "px";
+//      }
+//       // eg_cont.style.fontSize=value_dsc + "px";
+//       val.textContent = value_dsc+"%";
+//    }
+// });
 
 
 //CLOSE BUTTON
@@ -234,4 +279,4 @@ function impl_Beeline_default() {
 
 
 
-export { readability_panel, close_panel,change_font };
+export { readability_panel, close_panel,change_font, font_size};
