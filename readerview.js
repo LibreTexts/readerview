@@ -254,11 +254,16 @@ import { readability_panel, close_panel,change_font, font_size } from './modules
     }
     
     document.addEventListener('DOMContentLoaded', function() {
-      var get_font_size= localStorage.getItem("FontSize")
-      font_size(get_font_size);
+     
       readability_panel();
       
     });
+
+    document.addEventListener("DOMContentLoaded", function(){
+       var get_font_size= localStorage.getItem("FontSize")
+      font_size(get_font_size);
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
       var selected_font = localStorage.getItem('DyslexicFont');
 
