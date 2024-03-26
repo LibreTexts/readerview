@@ -11,6 +11,11 @@
   display: none;
 }
 
+  .darkMode {
+    background-color: #252525;
+    /* color: white; */
+}
+
 
 #pop .pop-header .pop-controls > button {
   display: inline-block;
@@ -141,6 +146,7 @@ input:checked + .slider:before {
   padding: 10px;
   font-size: medium;
   font-weight: bold;
+  color: #111;
 }
 
 .fontSize_in{
@@ -1051,8 +1057,8 @@ body.readerView {
 }
 .readerView h2 {
   /* here */
-  font-size: 1.4em;
-  color: black;
+  /* font-size: 1.4em; */
+  /* color: black; */
   margin: 0 !important;
   padding: 1em 0 0.5em;
 }

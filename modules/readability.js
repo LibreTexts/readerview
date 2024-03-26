@@ -240,7 +240,8 @@ document.addEventListener("click", function (e) {
 function impl_Beeline(theme) {
    var beelineElements = document.querySelectorAll("#elm-main-content");
    var beeline_header = document.querySelectorAll("#readerview-container");
-   var contentContainer= document.querySelectorAll(".elm-skin-container");
+   // var contentContainer= document.querySelector(".elm-skin-container");
+   var maincont= document.querySelector('main');
    console.log(beelineElements);
 
    for (var i = 0; i < beelineElements.length; i++) {
@@ -253,25 +254,37 @@ function impl_Beeline(theme) {
    }
    localStorage.setItem('selectedTheme', theme);
 
-   // if (theme === 'night_blues') {
-   //    contentContainer.addClass('darkMode');
-   //    localStorage.setItem('darkMode', true);
-   // }
-   // else {
-   //    contentContainer.removeClass('darkMode');
-   //    localStorage.setItem('darkMode', false);
-   // }
+   if (theme === 'night_blues') {
+      console.log("yo");
+      maincont.classList.add("darkMode");
+      localStorage.setItem('darkMode', true);
+   }
+   else {
+      maincont.classList.remove("darkMode");
+      localStorage.setItem('darkMode', false);
+   }
 
 }
 
 function impl_Beeline_default() {
    var beelineElements = document.querySelectorAll("#elm-main-content");
+   var beeline_header = document.querySelectorAll("#readerview-container");
+
+   var maincont= document.querySelector('main');
    console.log(beelineElements)
    for (var i = 0; i < beelineElements.length; i++) {
       var beeline = new BeeLineReader(beelineElements[i], { theme: "off" });
       beeline.uncolor();
    }
+   for (var i = 0; i < beeline_header.length; i++) {
+      var beeline = new BeeLineReader(beeline_header[i], { theme: "off" });
+      beeline.uncolor();
+   }
    localStorage.removeItem('selectedTheme');
+   if (maincont.classList.contains("darkMode")){
+      maincont.classList.remove("darkMode");
+   }
+   localStorage.setItem('darkMode', false);
 
 };
 
