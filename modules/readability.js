@@ -46,16 +46,25 @@ function readability_panel() {
    
     </div>
     </div>
+
    <div>
    <label class="fontSize_label">Text Size</label>
-
     <div class="font-adjuster">
     <button class="btn_plus" id="btn_inc" tabindex="0" aria-label="Increase">+</button>
     <button class=" btn_minus" id="btn_dsc" tabindex="0" aria-label="Increase">-</button>
     <div type ="input" class="range_base" id="range_bs" value="18"></div>
   </div>
-
    </div>
+    
+   <div>
+   <label class="fontSize_label">Margin Size</label>
+    <div class="margin-adjuster">
+        <button class="btn_plus" id="btn_inc_margin" tabindex="0" aria-label="Increase Margin Size">+</button>
+        <button class="btn_minus" id="btn_dec_margin" tabindex="0" aria-label="Decrease Margin Size">-</button>
+        <div type ="input" class="margin_display" id="margin_disp" value="55"></div>
+    </div>
+</div>
+
    <label class="fontSize_label">Text type</label>
    <div class="dyslexic-toggle">
    Enable Dyslexic Font 
@@ -116,7 +125,6 @@ document.addEventListener("click", function(e) {
        
    }
 });
-
 function font_size(newFontSize){
    var val = document.getElementById("range_bs");
    var main_cont = document.querySelectorAll("#elm-main-content");
@@ -142,48 +150,54 @@ function font_size(newFontSize){
    val.textContent = newFontSize + "%";
 }
 
+//MARGIN SIZE
+document.addEventListener("click", function(e){
+   if(e.target && (e.target.id == "btn_inc_margin" || e.target.id == "btn_dec_margin")){
+      var val=document.getElementById("margin_disp");   
+      var currMarginSize = parseInt(val.getAttribute("value"), 10);
 
-// document.addEventListener("click", function(e){
-//      if(e.target && e.target.id == "btn_inc"){
-//         var eg_cont= document.getElementById("beelineExamples");
-//         var main_cont=document.querySelectorAll("#elm-main-content");
-//         var main_cont2= document.querySelectorAll('.readerView section.mt-content-container p');
-//         console.log(main_cont2);
-//         var val= document.getElementById("range_bs");
-//         var value_inc= parseInt(val.getAttribute("value"),10)+3;
-//         val.setAttribute("value",value_inc);
+      var sizes=[
+         {name: "Normal", value:55},
+         {name: "Large", value:70},
+         {name: "Extra Large", value:85},
+         {name: "Full", value:100},
+      ];
 
-//         for (var i = 0; i < main_cont.length; i++) {
-//          main_cont[i].style.fontSize=value_inc + "px";
-//       }
-//       for (var i = 0; i < main_cont2.length; i++) {
-//          main_cont2[i].style.fontSize = value_inc + "px";
-//      }
-//       //   eg_cont.style.fontSize=value_inc + "px";
-//         val.textContent = value_inc+"%";
-//      }
-// });
+      var currIndex= sizes.findIndex(size=> size.value== currMarginSize);
+       
+      if(e.target.id == "btn_inc_margin" && currIndex < sizes.length-1){
+         currIndex++;
+      }
+      else if(e.target.id == "btn_dec_margin" && currIndex > 0){
+         currIndex--;
+      }
+      
+      localStorage.setItem("MarginSize", sizes[currIndex].value)
+      margin_size(sizes[currIndex].value);
 
-// document.addEventListener("click", function(e){
-//    if(e.target && e.target.id == "btn_dsc"){
-//       var eg_cont= document.getElementById("beelineExamples");
-//       var main_cont=document.querySelectorAll("#elm-main-content");
-//       var main_cont2= document.querySelectorAll('.readerView section.mt-content-container p');
+   }
+});
 
-//       var val= document.getElementById("range_bs");
-//       var value_dsc= parseInt(val.getAttribute("value"),10)-3;
-//       val.setAttribute("value",value_dsc);
+function margin_size(new_margin_size){
+   var val=document.getElementById("margin_disp"); 
+   var sizes=[
+      {name: "Normal", value:55},
+      {name: "Large", value:70},
+      {name: "Extra Large", value:85},
+      {name: "Full", value:100},
+   ];
 
-//       for (var i = 0; i < main_cont.length; i++) {
-//          main_cont[i].style.fontSize=value_dsc + "px";
-//       }
-//       for (var i = 0; i < main_cont2.length; i++) {
-//          main_cont2[i].style.fontSize = value_dsc + "px";
-//      }
-//       // eg_cont.style.fontSize=value_dsc + "px";
-//       val.textContent = value_dsc+"%";
-//    }
-// });
+   var content=document.getElementById("elm-main-content");
+   content.style.maxWidth=new_margin_size +"%";
+   var sizeObject = sizes.find(size => size.value == new_margin_size)
+
+   val.setAttribute("value",sizeObject.value);
+   val.textContent=sizeObject.name;
+
+}
+
+
+
 
 
 //CLOSE BUTTON
@@ -247,6 +261,7 @@ function impl_Beeline(theme) {
    for (var i = 0; i < beelineElements.length; i++) {
       var beeline = new BeeLineReader(beelineElements[i], { theme: theme });
       beeline.color();
+      
    }
    for (var i = 0; i < beeline_header.length; i++) {
       var beeline = new BeeLineReader(beeline_header[i], { theme: theme });
@@ -292,4 +307,4 @@ function impl_Beeline_default() {
 
 
 
-export { readability_panel, close_panel,change_font, font_size};
+export { readability_panel, close_panel,change_font, font_size,margin_size};

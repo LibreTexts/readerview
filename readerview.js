@@ -13,7 +13,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
-import { readability_panel, close_panel,change_font, font_size } from './modules/readability.js';
+import { readability_panel, close_panel,change_font, font_size, margin_size } from './modules/readability.js';
 
 
 (function () {
@@ -195,6 +195,16 @@ import { readability_panel, close_panel,change_font, font_size } from './modules
     else{
       localStorage.setItem("FontSize",get_font_size);
     }
+    
+
+    var get_margin_size=localStorage.getItem("MarginSize");
+    if (get_margin_size==null){
+      localStorage.setItem("MarginSize",55);
+    }
+    else{
+      localStorage.setItem("MarginSize",get_margin_size);
+    }
+
 
       ReadabilityToolbarItem.className = 'toolbar-item';  
       ReadabilityToolbarItem.id = 'Readability-menu-item'; 
@@ -238,6 +248,7 @@ import { readability_panel, close_panel,change_font, font_size } from './modules
         ReadabilityElement.setAttribute("class","op");
         readability_panel();
         font_size(localStorage.getItem("FontSize"));
+        margin_size(localStorage.getItem("MarginSize"));
         restoreDyslexicFontState();
         // setTimeout(restoreDyslexicFontState, 0);
         close_search_panel();
@@ -260,8 +271,13 @@ import { readability_panel, close_panel,change_font, font_size } from './modules
     });
 
     document.addEventListener("DOMContentLoaded", function(){
-       var get_font_size= localStorage.getItem("FontSize")
+       var get_font_size= localStorage.getItem("FontSize");
       font_size(get_font_size);
+    });
+
+    document.addEventListener("DOMContentLoaded",function(){
+      var get_margin_size=localStorage.getItem("MarginSize");
+      margin_size(get_margin_size);
     });
 
     document.addEventListener("DOMContentLoaded", function() {
