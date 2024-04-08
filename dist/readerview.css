@@ -41,6 +41,7 @@
   font-size: medium;
   font-family: "OpenDyslexic";
   margin-left: 10px;
+  color:black;
 }
 
 .switch {
@@ -996,15 +997,17 @@ body.readerView {
   margin-right: 0px !important;
   margin-left: 0px !important;
 }
+
+/* Change for margin */
 .readerView article.elm-content-container {
   background: white;
-  max-width: 1000px;
+  max-width: 70%;
   margin: auto !important;
   min-width: unset !important;
   padding: 1em 3.5em;
   border-radius: 10px;
   border: 1px solid lightgray;
-  width: 100% !important;
+  /* width: 100% !important; */
 }
 .readerView footer.elm-footer {
   z-index: 1002;
@@ -1259,6 +1262,31 @@ body.readerView {
 #text {
   font-size: 10px; /* Initial font size */
 }
+
+/* margin-adjustment */
+
+.margin-adjuster{
+  position: relative;
+  width: 90%;
+  max-width: 200px;
+  margin: auto;
+  padding-bottom: 15px;
+}
+
+.margin_display{
+  color: rgb(14, 14, 15);
+  position: relative;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 2.6;
+  direction: ltr;
+  background-color: #f0f7fa;
+  text-align: center;
+  font-weight: bold;
+}
+
 
 /** 
  * Reference and Cite
