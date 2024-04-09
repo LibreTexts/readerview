@@ -313,16 +313,59 @@ import { readability_panel, close_panel,change_font, font_size, margin_size } fr
           close_panel();
         }
       }, 0); 
-    });    
+    }); 
     
-    // document.getElementById('readability_btn').addEventListener('click', function() {
-    //   setTimeout(() => {
-    //     const read_div = document.getElementById('readability');
-    //     if (this.getAttribute('aria-expanded') === 'true' && read_div.classList.contains('op')) {
-    //       close_search_panel();
-    //     }
-    //   }, 0); 
-    // });    
+    //TOOLBAR local storage
+    document.getElementById('toggle_tools').addEventListener('click', function(){
+      setTimeout(()=>{
+        if(this.getAttribute('aria-expanded')==='true'){
+             localStorage.setItem("toolbar",true);
+        }
+        else if(this.getAttribute('aria-expanded')==='false'){
+          localStorage.setItem("toolbar",false);
+        }
+      },0);
+    })
+
+    // document.addEventListener("DOMContentLoaded", function(){
+    //   var main_toolbar_elm= document.getElementById('toggle_tools');
+    //   if (localStorage.getItem("toolbar")==null){
+    //     if(main_toolbar_elm.getAttribute('aria-expanded')==='true'){
+    //     localStorage.setItem("toolbar",true);
+    //   }
+    //     else if(main_toolbar_elm.getAttribute('aria-expanded')==='false'){
+    //           localStorage.setItem("toolbar",false);
+    //         }
+    //   }
+    // })
+
+    document.addEventListener("DOMContentLoaded", function(){
+      var get_toolbar_state= localStorage.getItem("toolbar");
+      var toolbar_elm= document.getElementById('toolbar');
+      var main_toolbar_elm= document.getElementById('toggle_tools');
+      
+      if (get_toolbar_state==null){
+        if(main_toolbar_elm.getAttribute('aria-expanded')==='true'){
+        localStorage.setItem("toolbar",true);
+      }
+        else if(main_toolbar_elm.getAttribute('aria-expanded')==='false'){
+              localStorage.setItem("toolbar",false);
+            }
+      }
+      if(get_toolbar_state==='true'){
+        toolbar_elm.setAttribute("class","open");
+        main_toolbar_elm.setAttribute('aria-expanded',true);
+        main_toolbar_elm.classList.add('active');
+      }
+      else if (get_toolbar_state==='false'){
+        toolbar_elm.classList.remove('open');
+        main_toolbar_elm.setAttribute('aria-expanded',false);
+        main_toolbar_elm.classList.remove('active');
+      }
+   });
+
+    
+  
 
     function close_search_panel(){
      var search_elm= document.getElementById('toogle_search');
