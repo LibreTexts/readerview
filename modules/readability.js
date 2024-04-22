@@ -12,8 +12,11 @@ function readability_panel() {
    <p id="beelineExamples"> BeeLine Reader uses subtle color gradients to help you read more quickly and efficiently. Choose a color scheme below, or <a href="http://www.beelinereader.com/education/?utm_source=libretexts" style="color: rgb(48, 179, 246); display: unset; margin: 0px;">click here to learn more. </a></p>
    
    <div id="doBeelines">
+   <div class="settings-section">
+   <div class="buttonContainer">
    <label class="fontSize_label">Text Color</label>
-
+   <button class="reset" id="text_color_reset">Reset</button>
+   </div>
    <div class="text_color">
    <div class="button-container">
    <button class="bee_readability" id="sb_bright" style="margin: 6px; border: 2px solid white;background-image: linear-gradient(90deg, #0000F4, #000000, #E93323);
@@ -38,33 +41,39 @@ function readability_panel() {
    color: #383838;width: 50px; height:50px;"></button>
    <div class="label">Inverted & dark</div>
    </div>
-
-   <div class="button-container">
-   <button class="bee_readability" id="sb_off" style="margin: 6px; border: 2px solid white; width: 50px; height:50px;"></button>
-   <div class="label">Off</div>
    </div>
-   
     </div>
     </div>
 
    <div>
+   <div class="settings-section">
+   <div class="buttonContainer">
    <label class="fontSize_label">Text Size</label>
+   <button class="reset" id="text_size_reset">Reset</button>
+   </div>
     <div class="font-adjuster">
     <button class="btn_plus" id="btn_inc" tabindex="0" aria-label="Increase">+</button>
     <button class=" btn_minus" id="btn_dsc" tabindex="0" aria-label="Increase">-</button>
     <div type ="input" class="range_base" id="range_bs" value="18"></div>
   </div>
+  </div>
    </div>
     
    <div>
+   <div class="settings-section">
+   <div class="buttonContainer">
    <label class="fontSize_label">Margin Size</label>
+   <button class="reset" id="margin_size_reset">Reset</button>
+   </div>
     <div class="margin-adjuster">
         <button class="btn_plus" id="btn_inc_margin" tabindex="0" aria-label="Increase Margin Size">+</button>
         <button class="btn_minus" id="btn_dec_margin" tabindex="0" aria-label="Decrease Margin Size">-</button>
         <div type ="input" class="margin_display" id="margin_disp" value="55"></div>
     </div>
+    </div>
 </div>
-
+<div>
+<div class="settings-section">
    <label class="fontSize_label">Text type</label>
    <div class="dyslexic-toggle">
    Enable Dyslexic Font 
@@ -72,6 +81,8 @@ function readability_panel() {
   <input type="checkbox" id="dyslexic-checkbox">
   <span class="slider round"></span>
   </label>
+   </div>
+   </div>
    </div>
    
    
@@ -110,23 +121,34 @@ function change_font(font){
 
 //FONT SIZE
 
-document.addEventListener("click", function(e) {
-   if (e.target && (e.target.id == "btn_inc" || e.target.id == "btn_dsc")) {
+// document.addEventListener("click", function(e) {
+//    if (e.target && (e.target.id == "btn_inc" || e.target.id == "btn_dsc")) {
 
-      var val = document.getElementById("range_bs");
-       var currentFontSize = parseInt(val.getAttribute("value"), 10);
-       var newFontSize = e.target.id == "btn_inc" ? currentFontSize + 3 : currentFontSize - 3;
+//       var val = document.getElementById("range_bs");
+//        var currentFontSize = parseInt(val.getAttribute("value"), 10);
+//        var newFontSize = e.target.id == "btn_inc" ? currentFontSize + 3 : currentFontSize - 3;
        
-       localStorage.setItem("FontSize",newFontSize);
+//        localStorage.setItem("FontSize",newFontSize);
 
-      //  val.setAttribute("value", newFontSize);
-      //  val.textContent = newFontSize + "%";
-       font_size(newFontSize);
+//       //  val.setAttribute("value", newFontSize);
+//       //  val.textContent = newFontSize + "%";
+//        font_size(newFontSize);
        
-   }
-});
+//    }
+//    else if (e.target.id=="text_size_reset"){
+//       localStorage.setItem("FontSize",18);
+//       font_size(18);
+//    }
+// });
 function font_size(newFontSize){
    var val = document.getElementById("range_bs");
+   var font_Sizes=[
+      {name: "Extra Small", value:12},
+      {name: "Small", value:15},
+      {name: "Normal", value:18},
+      {name: "Large", value:20},
+      {name: "Full", value:22},
+   ];
    var main_cont = document.querySelectorAll("#elm-main-content");
    var main_cont2 = document.querySelectorAll('.readerView section.mt-content-container p');
    var title= document.querySelectorAll('.readerView h1#title');
@@ -146,9 +168,44 @@ function font_size(newFontSize){
    for(var i=0; i<h2.length; i++){
       h2[i].style.fontSize= parseInt(newFontSize,10) + 4 + "px" + " !important";
    }
-   val.setAttribute("value", newFontSize);
-   val.textContent = newFontSize + "%";
+
+   var sizeObject = font_Sizes.find(size => size.value == newFontSize)
+   val.setAttribute("value",sizeObject.value);
+   val.textContent=sizeObject.name;
+   // val.setAttribute("value", newFontSize);
+   // val.textContent = newFontSize + "%";
 }
+
+//UPDTATED FONT SIZE
+document.addEventListener("click", function(e) {
+   if (e.target && (e.target.id == "btn_inc" || e.target.id == "btn_dsc")) {
+      var val = document.getElementById("range_bs");
+      var currentFontSize = parseInt(val.getAttribute("value"), 10);
+
+      var font_Sizes=[
+         {name: "Extra Small", value:12},
+         {name: "Small", value:15},
+         {name: "Normal", value:18},
+         {name: "Large", value:20},
+         {name: "Full", value:22},
+      ];
+      var currIndex= font_Sizes.findIndex(size=> size.value== currentFontSize);
+      if(e.target.id == "btn_inc" && currIndex < font_Sizes.length-1){
+         currIndex++;
+      }
+      else if(e.target.id == "btn_dsc" && currIndex > 0){
+         currIndex--;
+      }
+
+      localStorage.setItem("FontSize",font_Sizes[currIndex].value);
+      font_size(font_Sizes[currIndex].value)
+   }
+   else if (e.target.id=="text_size_reset"){
+            localStorage.setItem("FontSize",18);
+            font_size(18);
+         }
+});
+
 
 //MARGIN SIZE
 document.addEventListener("click", function(e){
@@ -175,6 +232,10 @@ document.addEventListener("click", function(e){
       localStorage.setItem("MarginSize", sizes[currIndex].value)
       margin_size(sizes[currIndex].value);
 
+   }
+   else if(e.target.id =="margin_size_reset"){
+      localStorage.setItem("MarginSize", 55)
+      margin_size(55);
    }
 });
 
@@ -246,7 +307,7 @@ document.addEventListener("click", function (e) {
          console.log("Inverted + Dark Mode");
          impl_Beeline('night_blues');
          break;
-      case 'sb_off': impl_Beeline_default();
+      case 'text_color_reset': impl_Beeline_default();
    }
 });
 

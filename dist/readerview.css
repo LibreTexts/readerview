@@ -143,7 +143,12 @@ input:checked + .slider:before {
   display: none;
 }
 
+.buttonContainer{
+  white-space: nowrap;
+}
+
 .fontSize_label{
+  display: inline-block;
   padding: 10px;
   font-size: medium;
   font-weight: bold;
@@ -432,6 +437,8 @@ p {
 #readability.op {
     display: block;
   z-index: 10;
+  background: #f4f4f4;
+  overflow-y: auto;
 }
 
 /* .bee_readability{
@@ -444,11 +451,24 @@ p {
   justify-content: center; /* Centers the button containers horizontally */
 }
 
+.settings-section {
+  background-color: #ffffff; /* White background for each section */
+  padding: 1px;
+  margin-bottom: 5px; /* Space between sections */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+} 
+
 .button-container {
   display: flex;
-  flex-direction: column; /* Arranges the button and label vertically */
-  align-items: center; /* Centers the button and label horizontally */
-  margin: 2px; /* Adjust as needed for spacing between button containers */
+  flex-direction: column; 
+  align-items: center; 
+  margin: 2px; 
+}
+.reset{
+  height: 30px;
+  font-size: 15px;
+  width: 65px;
 }
 
 .bee_readability {
