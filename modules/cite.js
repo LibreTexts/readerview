@@ -3,47 +3,52 @@
  */
 //import ls from 'localstorage-slim';
 
-function buildCite(data){
-  var pageParam=getParam();
+function buildCite(data) {
+  var pageParam = getParam();
 
   return `
-  <div id="cite">
-    <h3>Cite</h3> 
-    <div>
-      <select id="citeSe">
-                    <option value="" disabled="true">Template Selection</option>
-                    <option value="citation-apa" selected="true">APA</option>
-                    <option value="harvard1">Harvard</option>
-                    <option value="chicago">Chicago</option>
-                    <option value="vancouver">Vancouver</option>
-                    <option value="mla">MLA</option>
-                    <option value="acs">ACS</option>
-                </select>
-            </div>
+  <div class="entry" id="cite">
+    <div class="entry-header">
+      <h3>Cite</h3> 
+      <div class="entry-header-actions">
+        <label for=citeSe" class="label-inline">Style:</label>
+        <select id="citeSe">
+          <option value="" disabled="true">Template Selection</option>
+          <option value="citation-apa" selected="true">APA</option>
+          <option value="harvard1">Harvard</option>
+          <option value="chicago">Chicago</option>
+          <option value="vancouver">Vancouver</option>
+          <option value="mla">MLA</option>
+          <option value="acs">ACS</option>
+        </select>
+      </div>
+    </div>
     <textarea readonly type="text" id="cite_holder" class="copy-holder">${pageParam['title']}.${pageParam['URL']}</textarea>
-    <div id="citeCont">
-                 <a id="citeCpy">Copy Text</a>
-                 <a id="citeCpyHTML">Copy HTML</a>
-                 <a id="cite_bibtex">Download BibTeX </a>
-                 <a id="cite_RIS">Download RIS </a>
-            </div>
+    <div class="entry-actions" id="citeCont">
+      <a class="btn btn-light btn-sm" id="citeCpy">Copy Text</a>
+      <a class="btn btn-light btn-sm" id="citeCpyHTML">Copy HTML</a>
+      <a class="btn btn-light btn-sm" id="cite_bibtex">Download BibTeX </a>
+      <a class="btn btn-light btn-sm" id="cite_RIS">Download RIS </a>
+    </div>
   </div>
-  <div id="attribution ">
-    <h3>License &amp; Attribution</h3>
+  <div class="entry" id="attribution">
+    <div class="entry-header">
+      <h3>License &amp; Attribution</h3>
+    </div>
     <div type="text" id="cite_holder" class="copy-holder">
      ${buildLicenseAttribution(data)}
     </div>
-    <div id="citeCont">
-    <a id="citeCpy">Copy Text</a>
+    <div class="entry-actions" id="citeCont">
+    <a class="btn btn-light btn-sm" id="citeCpy">Copy Text</a>
     </div>
   </div>
   `;
   // document.getElementById("citeSe").onchange = function() {myFunction()};
- 
+
 }
 
 //GET CITATION STRUCTURE
-document.addEventListener('change', function(e) {
+document.addEventListener('change', function (e) {
   if (e.target && e.target.id === 'citeSe') {
     getCite();
   }
@@ -72,12 +77,12 @@ function getCite(verbose = false) {
   let pageParam = getParam();
   let citeobj = new Cite(pageParam);
   let output = citeobj.format('bibliography', {
-      format: 'text',
-      template: citetemp,
-      lang: 'en-US'
+    format: 'text',
+    template: citetemp,
+    lang: 'en-US'
   });
   console.log(output)
-  document.getElementById("cite_holder").innerHTML =output;
+  document.getElementById("cite_holder").innerHTML = output;
   // $('#citeText').text(output);
   // return pageParam;
 }
@@ -85,12 +90,12 @@ function getCite(verbose = false) {
 
 //COPY TEXT
 document.addEventListener("click", function (e) {
-    if (e.target && e.target.id === 'citeCpy') {
-      copy_text();
-    }
-    });
+  if (e.target && e.target.id === 'citeCpy') {
+    copy_text();
+  }
+});
 
-function copy_text(){
+function copy_text() {
   var cpy_txt = document.getElementById("cite_holder").innerHTML;
   var tempTextArea = document.createElement("textarea");
   tempTextArea.value = cpy_txt;
@@ -114,8 +119,8 @@ document.addEventListener("click", function (e) {
   if (e.target && e.target.id === 'citeCpyHTML') {
     copy_html_text();
   }
-  });
-function copy_html_text(){
+});
+function copy_html_text() {
   var cpy_html_txt = document.getElementById("cite_holder").innerHTML;
   var formattedHtml = `<p id="citeText">${cpy_html_txt}</p>`
   console.log(formattedHtml);
@@ -139,19 +144,19 @@ function copy_html_text(){
 //DOWNLOAD BIBTEX 
 document.addEventListener("click", function (e) {
   if (e.target && e.target.id === 'cite_bibtex') {
-    let citation= getFile('bibtex');
+    let citation = getFile('bibtex');
     download(`${citation}`, 'bibtex.bbl', 'text/plain');
   }
-  });
+});
 
 
 //DOWNLOAD RIS
 document.addEventListener("click", function (e) {
   if (e.target && e.target.id === 'cite_RIS') {
-    let citation= getFile('ris');
+    let citation = getFile('ris');
     download(`${citation}`, 'citation.ris', 'text/plain');
   }
-  });
+});
 
 function getFile(type) {
   let pageParam = getParam();
@@ -163,19 +168,19 @@ function getFile(type) {
 }
 ;
 function download(data, filename, type) {
-  let file = new Blob([data], {type: type});
+  let file = new Blob([data], { type: type });
   if (window.navigator.msSaveOrOpenBlob)
-      window.navigator.msSaveOrOpenBlob(file, filename);
+    window.navigator.msSaveOrOpenBlob(file, filename);
   else {
-      const tempa = document.createElement("a"), url = URL.createObjectURL(file);
-      tempa.href = url;
-      tempa.download = filename;
-      document.body.appendChild(tempa);
-      tempa.click();
-      setTimeout(function () {
-          document.body.removeChild(tempa);
-          //window.URL.revokeObjectURL(tempa);
-      }, 0);
+    const tempa = document.createElement("a"), url = URL.createObjectURL(file);
+    tempa.href = url;
+    tempa.download = filename;
+    document.body.appendChild(tempa);
+    tempa.click();
+    setTimeout(function () {
+      document.body.removeChild(tempa);
+      //window.URL.revokeObjectURL(tempa);
+    }, 0);
   }
 }
 function getParam() {
@@ -190,90 +195,90 @@ function getParam() {
   let author = namesplitter($("li.mt-author-information a:first").text());
   let publisher = $("li.mt-author-companyname a:first").text();
   if (title.match(/^[A-Za-z ]*?[0-9]+[.0-9A-Za-z]*?: /)) {
-      title = title.replace(/^[^:]*:/, '').trim();
+    title = title.replace(/^[^:]*:/, '').trim();
   }
   let pageParam = {
-      "type": "webpage",
-      "title": title,
-      "accessed": {
-          "date-parts": [[accdate[0], accdate[1], accdate[2]]]
-      },
-      "URL": url,
-      "author": author,
-      "issued": {
-          "date-parts": [[issdate[0], issdate[1], issdate[2]]]
-      },
-      "publisher": publisher
+    "type": "webpage",
+    "title": title,
+    "accessed": {
+      "date-parts": [[accdate[0], accdate[1], accdate[2]]]
+    },
+    "URL": url,
+    "author": author,
+    "issued": {
+      "date-parts": [[issdate[0], issdate[1], issdate[2]]]
+    },
+    "publisher": publisher
   };
-  
+
   function namesplitter(name, verbose = false) {
-      let rawnames = name;
-      let spls = [' and ', '& ', ', '];
-      let rawauthnames = new Array;
-      let authors = new Array;
-      
-      for (let splitter of spls) {
-          let splits = rawnames.split(splitter);
-          if (splits.length <= 1)
-              continue;
-          splits = splits.map(elem => elem.trim());
-          rawauthnames = splits;
-          break;
+    let rawnames = name;
+    let spls = [' and ', '& ', ', '];
+    let rawauthnames = new Array;
+    let authors = new Array;
+
+    for (let splitter of spls) {
+      let splits = rawnames.split(splitter);
+      if (splits.length <= 1)
+        continue;
+      splits = splits.map(elem => elem.trim());
+      rawauthnames = splits;
+      break;
+    }
+
+    for (let i = 0; i < rawauthnames.length; i++) { // Parses names into family and given names
+      let rawname = rawauthnames[i];
+      let namedict = {};
+      if (rawname.search('\\.') != -1) {
+        let fname = rawname.slice(0, rawname.lastIndexOf('.') + 1);
+        let lname = rawname.slice(rawname.lastIndexOf('.') + 2, rawname.length);
+        namedict = {
+          given: fname,
+          family: lname
+        };
       }
-      
-      for (let i = 0; i < rawauthnames.length; i++) { // Parses names into family and given names
-          let rawname = rawauthnames[i];
-          let namedict = {};
-          if (rawname.search('\\.') != -1) {
-              let fname = rawname.slice(0, rawname.lastIndexOf('.') + 1);
-              let lname = rawname.slice(rawname.lastIndexOf('.') + 2, rawname.length);
-              namedict = {
-                  given: fname,
-                  family: lname
-              };
+      else {
+        let fname = '';
+        let lname = '';
+        let arname = rawname.split(' ');
+        let lnameind = arname.length - 1;
+        for (let j = 0; j < arname.length; j++) {
+          if ((/^[a-z]/g).test(arname[j]) && lnameind == arname.length - 1) {
+            lnameind = j;
+          }
+          if (j < lnameind) {
+            fname += arname[j] + ' ';
           }
           else {
-              let fname = '';
-              let lname = '';
-              let arname = rawname.split(' ');
-              let lnameind = arname.length - 1;
-              for (let j = 0; j < arname.length; j++) {
-                  if ((/^[a-z]/g).test(arname[j]) && lnameind == arname.length - 1) {
-                      lnameind = j;
-                  }
-                  if (j < lnameind) {
-                      fname += arname[j] + ' ';
-                  }
-                  else {
-                      lname += arname[j] + ' ';
-                  }
-              }
-              fname = fname.slice(0, fname.length - 1);
-              lname = lname.slice(0, lname.length - 1);
-              namedict = {
-                  'given': fname,
-                  'family': lname
-              };
+            lname += arname[j] + ' ';
           }
-          authors.push(namedict);
+        }
+        fname = fname.slice(0, fname.length - 1);
+        lname = lname.slice(0, lname.length - 1);
+        namedict = {
+          'given': fname,
+          'family': lname
+        };
       }
-      if (verbose) {
-          console.log(rawnames);
-          console.log("Split Indices Found: " + splind);
-          console.log("Raw Author Names Found: " + rawauthnames);
-          console.log("Authors Found: ");
-          for (let i in authors) {
-              console.log(i);
-              console.log("Given: " + authors[i]['given']);
-              console.log("Family: " + authors[i]['family']);
-          }
+      authors.push(namedict);
+    }
+    if (verbose) {
+      console.log(rawnames);
+      console.log("Split Indices Found: " + splind);
+      console.log("Raw Author Names Found: " + rawauthnames);
+      console.log("Authors Found: ");
+      for (let i in authors) {
+        console.log(i);
+        console.log("Given: " + authors[i]['given']);
+        console.log("Family: " + authors[i]['family']);
       }
-      if (!authors || !authors.length)
-          authors = null;
-      
-      return authors;
+    }
+    if (!authors || !authors.length)
+      authors = null;
+
+    return authors;
   }
-  
+
   return pageParam;
 }
 
