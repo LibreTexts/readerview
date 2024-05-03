@@ -35,6 +35,11 @@ async function renderTableOfContents(id) {
   const buildListView = (page) => {
     if (Array.isArray(page.subpages)) {
       const children = page.subpages.map((item) => {
+
+        // console.log(`---- buildListView(item): ${item.path}`);
+        // console.log(`---- buildListView(item): ${item.path['#text']}`);
+
+
         let itemClasslist = [`m-${item.id}`];
         if (item.subpages){
           itemClasslist.push('expandable');
@@ -49,10 +54,11 @@ async function renderTableOfContents(id) {
           </span>
         `;
         const grandchildren = buildListView(item);
+        
         return `
           <li class="${itemClasslist.join(' ')}">
             <span>
-              <a href="/${item.path}?readerView">${item.title}</a>
+              <a href="/${item.path['#text']}?readerView">${item.title}</a>
               ${item.subpages ? expander : ''}
             </span>
             ${grandchildren}

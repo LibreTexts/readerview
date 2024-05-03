@@ -15,6 +15,8 @@ async function renderHeaderTitle(id) {
   const container = document.querySelector('.header-title');
   const currentPageId = document.getElementById('IDHolder').innerText;
 
+  console.log(`------------ current page id: ${currentPageId}`);
+
   if (!structured || !flat || !container) {
     console.error('[ReaderView]: Error building Header Title.');
     return;
@@ -40,7 +42,7 @@ async function renderHeaderTitle(id) {
       } else {
         return `
           <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-          <a id="chapterTitle" href="https://${window.location.host}/${chapter[0].path}?readerView">${chapter[0].title}</a>
+          <a id="chapterTitle" href="https://${window.location.host}/${chapter[0].path['#text']}?readerView">${chapter[0].title}</a>
         `;
       }
     }
