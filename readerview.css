@@ -555,9 +555,14 @@ body.readerView {
   text-decoration: none;
 }
 
+
+
+
 /** 
  * Reference and Cite
 **/
+
+
 .copy-holder {
   padding: 0.5em;
   border: 1px solid lightgray;
@@ -576,6 +581,7 @@ body.readerView {
 #attribution {
   margin-top: 2em;
 }
+
 
 /** 
  * Help & Documentation
