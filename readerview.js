@@ -13,7 +13,7 @@ import { renderHeaderTitle } from './modules/headertitle.js';
 import { performSearch, setSearchLinkParent } from './modules/search.js';
 import { initResourceLinks } from './modules/resources.js';
 import { initToolsLinks } from './modules/tools.js';
-import { readability_panel, close_panel,change_font, font_size, margin_size } from './modules/readability.js';
+import { close_panel,change_font, font_size, margin_size } from './modules/readability.js';
 
 
 (function () {
@@ -22,11 +22,11 @@ import { readability_panel, close_panel,change_font, font_size, margin_size } fr
     
     // add the readerView class to the body element (used in readerView.css)
     document.body.classList.add('readerView');
-    var parent= document.getElementById('readerview_container')
-    var readabilityDiv = document.createElement("div");
-    readabilityDiv.id = "readability";
-    readabilityDiv.className="";
-    parent.appendChild(readabilityDiv);
+    // var parent= document.getElementById('readerview_container')
+    // var readabilityDiv = document.createElement("div");
+    // readabilityDiv.id = "readability";
+    // readabilityDiv.className="";
+    // parent.appendChild(readabilityDiv);
     
     // var readSubDiv = document.createElement("div");
     // readSubDiv.setAttribute("mt-section-origin", "Template:Custom/Views/Header/Header_Panel");

@@ -424,6 +424,18 @@ p {
 /* Readability */
 #readability {
   display: none;
+  width: 14rem;
+  height: calc(100% - 54px - 1em);
+  background: white;
+  position: fixed;
+  top: 55px;
+  right: 0;
+  border-left: 1px solid lightgray;
+  padding: 1em;
+  max-width: 80%;
+}
+/* #readability {
+  display: none;
   width: 19.5rem;
   height: calc(100% - 54px - 1em);
   background: white;
@@ -433,68 +445,73 @@ p {
   border: 1px solid lightgray;
   padding: 1em;
   max-width: 80%;
-}
-#readability.op {
-    display: block;
-  z-index: 10;
-  background: #f4f4f4;
-  overflow-y: auto;
-}
-
-/* .bee_readability{
-    display: flex;
 } */
-
-.text_color {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Centers the button containers horizontally */
+#readability.op {
+  display: block;
+  z-index: 10;
 }
 
 .settings-section {
-  background-color: #ffffff; /* White background for each section */
+  background-color: #ffffff;
   padding: 1px;
-  margin-bottom: 5px; /* Space between sections */
+  margin-bottom: 5px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-} 
+}
 
-.button-container {
+.settings-section .setting {
+  margin-bottom: 1.5em;
+}
+
+.settings-section .setting .setting-title > div.mt-section {
+  font-size: 0.9em;
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  margin: 2px; 
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 1em;
 }
-.reset{
+.settings-section .setting .setting-title > h4,
+.settings-section .setting .setting-title > div.mt-section > h4 {
+  font-size: 1em !important;
+}
+.settings-section .setting .setting-control {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+button.bee-readability {
+  background: transparent;
+  padding: 0.5em;
+  border-radius: unset;
+  border-color: lightgray;
+  width: 45%;
+}
+.bee-btn-render {
+  background-color: black;
+  width: 100%;
   height: 30px;
-  font-size: 15px;
-  width: 65px;
+  display: block;
+}
+button.bee-readability .bee-btn-label {
+  display: block;
+  color: black;
 }
 
-.bee_readability {
-  border: 2px solid white;
-  width: 50px;
-  height: 50px;
-  margin-bottom: 5px; /* Adjust as needed for spacing between button and label */
-  /* Your other button styles */
-}
-
-.label {
-  color: #333333;
-  text-align: center;
-  font-size: 15px;
-  max-width: 62px;
-  word-wrap: break-word;
-}
-
-#doBeelines .bee_readability #SB_brights {
+button#sb_bright > .bee-btn-render {
   background-image: linear-gradient(90deg, #0000F4, #000000, #E93323);
-  color: #ffffff;
 }
-
-#SB_Blues {
+button#sb_blues > .bee-btn-render {
   background-image: linear-gradient(90deg, #0000f1, #000000, #891bd5);
-  color: #ffffff;
+}
+button#sb_gray > .bee-btn-render {
+  background-image: linear-gradient(90deg, #7d7d7d, #000000, #7d7d7d);
+}
+button#sb_inverted > .bee-btn-render {
+  background-image:  linear-gradient(90deg, #56aaff, #ffffff, #9e8dfc);
 }
 
 /**
@@ -1090,20 +1107,23 @@ body.readerView {
   /* here */
   font-size: 1.1em;
 }
-.readerView h3 {
+.readerView h3,
+.readerView .h3 {
   /* here */
   font-size: 1.25rem;
   color: #333;
   font-weight: 700;
 }
-.readerView h4 {
+.readerView h4,
+.readerView .h4 {
   /* here */
   font-size: 1rem;
   color: black;
   font-weight: 700;
 }
 
-.readerView h5 {
+.readerView h5,
+.readerView .h5 {
   /* here */
   font-size: 1rem;
   color: black;
