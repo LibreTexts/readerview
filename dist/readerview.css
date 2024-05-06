@@ -10,6 +10,111 @@
 .readerView .LTBranding {
   display: none;
 }
+
+  .darkMode {
+    background-color: #252525;
+    /* color: white; */
+}
+
+
+#pop .pop-header .pop-controls > button {
+  display: inline-block;
+  padding: 0em 0.5em;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  color: #235A8B;
+}
+
+@font-face { font-family: "OpenDyslexic"; src: url('https://dl.dropboxusercontent.com/s/qfpakpjedhsrdb9/OpenDyslexicAlta-Regular.ttf'); } 
+/* #panel_btn{
+  background-color: white;
+  margin-top: -10px;
+  margin-bottom: -7px;
+  width:13px;
+  margin-left: -29px;
+} */
+
+.dyslexic-toggle {
+  display: flex;
+  align-items: center;
+  gap:10px;
+  font-size: medium;
+  font-family: "OpenDyslexic";
+  margin-left: 10px;
+  color:black;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  /* background-color: #2196F3; */
+  background-color: rgb(17, 96, 175);
+  ;
+
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* #chevron-icon{
+  margin-left: 6px;
+} */
+
+#chevron-icon:hover{
+  cursor:pointer;
+  color: rgb(29, 81, 140)
+}
 .readerView header.elm-header {
   margin-bottom: 1em;
   position: sticky;
@@ -38,6 +143,22 @@
   display: none;
 }
 
+.buttonContainer{
+  white-space: nowrap;
+}
+
+.fontSize_label{
+  display: inline-block;
+  padding: 10px;
+  font-size: medium;
+  font-weight: bold;
+  color: #111;
+}
+
+.fontSize_in{
+  margin-top: -15px;
+  
+}
 /* Hide footer feedback **/
 .readerView .elm-article-feedback {
   display: none;
@@ -293,6 +414,104 @@ button.disabled-header-btn:hover {
   button#exit_reader {
     display: none;
   }
+}
+
+p {
+  font-size: 100%;
+  line-height: 1.4;
+  color: black;
+} 
+/* Readability */
+#readability {
+  display: none;
+  width: 14rem;
+  height: calc(100% - 54px - 1em);
+  background: white;
+  position: fixed;
+  top: 55px;
+  right: 0;
+  border-left: 1px solid lightgray;
+  padding: 1em;
+  max-width: 80%;
+}
+/* #readability {
+  display: none;
+  width: 19.5rem;
+  height: calc(100% - 54px - 1em);
+  background: white;
+  position: fixed;
+  top: 94px;
+  right: 0;
+  border: 1px solid lightgray;
+  padding: 1em;
+  max-width: 80%;
+} */
+#readability.op {
+  display: block;
+  z-index: 10;
+}
+
+.settings-section {
+  background-color: #ffffff;
+  padding: 1px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.settings-section .setting {
+  margin-bottom: 1.5em;
+}
+
+.settings-section .setting .setting-title > div.mt-section {
+  font-size: 0.9em;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 1em;
+}
+.settings-section .setting .setting-title > h4,
+.settings-section .setting .setting-title > div.mt-section > h4 {
+  font-size: 1em !important;
+}
+.settings-section .setting .setting-control {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+button.bee-readability {
+  background: transparent;
+  padding: 0.5em;
+  border-radius: unset;
+  border-color: lightgray;
+  width: 45%;
+}
+.bee-btn-render {
+  background-color: black;
+  width: 100%;
+  height: 30px;
+  display: block;
+}
+button.bee-readability .bee-btn-label {
+  display: block;
+  color: black;
+}
+
+button#sb_bright > .bee-btn-render {
+  background-image: linear-gradient(90deg, #0000F4, #000000, #E93323);
+}
+button#sb_blues > .bee-btn-render {
+  background-image: linear-gradient(90deg, #0000f1, #000000, #891bd5);
+}
+button#sb_gray > .bee-btn-render {
+  background-image: linear-gradient(90deg, #7d7d7d, #000000, #7d7d7d);
+}
+button#sb_inverted > .bee-btn-render {
+  background-image:  linear-gradient(90deg, #56aaff, #ffffff, #9e8dfc);
 }
 
 /**
@@ -644,6 +863,9 @@ a.toolbar-inner {
   background-color: #f0f0f3;
 }
 
+#elm-main-content{
+  font-size: 18px;
+}
 /** Level 2: Page in Chapter **/
 #toc > ul > li > ul > li > span > a {
   padding: 0.5em 0.5em 0.5em 1.7em;
@@ -810,15 +1032,17 @@ body.readerView {
   margin-right: 0px !important;
   margin-left: 0px !important;
 }
+
+/* Change for margin */
 .readerView article.elm-content-container {
   background: white;
-  max-width: 1000px;
+  max-width: 70%;
   margin: auto !important;
   min-width: unset !important;
   padding: 1em 3.5em;
   border-radius: 10px;
   border: 1px solid lightgray;
-  width: 100% !important;
+  /* width: 100% !important; */
 }
 .readerView footer.elm-footer {
   z-index: 1002;
@@ -863,35 +1087,45 @@ body.readerView {
   outline: 1px solid black;
 }
 .readerView h1#title {
-  color: black;
+  /* color: black; */
   font-weight: 600;
   margin: 0 !important;
   padding: 0.75em 0;
   border-bottom: 0;
 }
 .readerView h2 {
-  font-size: 1.4em !important;
-  color: black;
+  /* here */
+  /* font-size: 1.4em; */
+  /* color: black; */
   margin: 0 !important;
   padding: 1em 0 0.5em;
 }
+
+
 .readerView h2.section-title {
   padding: 0;
-  font-size: 1.1em !important;
+  /* here */
+  font-size: 1.1em;
 }
-.readerView h3 {
-  font-size: 1.25rem!important;
+.readerView h3,
+.readerView .h3 {
+  /* here */
+  font-size: 1.25rem;
   color: #333;
   font-weight: 700;
 }
-.readerView h4 {
-  font-size: 1rem!important;
+.readerView h4,
+.readerView .h4 {
+  /* here */
+  font-size: 1rem;
   color: black;
   font-weight: 700;
 }
 
-.readerView h5 {
-  font-size: 1rem!important;
+.readerView h5,
+.readerView .h5 {
+  /* here */
+  font-size: 1rem;
   color: black;
   font-style: italic;
   font-weight: 600;
@@ -899,7 +1133,8 @@ body.readerView {
 }
 
 .readerView section.mt-content-container p {
-  font-size: 18px !important;
+  /* here */
+  font-size: 18px;
   margin-bottom: 1em;
   line-height: 1.5em;
 }
@@ -914,7 +1149,8 @@ body.readerView {
 }
 
 .readerView figcaption {
-  font-size: 1.1em !important;
+  /* here */
+  font-size: 1.1em;
   padding: 1em !important;
 }
 
@@ -981,6 +1217,127 @@ body.readerView {
     line-height: 1.5em;
   }
 }
+
+
+
+.button-label {
+  font-size: 14px;
+  text-align: center;
+  color: #333; /* Text color for the label */
+}
+
+/* FONT ADJUSTMENT 2.0 */
+
+.font-adjuster {
+  position: relative;
+  width: 90%;
+  max-width: 200px;
+  margin: auto;
+  padding-bottom: 15px;
+  
+}
+.btn_plus{
+  background-color: rgb(17, 96, 175);
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 22px;
+  cursor: pointer;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  right: -15px;
+  width: 33px;
+  height: 33px;
+  font-weight: bold;
+  /* border-radius: 50%; */
+}
+
+.btn_plus:hover{
+  background-color: rgb(20, 38, 56);
+  border: none;
+  transform: scale(1.1);
+}
+.btn_minus{
+  background-color: rgb(17, 96, 175);
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 29px;
+  cursor: pointer;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  left: -15px;
+  width: 33px;
+  height: 33px;
+  font-weight: bold;
+
+  /* border-radius: 50%; */
+
+}
+.btn_minus:hover{
+  background-color: rgb(20, 38, 56);
+  border: none;
+  transform: scale(1.1);
+}
+
+.range_base {
+  color: rgb(14, 14, 15);
+  position: relative;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 2.6;
+  direction: ltr;
+  background-color: #f0f7fa;
+  text-align: center;
+  font-weight: bold;
+}
+
+#font-slider {
+  margin: 0 10px;
+  flex-grow: 1;
+}
+
+#decrease, #increase {
+  width: 30px;
+  height: 30px;
+}
+
+#text {
+  font-size: 10px; /* Initial font size */
+}
+
+/* margin-adjustment */
+
+.margin-adjuster{
+  position: relative;
+  width: 90%;
+  max-width: 200px;
+  margin: auto;
+  padding-bottom: 15px;
+}
+
+.margin_display{
+  color: rgb(14, 14, 15);
+  position: relative;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 2.6;
+  direction: ltr;
+  background-color: #f0f7fa;
+  text-align: center;
+  font-weight: bold;
+}
+
 
 /** 
  * Reference and Cite
@@ -1339,3 +1696,49 @@ body.readerView {
 .micromodal-slide .modal__overlay {
   will-change: transform;
 }
+
+/* READABILITY PANEL CSS */
+
+.sidepanel  {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 250px;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#444;}
