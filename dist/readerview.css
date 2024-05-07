@@ -863,9 +863,9 @@ a.toolbar-inner {
   background-color: #f0f0f3;
 }
 
-#elm-main-content{
+/* #elm-main-content{
   font-size: 18px;
-}
+} */
 /** Level 2: Page in Chapter **/
 #toc > ul > li > ul > li > span > a {
   padding: 0.5em 0.5em 0.5em 1.7em;
