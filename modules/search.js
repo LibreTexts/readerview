@@ -19,7 +19,7 @@ function performSearch(id) {
   if (!flat && !structured) {
     searchLabel.innerHTML = 'Search by Keyword';
   } else {
-    searchScope = `&path=${flat[0].path}`;
+    searchScope = `&path=${flat[0].path?.['#text']}`;
   }
 
   ["click", "keypress"].forEach(ev=>{
