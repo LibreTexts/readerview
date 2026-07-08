@@ -3,13 +3,12 @@ function renderHelp() {
   //const docsURL = 'https://studio.libretexts.org/h5p/10963/embed'
   const additionalInfo = `
     <h3>Video Overview</h3>
-    <p>Video is being build and will be available soon.</p>
+    <p>Video is in development and will be available soon.</p>
     <div id="helpInfo">  
-      <p>Please contact <a href="mailto:info@libretexts.org">info@libretexts.org</a> if you have any questions.</p>
+      <p>Please contact our <a href="https://support.libretexts.org" target="_blank" rel="noopener noreferrer">Support Center</a> if you have any questions.</p>
       <h3>Still have questions?</h3>
       <p>You should first contact your instructor regarding any issues with this book if it assigned reading.</p>
-      <p>If you are still running into issues or have questions, please send your query to <a href="mailto:info@libretexts.org">info@libretexts.org</a>.</p>
-      <!--<p>You can also refer to the <a href="#" target="_blank">LibreTexts Documentation</a> for tutorials and guides on using the LibreTexts platform.<p>-->
+      <p>If you are still running into issues or have questions, please contact our <a href="https://support.libretexts.org" target="_blank" rel="noopener noreferrer">Support Center</a>.</p>
     </div>
   `;
   return additionalInfo;
