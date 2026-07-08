@@ -1,4 +1,3 @@
-import ClipboardJS from 'clipboard';
 import MicroModal from 'micromodal';
 import ls from 'localstorage-slim';
 import { Page, getPageObj } from './modules/pageinfo.js';
@@ -73,14 +72,25 @@ import { close_panel,change_font, font_size, margin_size } from './modules/reada
     btnEvents();
     
 
-    // make all .copy-button copy to clipboard from 
-    // data-clipboard-target
-    const clip = new ClipboardJS('.copy-button');
-    clip.on('success', (e) => {
-      e.trigger.innerHTML = 'Copied!';
-      setTimeout(function() {
-        e.trigger.innerHTML = 'Copy Text';
-      }, 4000);
+    // make all .copy-button copy to clipboard from the element
+    // referenced by their data-clipboard-target selector (native API,
+    // matching the approach in modules/cite.js)
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('.copy-button');
+      if (!btn) return;
+
+      const target = document.querySelector(btn.getAttribute('data-clipboard-target'));
+      if (!target) return;
+
+      const text = target.value !== undefined ? target.value : target.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = 'Copied!';
+        setTimeout(function () {
+          btn.innerHTML = 'Copy Text';
+        }, 4000);
+      }).catch((err) => {
+        console.error('Error copying text: ', err);
+      });
     });
   }
   
